@@ -41,3 +41,9 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Clickable Sprites
+    uniqueID: 3577418675
+    locked: 0
+  - name: UI
+    uniqueID: 2496519637
+    locked: 0

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SpotStats : MonoBehaviour {
 
@@ -10,26 +11,40 @@ public class SpotStats : MonoBehaviour {
 	public int health = 0;
 	public int damage = 0;
 
-	public bool addUnit(int health, int damage) {
+	public Text atkUI;
+	public Text hpUI;
+
+	public void AddUnit(int health, int damage) {
 		if (!hasUnit) {
 			health = this.health;
 			damage = this.damage;
-			return true;
-		} else {
-			return false;
+			UpdateUI ();
 		}
 	}
 
-	public void attack(SpotStats enemy) {
-		enemy.takeDamage (damage);
+	void RemoveUnit() {
+		hasUnit = false;
+		atkUI.text = "";
+		hpUI.text = "";
+		health = 0;
+		damage = 0;
 	}
 
-	public void takeDamage(int amount) {
+	public void Attack(SpotStats enemy) {
+		enemy.TakeDamage (damage);
+	}
+
+	public void TakeDamage(int amount) {
 		health -= amount;
+		UpdateUI();
 		if (health <= 0) {
-			hasUnit = false;
-			health = 0;
-			damage = 0;
+			RemoveUnit ();
 		}
 	}
+
+	void UpdateUI() {
+		atkUI.text = damage.ToString ();
+		hpUI.text = health.ToString ();
+	}
+		
 }
