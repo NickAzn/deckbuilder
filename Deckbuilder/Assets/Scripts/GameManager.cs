@@ -7,7 +7,9 @@ public class GameManager : MonoBehaviour {
 	public SpotStats[] playerSpots;
 	public SpotStats[] enemySpots;
 
-	public void endTurn() {
+	public Card selectedCard;
+
+	public void EndTurn() {
 		//Player attack
 		for (int i = 0; i < playerSpots.Length; i++) {
 			if (playerSpots [i].hasUnit) {
