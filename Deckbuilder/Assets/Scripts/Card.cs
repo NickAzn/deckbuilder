@@ -1,10 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Card : MonoBehaviour {
 
 	GameManager gm;
+
+	public Sprite unit;
 
 	public bool playerSideCast;
 	public bool enemySideCast;
@@ -12,11 +15,48 @@ public class Card : MonoBehaviour {
 	public int attack;
 	public int health;
 
+	public string cardName;
+	public string description;
+
+	public Text nameUI;
+	public Text descUI;
+	public Text atkUI;
+	public Text hpUI;
+	public SpriteRenderer cardArt;
+
 	void Start() {
 		gm = GameObject.Find ("GameManager").GetComponent<GameManager> ();
+		UpdateUI ();
+	}
+
+	void UpdateUI() {
+		cardArt.sprite = unit;
+		nameUI.text = cardName;
+		descUI.text = description;
+		atkUI.text = attack.ToString ();
+		hpUI.text = health.ToString ();
+	}
+
+	public void CopyStats(Card otherCard) {
+		unit = otherCard.unit;
+		playerSideCast = otherCard.playerSideCast;
+		enemySideCast = otherCard.enemySideCast;
+		attack = otherCard.attack;
+		health = otherCard.health;
+		description = otherCard.description;
+		cardName = otherCard.cardName;
+		UpdateUI ();
 	}
 
 	void OnMouseDown() {
 		gm.selectedCard = this;
+	}
+
+	void OnMouseOver() {
+		gm.ShowZoomCard (this);
+	}
+
+	void OnMouseExit() {
+		gm.HideZoomCard ();
 	}
 }

@@ -8,6 +8,22 @@ public class GameManager : MonoBehaviour {
 	public SpotStats[] enemySpots;
 
 	public Card selectedCard;
+	public GameObject zoomCard;
+	Card zoomCardStats;
+
+	void Start() {
+		zoomCardStats = zoomCard.GetComponent<Card> ();
+		HideZoomCard ();
+	}
+
+	public void HideZoomCard() {
+		zoomCard.SetActive (false);
+	}
+
+	public void ShowZoomCard(Card card) {
+		zoomCardStats.CopyStats (card);
+		zoomCard.SetActive (true);
+	}
 
 	public void EndTurn() {
 		//Player attack
