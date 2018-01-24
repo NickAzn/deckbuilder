@@ -8,27 +8,47 @@ public class Player : MonoBehaviour {
 	public GameManager gm;
 
 	public List<Card> deck = new List<Card>();
-	List<Card> discards = new List<Card>();
-	List<Card> inPlay = new List<Card>();
+	public List<Card> discards = new List<Card>();
 
 	public GameObject[] hand = new GameObject[5];
 
 	int maxMana = 0;
 	int mana = 0;
+	int maxSacs = 2;
+	int sacs = 0;
 
 	public Text manaUI;
+	public Text deckUI;
+	public Text discUI;
+
+	public GameObject sacButton;
 
 	void Start() {
+		//Update UI and hide all possible cards in hand
 		UpdateUI ();
 		for (int i = 0; i < hand.Length; i++) {
 			hand [i].SetActive (false);
 		}
+		for (int i = 0; i < 5; i++) {
+			DrawCard ();
+		}
 	}
 
+	void Update() {
+		if (gm.selectedCard != null && sacs < maxSacs) {
+			sacButton.SetActive (true);
+		} else {
+			sacButton.SetActive (false);
+		}
+	}
+	//Updates player UI
 	public void UpdateUI() {
 		manaUI.text = mana.ToString () + "/" + maxMana.ToString ();
+		deckUI.text = deck.Count.ToString ();
+		discUI.text = discards.Count.ToString ();
 	}
 
+	//Finds an open spot for card in player hand
 	int FindOpenHand() {
 		for (int i = 0; i < hand.Length; i++) {
 			if (hand [i].activeSelf == false) {
@@ -38,6 +58,9 @@ public class Player : MonoBehaviour {
 		return -1;
 	}
 
+	//Draws a card from the deck
+	//If the deck is empty, recycle the discards back into deck
+	//Do not draw if deck and discards are empty or hand is full
 	public void DrawCard() {
 		int openIndex = FindOpenHand ();
 		if (openIndex >= 0) {
@@ -50,6 +73,7 @@ public class Player : MonoBehaviour {
 				hand[openIndex].GetComponent<Card>().CopyStats(deck[i]);
 				hand [openIndex].SetActive (true);
 				deck.RemoveAt (i);
+				UpdateUI ();
 			}
 		}
 	}
@@ -68,11 +92,17 @@ public class Player : MonoBehaviour {
 		discards.Add (card);
 	}
 
+	public bool CanPlayCard (Card card) {
+		if (card.manaCost <= mana) {
+			return true;
+		}
+		return false;
+	}
+
 	public bool PlayCard(SpotStats spot) {
 		Card card = gm.selectedCard;
-		if (card.manaCost <= mana) {
+		if (CanPlayCard(card)) {
 			mana -= card.manaCost;
-			inPlay.Add (card);
 			spot.AddUnit (card);
 			DisableSelectedCard ();
 			UpdateUI ();
@@ -107,6 +137,7 @@ public class Player : MonoBehaviour {
 		if (gm.selectedCard != null) {
 			maxMana++;
 			mana++;
+			sacs++;
 			int cardNum = DisableSelectedCard ();
 			DiscardCard (hand [cardNum].GetComponent<Card> ());
 			hand [cardNum].SetActive (false);
@@ -114,8 +145,11 @@ public class Player : MonoBehaviour {
 		}
 	}
 
-	public void ResetMana() {
+	public void NewTurn() {
 		mana = maxMana;
+		sacs = 0;
+		DrawCard ();
+		DrawCard ();
 		UpdateUI ();
 	}
 }

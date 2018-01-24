@@ -13,6 +13,7 @@ public class SpotStats : MonoBehaviour {
 
 	public GameManager gm;
 	public Color hoverColor;
+	public GameObject highlighter;
 
 	public Text atkUI;
 	public Text hpUI;
@@ -27,6 +28,22 @@ public class SpotStats : MonoBehaviour {
 
 	void Start() {
 		sr = GetComponent<SpriteRenderer> ();
+		UpdateUI ();
+	}
+
+	void Update() {
+		if (gm.selectedCard != null) {
+			Card card = gm.selectedCard;
+			if (player.CanPlayCard(card)) {
+				if (card.playerSideCast && playerSide && !hasUnit) {
+					highlighter.SetActive (true);
+				} else if (card.enemySideCast && !playerSide && !hasUnit) {
+					highlighter.SetActive (true);
+				}
+			}
+		} else {
+			highlighter.SetActive (false);
+		}
 	}
 
 	//Adds unit to spot with given damage, health, and unit sprite
@@ -44,13 +61,14 @@ public class SpotStats : MonoBehaviour {
 	//Removes unit from spot
 	void RemoveUnit() {
 		hasUnit = false;
-		atkUI.text = "";
-		hpUI.text = "";
 		unitSprite.sprite = null;
 		health = 0;
 		damage = 0;
-		player.DiscardCard (origCard);
+		if (playerSide) {
+			player.DiscardCard (origCard);
+		}
 		origCard = null;
+		UpdateUI ();
 	}
 
 	//Places card on spot
@@ -72,11 +90,15 @@ public class SpotStats : MonoBehaviour {
 	//Changes color when hovered over
 	void OnMouseOver() {
 		sr.color = hoverColor;
+		if (hasUnit) {
+			gm.ShowZoomCard (origCard);
+		}
 	}
 
 	//Goes back to original color when mouse stops hovering
 	void OnMouseExit() {
 		sr.color = Color.white;
+		gm.HideZoomCard ();
 	}
 
 	//Damages another spot
@@ -95,8 +117,12 @@ public class SpotStats : MonoBehaviour {
 
 	//Updates spot's display attack and health
 	void UpdateUI() {
-		atkUI.text = damage.ToString ();
-		hpUI.text = health.ToString ();
+		if (hasUnit) {
+			atkUI.text = damage.ToString ();
+			hpUI.text = health.ToString ();
+		} else {
+			atkUI.text = "";
+			hpUI.text = "";
+		}
 	}
-		
 }
