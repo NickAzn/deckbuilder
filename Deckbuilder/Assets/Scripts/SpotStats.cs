@@ -19,6 +19,9 @@ public class SpotStats : MonoBehaviour {
 	public SpriteRenderer unitSprite;
 
 	public bool playerSide;
+	public Player player;
+
+	public Card origCard;
 
 	SpriteRenderer sr;
 
@@ -27,12 +30,13 @@ public class SpotStats : MonoBehaviour {
 	}
 
 	//Adds unit to spot with given damage, health, and unit sprite
-	public void AddUnit(int damage, int health, Sprite unit) {
+	public void AddUnit(Card card) {
 		if (!hasUnit) {
 			hasUnit = true;
-			this.health = health;
-			this.damage = damage;
-			unitSprite.sprite = unit;
+			health = card.health;
+			damage = card.attack;
+			unitSprite.sprite = card.unit;
+			origCard = card;
 			UpdateUI ();
 		}
 	}
@@ -45,6 +49,8 @@ public class SpotStats : MonoBehaviour {
 		unitSprite.sprite = null;
 		health = 0;
 		damage = 0;
+		player.DiscardCard (origCard);
+		origCard = null;
 	}
 
 	//Places card on spot
@@ -53,10 +59,10 @@ public class SpotStats : MonoBehaviour {
 			if (gm.selectedCard != null) {
 				Card selCard = gm.selectedCard;
 				if (selCard.playerSideCast && playerSide) {
-					AddUnit (selCard.attack, selCard.health, selCard.unit);
+					player.PlayCard (this);
 					gm.selectedCard = null;
 				} else if (selCard.enemySideCast && !playerSide) {
-					AddUnit (selCard.attack, selCard.health, selCard.unit);
+					player.PlayCard (this);
 					gm.selectedCard = null;
 				}
 			}

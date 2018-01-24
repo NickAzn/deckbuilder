@@ -7,6 +7,8 @@ public class GameManager : MonoBehaviour {
 	public SpotStats[] playerSpots;
 	public SpotStats[] enemySpots;
 
+	public Player player;
+
 	public Card selectedCard;
 	public GameObject zoomCard;
 	Card zoomCardStats;
@@ -27,6 +29,7 @@ public class GameManager : MonoBehaviour {
 
 	public void EndTurn() {
 		//Player attack
+		player.ResetMana();
 		for (int i = 0; i < playerSpots.Length; i++) {
 			if (playerSpots [i].hasUnit) {
 				if (playerSpots [i].collumn == 1) {

@@ -9,6 +9,8 @@ public class Card : MonoBehaviour {
 
 	public Sprite unit;
 
+	public int manaCost;
+
 	public bool playerSideCast;
 	public bool enemySideCast;
 
@@ -22,10 +24,16 @@ public class Card : MonoBehaviour {
 	public Text descUI;
 	public Text atkUI;
 	public Text hpUI;
+	public Text manaUI;
 	public SpriteRenderer cardArt;
+
+	public Color clickColor;
+
+	SpriteRenderer sr;
 
 	void Start() {
 		gm = GameObject.Find ("GameManager").GetComponent<GameManager> ();
+		sr = GetComponent<SpriteRenderer> ();
 		UpdateUI ();
 	}
 
@@ -35,6 +43,7 @@ public class Card : MonoBehaviour {
 		descUI.text = description;
 		atkUI.text = attack.ToString ();
 		hpUI.text = health.ToString ();
+		manaUI.text = manaCost.ToString ();
 	}
 
 	public void CopyStats(Card otherCard) {
@@ -45,11 +54,17 @@ public class Card : MonoBehaviour {
 		health = otherCard.health;
 		description = otherCard.description;
 		cardName = otherCard.cardName;
+		manaCost = otherCard.manaCost;
 		UpdateUI ();
 	}
 
 	void OnMouseDown() {
+		sr.color = clickColor;
 		gm.selectedCard = this;
+	}
+
+	void OnMouseUp() {
+		sr.color = Color.white;
 	}
 
 	void OnMouseOver() {
