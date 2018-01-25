@@ -7,6 +7,8 @@ public class Card : MonoBehaviour {
 
 	GameManager gm;
 
+	public Card baseCard;
+
 	public Sprite unit;
 
 	public int manaCost;

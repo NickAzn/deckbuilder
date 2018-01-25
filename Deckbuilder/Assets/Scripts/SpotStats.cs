@@ -53,7 +53,7 @@ public class SpotStats : MonoBehaviour {
 			health = card.health;
 			damage = card.attack;
 			unitSprite.sprite = card.unit;
-			origCard = card;
+			origCard = card.baseCard;
 			UpdateUI ();
 		}
 	}
@@ -67,7 +67,6 @@ public class SpotStats : MonoBehaviour {
 		if (playerSide) {
 			player.DiscardCard (origCard);
 		}
-		origCard = null;
 		UpdateUI ();
 	}
 

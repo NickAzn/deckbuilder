@@ -71,6 +71,7 @@ public class Player : MonoBehaviour {
 			} else {
 				int i = Random.Range (0, deck.Count);
 				hand[openIndex].GetComponent<Card>().CopyStats(deck[i]);
+				hand [openIndex].GetComponent<Card> ().baseCard = deck [i];
 				hand [openIndex].SetActive (true);
 				deck.RemoveAt (i);
 				UpdateUI ();
@@ -89,7 +90,7 @@ public class Player : MonoBehaviour {
 	}
 
 	public void DiscardCard(Card card) {
-		discards.Add (card);
+		discards.Add (card.baseCard);
 	}
 
 	public bool CanPlayCard (Card card) {
