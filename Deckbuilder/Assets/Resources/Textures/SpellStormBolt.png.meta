@@ -1,14 +1,13 @@
 fileFormatVersion: 2
-guid: 37906ff7514e0084c960459ff708b0f5
-timeCreated: 1516851629
+guid: a9e925f70bd3a1a4cb12e09f24d11a4b
+timeCreated: 1516930884
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
-    21300000: UnitStormEye_0
-    21300002: UnitStormEye_1
-    21300004: UnitStormEye_2
-    21300006: UnitStormEye_3
-    21300008: UnitStormEye_4
+    21300000: SpellStormBolt_0
+    21300002: SpellStormBolt_1
+    21300004: SpellStormBolt_2
+    21300006: SpellStormBolt_3
   externalObjects: {}
   serializedVersion: 4
   mipmaps:
@@ -105,7 +104,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: UnitStormEye_0
+      name: SpellStormBolt_0
       rect:
         serializedVersion: 2
         x: 0
@@ -119,7 +118,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: UnitStormEye_1
+      name: SpellStormBolt_1
       rect:
         serializedVersion: 2
         x: 64
@@ -133,7 +132,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: UnitStormEye_2
+      name: SpellStormBolt_2
       rect:
         serializedVersion: 2
         x: 128
@@ -147,24 +146,10 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: UnitStormEye_3
+      name: SpellStormBolt_3
       rect:
         serializedVersion: 2
         x: 192
-        y: 0
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: UnitStormEye_4
-      rect:
-        serializedVersion: 2
-        x: 256
         y: 0
         width: 64
         height: 64

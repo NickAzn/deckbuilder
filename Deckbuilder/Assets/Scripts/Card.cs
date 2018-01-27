@@ -9,9 +9,12 @@ public class Card : MonoBehaviour {
 
 	public Card baseCard;
 
-	public Sprite unit;
+	public RuntimeAnimatorController cardAnimation;
 
 	public int manaCost;
+
+	public bool isUnit;
+	public bool isSpell;
 
 	public bool playerSideCast;
 	public bool enemySideCast;
@@ -27,7 +30,7 @@ public class Card : MonoBehaviour {
 	public Text atkUI;
 	public Text hpUI;
 	public Text manaUI;
-	public SpriteRenderer cardArt;
+	public Animator cardArt;
 
 	public Color clickColor;
 
@@ -40,16 +43,26 @@ public class Card : MonoBehaviour {
 	}
 
 	void UpdateUI() {
-		cardArt.sprite = unit;
+		cardArt.runtimeAnimatorController = cardAnimation;
 		nameUI.text = cardName;
 		descUI.text = description;
-		atkUI.text = attack.ToString ();
-		hpUI.text = health.ToString ();
+		if (attack > -1) {
+			atkUI.text = attack.ToString ();
+		} else {
+			atkUI.text = "";
+		}
+		if (health > -1) {
+			hpUI.text = health.ToString ();
+		} else {
+			hpUI.text = "";
+		}
 		manaUI.text = manaCost.ToString ();
 	}
 
 	public void CopyStats(Card otherCard) {
-		unit = otherCard.unit;
+		isUnit = otherCard.isUnit;
+		isSpell = otherCard.isSpell;
+		cardAnimation = otherCard.cardAnimation;
 		playerSideCast = otherCard.playerSideCast;
 		enemySideCast = otherCard.enemySideCast;
 		attack = otherCard.attack;
@@ -61,8 +74,8 @@ public class Card : MonoBehaviour {
 	}
 
 	void OnMouseDown() {
-		sr.color = clickColor;
 		gm.selectedCard = this;
+		sr.color = clickColor;
 	}
 
 	void OnMouseUp() {

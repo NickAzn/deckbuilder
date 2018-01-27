@@ -35,7 +35,7 @@ public class Player : MonoBehaviour {
 	}
 
 	void Update() {
-		if (gm.selectedCard != null && sacs < maxSacs) {
+		if (gm.selectedCard != null && sacs < maxSacs && gm.isPlayerTurn()) {
 			sacButton.SetActive (true);
 		} else {
 			sacButton.SetActive (false);
@@ -91,6 +91,7 @@ public class Player : MonoBehaviour {
 
 	public void DiscardCard(Card card) {
 		discards.Add (card.baseCard);
+		UpdateUI ();
 	}
 
 	public bool CanPlayCard (Card card) {
@@ -104,7 +105,12 @@ public class Player : MonoBehaviour {
 		Card card = gm.selectedCard;
 		if (CanPlayCard(card)) {
 			mana -= card.manaCost;
-			spot.AddUnit (card);
+			if (card.isUnit) {
+				spot.AddUnit (card);
+			} else if (card.isSpell) {
+				spot.UseSpell (card);
+				DiscardCard (card);
+			}
 			DisableSelectedCard ();
 			UpdateUI ();
 			return true;

@@ -9,59 +9,59 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1021381430016860}
+  m_RootGameObject: {fileID: 1653293299119888}
   m_IsPrefabParent: 1
---- !u!1 &1021381430016860
+--- !u!1 &1653293299119888
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
   m_Component:
-  - component: {fileID: 4729090202904690}
-  - component: {fileID: 114934376419062240}
+  - component: {fileID: 4120261998545380}
+  - component: {fileID: 114305136590519174}
   m_Layer: 0
-  m_Name: Animated Cloth
+  m_Name: Storm Bolt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4729090202904690
+--- !u!4 &4120261998545380
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1021381430016860}
+  m_GameObject: {fileID: 1653293299119888}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.37137, y: -0.5241117, z: -0.027052732}
+  m_LocalPosition: {x: -13.887344, y: -4.8959913, z: -0.03848517}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &114934376419062240
+--- !u!114 &114305136590519174
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1021381430016860}
+  m_GameObject: {fileID: 1653293299119888}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b85f16a64ffd7314882886f152f96910, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseCard: {fileID: 114934376419062240}
-  cardAnimation: {fileID: 22100000, guid: f1015d4e59ebf7a49a44214d304fa0a4, type: 2}
-  manaCost: 1
-  isUnit: 1
-  isSpell: 0
-  playerSideCast: 1
-  enemySideCast: 0
-  attack: 1
-  health: 1
-  cardName: Animated Cloth
-  description: 
+  baseCard: {fileID: 114305136590519174}
+  cardAnimation: {fileID: 22100000, guid: 13c7484f1d2ede3439eee58d85d0f357, type: 2}
+  manaCost: 4
+  isUnit: 0
+  isSpell: 1
+  playerSideCast: 0
+  enemySideCast: 1
+  attack: 3
+  health: -1
+  cardName: Storm Bolt
+  description: Deals 3 damage to target enemy unit
   nameUI: {fileID: 0}
   descUI: {fileID: 0}
   atkUI: {fileID: 0}

@@ -17,7 +17,9 @@ public class SpotStats : MonoBehaviour {
 
 	public Text atkUI;
 	public Text hpUI;
-	public SpriteRenderer unitSprite;
+	public Animator unitAnimation;
+	public Animator spellAnimation;
+	public Animator summonAnimation;
 
 	public bool playerSide;
 	public Player player;
@@ -28,19 +30,14 @@ public class SpotStats : MonoBehaviour {
 
 	void Start() {
 		sr = GetComponent<SpriteRenderer> ();
+		spellAnimation.gameObject.SetActive (false);
+		summonAnimation.gameObject.SetActive (false);
 		UpdateUI ();
 	}
 
 	void Update() {
-		if (gm.selectedCard != null) {
-			Card card = gm.selectedCard;
-			if (player.CanPlayCard(card)) {
-				if (card.playerSideCast && playerSide && !hasUnit) {
-					highlighter.SetActive (true);
-				} else if (card.enemySideCast && !playerSide && !hasUnit) {
-					highlighter.SetActive (true);
-				}
-			}
+		if (CanUseCard()) {
+			highlighter.SetActive (true);
 		} else {
 			highlighter.SetActive (false);
 		}
@@ -49,19 +46,45 @@ public class SpotStats : MonoBehaviour {
 	//Adds unit to spot with given damage, health, and unit sprite
 	public void AddUnit(Card card) {
 		if (!hasUnit) {
+			StartCoroutine (PlaySummonAnimation ());
 			hasUnit = true;
 			health = card.health;
 			damage = card.attack;
-			unitSprite.sprite = card.unit;
+			unitAnimation.runtimeAnimatorController = card.cardAnimation;
 			origCard = card.baseCard;
 			UpdateUI ();
 		}
 	}
 
+	public void UseSpell(Card card) {
+		if (hasUnit) {
+			StartCoroutine(DelaySpell (card));
+			spellAnimation.runtimeAnimatorController = card.cardAnimation;
+			spellAnimation.gameObject.SetActive (true);
+		}
+	}
+
+	IEnumerator DelaySpell(Card card) {
+		float waitTime = card.cardAnimation.animationClips [0].length;
+		waitTime *= 0.98f;
+		yield return new WaitForSeconds (waitTime);
+		spellAnimation.gameObject.SetActive (false);
+		TakeDamage (card.attack);
+	}
+
+	IEnumerator PlaySummonAnimation() {
+		summonAnimation.gameObject.SetActive (true);
+		summonAnimation.Play ("Summoning");
+		yield return new WaitForSeconds (0.3f);
+		summonAnimation.gameObject.SetActive (false);
+
+	}
+
 	//Removes unit from spot
 	void RemoveUnit() {
 		hasUnit = false;
-		unitSprite.sprite = null;
+		unitAnimation.runtimeAnimatorController = null;
+		unitAnimation.GetComponent<SpriteRenderer> ().sprite = null;
 		health = 0;
 		damage = 0;
 		if (playerSide) {
@@ -72,18 +95,31 @@ public class SpotStats : MonoBehaviour {
 
 	//Places card on spot
 	void OnMouseDown() {
-		if (!hasUnit) {
-			if (gm.selectedCard != null) {
-				Card selCard = gm.selectedCard;
+		if (CanUseCard()) {
+			player.PlayCard (this);
+		}
+	}
+
+	bool CanUseCard() {
+		if (gm.selectedCard != null) {
+			Card selCard = gm.selectedCard;
+			if (player.CanPlayCard (selCard)) {
 				if (selCard.playerSideCast && playerSide) {
-					player.PlayCard (this);
-					gm.selectedCard = null;
+					if (selCard.isUnit && !hasUnit) {
+						return true;
+					} else if (selCard.isSpell && hasUnit) {
+						return true;
+					}
 				} else if (selCard.enemySideCast && !playerSide) {
-					player.PlayCard (this);
-					gm.selectedCard = null;
+					if (selCard.isUnit && !hasUnit) {
+						return true;
+					} else if (selCard.isSpell && hasUnit) {
+						return true;
+					}
 				}
 			}
 		}
+		return false;
 	}
 
 	//Changes color when hovered over
