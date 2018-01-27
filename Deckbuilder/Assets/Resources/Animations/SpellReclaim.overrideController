@@ -5,8 +5,8 @@ AnimatorOverrideController:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: SpellStormBolt
+  m_Name: SpellReclaim
   m_Controller: {fileID: 9100000, guid: ae40b95eaacbd404785760431ad0504b, type: 2}
   m_Clips:
   - m_OriginalClip: {fileID: 7400000, guid: c72278d4d60369747bd426592fb8a8de, type: 2}
-    m_OverrideClip: {fileID: 7400000, guid: 84c471b85eba18441aaf3da7237da870, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 20f71c0844c9b8b47b17a7c0f2b628f2, type: 2}

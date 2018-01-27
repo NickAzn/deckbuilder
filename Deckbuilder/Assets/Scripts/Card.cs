@@ -34,6 +34,11 @@ public class Card : MonoBehaviour {
 
 	public Color clickColor;
 
+	public bool spellSacrifice = false;
+	public int spellCardDraw = 0;
+
+	public bool unitRelentless = false;
+
 	SpriteRenderer sr;
 
 	void Start() {
@@ -62,14 +67,23 @@ public class Card : MonoBehaviour {
 	public void CopyStats(Card otherCard) {
 		isUnit = otherCard.isUnit;
 		isSpell = otherCard.isSpell;
+
 		cardAnimation = otherCard.cardAnimation;
 		playerSideCast = otherCard.playerSideCast;
 		enemySideCast = otherCard.enemySideCast;
+
 		attack = otherCard.attack;
 		health = otherCard.health;
+
 		description = otherCard.description;
 		cardName = otherCard.cardName;
 		manaCost = otherCard.manaCost;
+
+		spellSacrifice = otherCard.spellSacrifice;
+		spellCardDraw = otherCard.spellCardDraw;
+
+		unitRelentless = otherCard.unitRelentless;
+
 		UpdateUI ();
 	}
 

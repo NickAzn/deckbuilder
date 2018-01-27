@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour {
 	public SpotStats[] playerSpots;
@@ -18,10 +20,19 @@ public class GameManager : MonoBehaviour {
 
 	bool playerTurn = true;
 
+	public Text endText;
+	public GameObject restartButton;
+
 	void Start() {
+		Time.timeScale = 1.0f;
 		zoomCardStats = zoomCard.GetComponent<Card> ();
 		HideZoomCard ();
-		Debug.Log ("Start");
+		enemy.aggroMeter = Random.Range (0, 4);
+		restartButton.SetActive (false);
+	}
+
+	public void Restart() {
+		SceneManager.LoadScene ("GameBoard");
 	}
 
 	public void HideZoomCard() {
@@ -35,6 +46,32 @@ public class GameManager : MonoBehaviour {
 
 	public bool isPlayerTurn() {
 		return playerTurn;
+	}
+
+	void CheckGameEnded() {
+		bool playerAlive = false;
+		for (int i = 0; i < playerCrystals.Length; i++) {
+			if (playerCrystals [i].isAlive ()) {
+				playerAlive = true;
+			}
+		}
+		if (!playerAlive) {
+			endText.text = "Defeat";
+			restartButton.SetActive (true);
+			Time.timeScale = 0.0f;
+		}
+
+		bool enemyAlive = false;
+		for (int i = 0; i < enemyCrystals.Length; i++) {
+			if (enemyCrystals [i].isAlive ()) {
+				enemyAlive = true;
+			}
+		}
+		if (!enemyAlive) {
+			endText.text = "Victory!";
+			restartButton.SetActive (true);
+			Time.timeScale = 0.0f;
+		}
 	}
 
 	//Unit at playerSpots[i] hits the crystal in the same row
@@ -58,64 +95,91 @@ public class GameManager : MonoBehaviour {
 		}
 	}
 
-	public void EndTurn() {
-		StartCoroutine (TurnEnd ());
+	void HitCrystal(int unitIteration, bool hitEnemySide, int damage) {
+		if (hitEnemySide) {
+			if (playerSpots [unitIteration].row == 1) {
+				enemyCrystals [0].TakeDamage (damage);
+			} else if (playerSpots [unitIteration].row == 2) {
+				enemyCrystals [1].TakeDamage (damage);
+			} else if (playerSpots [unitIteration].row == 3) {
+				enemyCrystals [2].TakeDamage (damage);
+			}
+		} else {
+			if (enemySpots [unitIteration].row == 1) {
+				playerCrystals [0].TakeDamage (damage);
+			} else if (playerSpots [unitIteration].row == 2) {
+				playerCrystals [1].TakeDamage (damage);
+			} else if (playerSpots [unitIteration].row == 3) {
+				playerCrystals [2].TakeDamage (damage);
+			}
+		}
 	}
 
-	IEnumerator TurnEnd() {
+	public void EndTurn() {
 		if (playerTurn) {
-			endTurnButton.SetActive (false);
-			playerTurn = false;
 			//Player attack
-			for (int i = 0; i < playerSpots.Length; i++) {
-				if (playerSpots [i].hasUnit) {
-					playerSpots [i].unitAnimation.Play ("Attack");
-					yield return new WaitForSeconds (0.7f);
-					if (playerSpots [i].collumn == 1) {
-						if (enemySpots [i].hasUnit) {
-							playerSpots [i].Attack (enemySpots [i]);
-						} else if (enemySpots [i + 3].hasUnit) {
-							playerSpots [i].Attack (enemySpots [i + 3]);
-						} else {
-							HitCrystal (i, true);
-						}
-					} else {
-						if (enemySpots [i - 3].hasUnit) {
-							playerSpots [i].Attack (enemySpots [i - 3]);
-						} else if (enemySpots [i].hasUnit) {
-							playerSpots [i].Attack (enemySpots [i]);
-						} else {
-							HitCrystal (i, true);
-						}
-					}
-				}
-			}
-			enemy.NewTurn ();
+			StartCoroutine(UnitsAttack(playerSpots, enemySpots));
 		} else {
 			//Enemy Attack
-			for (int i = 0; i < enemySpots.Length; i++) {
-				if (enemySpots [i].hasUnit) {
-					enemySpots [i].unitAnimation.Play ("Attack");
-					yield return new WaitForSeconds (0.7f);
-					if (enemySpots [i].collumn == 1) {
-						if (playerSpots [i].hasUnit) {
-							enemySpots [i].Attack (playerSpots [i]);
-						} else if (playerSpots [i + 3].hasUnit) {
-							enemySpots [i].Attack (playerSpots [i + 3]);
-						} else {
-							HitCrystal (i, false);
+			StartCoroutine(UnitsAttack(enemySpots, playerSpots));
+		}
+	}
+
+	IEnumerator UnitsAttack(SpotStats[] attackingSpots, SpotStats[] defendingSpots) {
+		bool startedPlayerTurn = playerTurn;
+		if (startedPlayerTurn) {
+			endTurnButton.SetActive (false);
+			playerTurn = false;
+		}
+		for (int i = 0; i < attackingSpots.Length; i++) {
+			if (attackingSpots [i].hasUnit) {
+				attackingSpots [i].unitAnimation.Play ("Attack");
+				yield return new WaitForSeconds (0.7f);
+				if (attackingSpots [i].collumn == 1) {
+					if (defendingSpots [i].hasUnit) {
+						if (attackingSpots [i].damage > defendingSpots [i].health && attackingSpots[i].relentless) {
+							if (attackingSpots [i].damage > (defendingSpots [i+3].health + defendingSpots [i].health) 
+								&& attackingSpots[i].relentless) {
+								HitCrystal (i, startedPlayerTurn, 
+									attackingSpots[i].damage - defendingSpots[i+3].health - defendingSpots[i].health);
+							}
+							defendingSpots [i+3].TakeDamage (attackingSpots [i].damage - defendingSpots [i+3].health);
 						}
+						attackingSpots [i].Attack (defendingSpots [i]);
+					} else if (defendingSpots [i + 3].hasUnit) {
+						if (attackingSpots [i].damage > defendingSpots [i+3].health && attackingSpots[i].relentless) {
+							HitCrystal (i, startedPlayerTurn, attackingSpots[i].damage - defendingSpots[i+3].health);
+						}
+						attackingSpots [i].Attack (defendingSpots [i + 3]);
 					} else {
-						if (playerSpots [i - 3].hasUnit) {
-							enemySpots [i].Attack (playerSpots [i - 3]);
-						} else if (playerSpots [i].hasUnit) {
-							enemySpots [i].Attack (playerSpots [i]);
-						} else {
-							HitCrystal (i, false);
+						HitCrystal (i, startedPlayerTurn);
+					}
+				} else {
+					if (defendingSpots [i - 3].hasUnit) {
+						if (attackingSpots [i].damage > defendingSpots [i-3].health && attackingSpots[i].relentless) {
+							if (attackingSpots [i].damage > (defendingSpots [i-3].health + defendingSpots [i].health) 
+								&& attackingSpots[i].relentless) {
+								HitCrystal (i, startedPlayerTurn, 
+									attackingSpots[i].damage - defendingSpots[i-3].health - defendingSpots[i].health);
+							}
+							defendingSpots [i].TakeDamage (attackingSpots [i].damage - defendingSpots [i-3].health);
 						}
+						attackingSpots [i].Attack (defendingSpots [i - 3]);
+					} else if (defendingSpots [i].hasUnit) {
+						if (attackingSpots [i].damage > defendingSpots [i].health && attackingSpots[i].relentless) {
+							HitCrystal (i, startedPlayerTurn, attackingSpots[i].damage - defendingSpots[i].health);
+						}
+						attackingSpots [i].Attack (defendingSpots [i]);
+					} else {
+						HitCrystal (i, startedPlayerTurn);
 					}
 				}
 			}
+		}
+		CheckGameEnded ();
+		if (startedPlayerTurn) {
+			enemy.NewTurn ();
+		} else {
 			endTurnButton.SetActive (true);
 			playerTurn = true;
 			player.NewTurn ();

@@ -29,9 +29,7 @@ public class Player : MonoBehaviour {
 		for (int i = 0; i < hand.Length; i++) {
 			hand [i].SetActive (false);
 		}
-		for (int i = 0; i < 5; i++) {
-			DrawCard ();
-		}
+		DrawCard (5);
 	}
 
 	void Update() {
@@ -61,20 +59,22 @@ public class Player : MonoBehaviour {
 	//Draws a card from the deck
 	//If the deck is empty, recycle the discards back into deck
 	//Do not draw if deck and discards are empty or hand is full
-	public void DrawCard() {
-		int openIndex = FindOpenHand ();
-		if (openIndex >= 0) {
-			if (deck.Count == 0) {
-				if (ResetDeck ()) {
-					DrawCard ();
+	public void DrawCard(int amount) {
+		for (int i = 0; i < amount; i++) {
+			int openIndex = FindOpenHand ();
+			if (openIndex >= 0) {
+				if (deck.Count == 0) {
+					if (ResetDeck ()) {
+						DrawCard (amount - i);
+					}
+				} else {
+					int j = Random.Range (0, deck.Count);
+					hand[openIndex].GetComponent<Card>().CopyStats(deck[j]);
+					hand [openIndex].GetComponent<Card> ().baseCard = deck [j];
+					hand [openIndex].SetActive (true);
+					deck.RemoveAt (j);
+					UpdateUI ();
 				}
-			} else {
-				int i = Random.Range (0, deck.Count);
-				hand[openIndex].GetComponent<Card>().CopyStats(deck[i]);
-				hand [openIndex].GetComponent<Card> ().baseCard = deck [i];
-				hand [openIndex].SetActive (true);
-				deck.RemoveAt (i);
-				UpdateUI ();
 			}
 		}
 	}
@@ -155,8 +155,7 @@ public class Player : MonoBehaviour {
 	public void NewTurn() {
 		mana = maxMana;
 		sacs = 0;
-		DrawCard ();
-		DrawCard ();
+		DrawCard (2);
 		UpdateUI ();
 	}
 }

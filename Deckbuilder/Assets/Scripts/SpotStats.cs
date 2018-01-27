@@ -28,6 +28,8 @@ public class SpotStats : MonoBehaviour {
 
 	SpriteRenderer sr;
 
+	public bool relentless = false;
+
 	void Start() {
 		sr = GetComponent<SpriteRenderer> ();
 		spellAnimation.gameObject.SetActive (false);
@@ -50,6 +52,7 @@ public class SpotStats : MonoBehaviour {
 			hasUnit = true;
 			health = card.health;
 			damage = card.attack;
+			relentless = card.unitRelentless;
 			unitAnimation.runtimeAnimatorController = card.cardAnimation;
 			origCard = card.baseCard;
 			UpdateUI ();
@@ -65,11 +68,22 @@ public class SpotStats : MonoBehaviour {
 	}
 
 	IEnumerator DelaySpell(Card card) {
-		float waitTime = card.cardAnimation.animationClips [0].length;
-		waitTime *= 0.98f;
+		float waitTime = card.cardAnimation.animationClips [0].length * 0.95f;
 		yield return new WaitForSeconds (waitTime);
 		spellAnimation.gameObject.SetActive (false);
-		TakeDamage (card.attack);
+
+		if (card.attack > 0) {
+			TakeDamage (card.attack);
+		}
+		if (card.health > 0) {
+			TakeDamage (-card.health);
+		}
+		if (card.spellSacrifice) {
+			TakeDamage (health * 2);
+		}
+		if (card.spellCardDraw > 0) {
+			player.DrawCard (card.spellCardDraw);
+		}
 	}
 
 	IEnumerator PlaySummonAnimation() {
@@ -87,6 +101,7 @@ public class SpotStats : MonoBehaviour {
 		unitAnimation.GetComponent<SpriteRenderer> ().sprite = null;
 		health = 0;
 		damage = 0;
+		relentless = false;
 		if (playerSide) {
 			player.DiscardCard (origCard);
 		}
@@ -102,19 +117,21 @@ public class SpotStats : MonoBehaviour {
 
 	bool CanUseCard() {
 		if (gm.selectedCard != null) {
-			Card selCard = gm.selectedCard;
-			if (player.CanPlayCard (selCard)) {
-				if (selCard.playerSideCast && playerSide) {
-					if (selCard.isUnit && !hasUnit) {
-						return true;
-					} else if (selCard.isSpell && hasUnit) {
-						return true;
-					}
-				} else if (selCard.enemySideCast && !playerSide) {
-					if (selCard.isUnit && !hasUnit) {
-						return true;
-					} else if (selCard.isSpell && hasUnit) {
-						return true;
+			if (gm.isPlayerTurn ()) {
+				Card selCard = gm.selectedCard;
+				if (player.CanPlayCard (selCard)) {
+					if (selCard.playerSideCast && playerSide) {
+						if (selCard.isUnit && !hasUnit) {
+							return true;
+						} else if (selCard.isSpell && hasUnit) {
+							return true;
+						}
+					} else if (selCard.enemySideCast && !playerSide) {
+						if (selCard.isUnit && !hasUnit) {
+							return true;
+						} else if (selCard.isSpell && hasUnit) {
+							return true;
+						}
 					}
 				}
 			}
@@ -143,10 +160,12 @@ public class SpotStats : MonoBehaviour {
 
 	//Take damage, if health is 0 or less, remove unit
 	public void TakeDamage(int amount) {
-		health -= amount;
-		UpdateUI();
-		if (health <= 0) {
-			RemoveUnit ();
+		if (hasUnit) {
+			health -= amount;
+			UpdateUI ();
+			if (health <= 0) {
+				RemoveUnit ();
+			}
 		}
 	}
 
