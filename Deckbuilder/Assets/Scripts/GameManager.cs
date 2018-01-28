@@ -143,7 +143,7 @@ public class GameManager : MonoBehaviour {
 								HitCrystal (i, startedPlayerTurn, 
 									attackingSpots[i].damage - defendingSpots[i+3].health - defendingSpots[i].health);
 							}
-							defendingSpots [i+3].TakeDamage (attackingSpots [i].damage - defendingSpots [i+3].health);
+							defendingSpots [i+3].TakeDamage (attackingSpots [i].damage - defendingSpots [i].health);
 						}
 						attackingSpots [i].Attack (defendingSpots [i]);
 					} else if (defendingSpots [i + 3].hasUnit) {

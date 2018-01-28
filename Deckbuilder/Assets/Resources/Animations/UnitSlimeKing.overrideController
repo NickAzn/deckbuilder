@@ -6,5 +6,9 @@ AnimatorOverrideController:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: UnitSlimeKing
-  m_Controller: {fileID: 0}
-  m_Clips: []
+  m_Controller: {fileID: 9100000, guid: 2d4e3e6ad5385cc4fa0e17f93b042b4c, type: 2}
+  m_Clips:
+  - m_OriginalClip: {fileID: 7400000, guid: 8b04d06681846c04ebe0bddd06d9734f, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 322f0e3f286d8cd49b5e92bfa6092a50, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 56cfc3c6e63adf74b9fb46c256313212, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 56fd63945c1de2b4db73726163d19923, type: 2}

@@ -58,10 +58,10 @@ MonoBehaviour:
   isSpell: 1
   playerSideCast: 0
   enemySideCast: 1
-  attack: 3
+  attack: 4
   health: -1
   cardName: Storm Bolt
-  description: Deals 3 damage to target enemy unit
+  description: Deals 4 damage to target enemy unit
   nameUI: {fileID: 0}
   descUI: {fileID: 0}
   atkUI: {fileID: 0}
@@ -69,3 +69,6 @@ MonoBehaviour:
   manaUI: {fileID: 0}
   cardArt: {fileID: 0}
   clickColor: {r: 0, g: 0, b: 0, a: 0}
+  spellSacrifice: 0
+  spellCardDraw: 0
+  unitRelentless: 0
