@@ -8,6 +8,7 @@ public class EnemyAI : MonoBehaviour {
 	public Card[] earlyUnits;
 	public Card[] midUnits;
 	public Card[] lateUnits;
+	public Card[] offensiveSpells;
 	public GameManager gm;
 	public int aggroMeter;
 	int actionCounter = 0;
@@ -39,25 +40,15 @@ public class EnemyAI : MonoBehaviour {
 
 		actionCounter = 0;
 
-		playerR1Atk = 0;
-		playerR2Atk = 0;
-		playerR3Atk = 0;
-		playerR1FrontHp = 0;
-		playerR2FrontHp = 0;
-		playerR3FrontHp = 0;
-
-		pRow1CrystalUp = false;
-		pRow2CrystalUp = false;
-		pRow3CrystalUp = false;
-
-		row1CrystalUp = false;
-		row2CrystalUp = false;
-		row3CrystalUp = false;
 		StartCoroutine (DecideAction ());
 	}
 
 	void SummonUnit(SpotStats spot, Card card) {
 		spot.AddUnit (card);
+	}
+
+	void CastSpell(SpotStats spot, Card card) {
+		spot.UseSpell (card);
 	}
 		
 	int SelectRandomOpenSpot() {
@@ -76,6 +67,13 @@ public class EnemyAI : MonoBehaviour {
 	}
 
 	void GetPlayerUnits() {
+		playerR1Atk = 0;
+		playerR2Atk = 0;
+		playerR3Atk = 0;
+		playerR1FrontHp = 0;
+		playerR2FrontHp = 0;
+		playerR3FrontHp = 0;
+
 		// Records the damage that all player rows deal
 		// Records the health of the front most unit in that row
 		for (int i = 0; i < gm.playerSpots.Length; i++) {
@@ -100,6 +98,10 @@ public class EnemyAI : MonoBehaviour {
 	}
 
 	void GetPlayerCrystals() {
+		pRow1CrystalUp = false;
+		pRow2CrystalUp = false;
+		pRow3CrystalUp = false;
+
 		//Check which player crystals are still alive
 		for (int i = 0; i < gm.playerCrystals.Length; i++) {
 			if (gm.playerCrystals [i].isAlive ()) {
@@ -115,6 +117,10 @@ public class EnemyAI : MonoBehaviour {
 	}
 
 	void GetCrystals() {
+		row1CrystalUp = false;
+		row2CrystalUp = false;
+		row3CrystalUp = false;
+
 		// Determine which crystals on enemy side are still alive
 		for (int i = 0; i < gm.enemyCrystals.Length; i++) {
 			if (gm.enemyCrystals [i].isAlive ()) {
@@ -173,6 +179,16 @@ public class EnemyAI : MonoBehaviour {
 			}
 		}
 		yield return new WaitForSeconds(0.7f);
+		if (Random.Range(0,actionCounter * 5) == 0) {
+			actionCounter++;
+			List<int> possibleSpells = OffensiveSpell();
+			if (possibleSpells.Count > 0) {
+				int castSpot = possibleSpells[Random.Range (0, possibleSpells.Count)];
+				int spellCard = Random.Range (0, offensiveSpells.Length);
+				CastSpell (gm.playerSpots [castSpot], offensiveSpells[spellCard]);
+				yield return new WaitForSeconds(0.7f);
+			}
+		}
 
 		if (Random.Range (0, actionCounter * 5) == 0) {
 			StartCoroutine (DecideAction ());
@@ -237,9 +253,18 @@ public class EnemyAI : MonoBehaviour {
 			}
 		}
 		if (possibleSummons.Count == 0) {
-			return DefensivePlay ();
-		} else {
-			return possibleSummons;
+			possibleSummons = DefensivePlay ();
 		}
+		return possibleSummons;
+	}
+
+	List<int> OffensiveSpell() {
+		List<int> possibleSpells = new List<int> ();
+		for (int i = 0; i < gm.playerSpots.Length; i++) {
+			if (gm.playerSpots [i].hasUnit) {
+				possibleSpells.Add (i);
+			}
+		}
+		return possibleSpells;
 	}
 }
