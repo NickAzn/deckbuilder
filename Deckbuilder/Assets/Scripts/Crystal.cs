@@ -15,6 +15,7 @@ public class Crystal : MonoBehaviour {
 	void Start() {
 		sr = GetComponent<SpriteRenderer> ();
 		UpdateUI ();
+
 	}
 
 	public void TakeDamage(int amount) {
@@ -41,5 +42,13 @@ public class Crystal : MonoBehaviour {
 			return true;
 		}
 		return false;
+	}
+
+	public void SetHealth(int amount) {
+		health = amount;
+	}
+
+	public int GetHealth() {
+		return health;
 	}
 }

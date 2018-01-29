@@ -24,6 +24,9 @@ public class GameManager : MonoBehaviour {
 	public GameObject restartButton;
 
 	void Start() {
+		playerCrystals [0].SetHealth (PlayerPrefs.GetInt ("Crystal1HP"));
+		playerCrystals [1].SetHealth (PlayerPrefs.GetInt ("Crystal2HP"));
+		playerCrystals [2].SetHealth (PlayerPrefs.GetInt ("Crystal3HP"));
 		Time.timeScale = 1.0f;
 		zoomCardStats = zoomCard.GetComponent<Card> ();
 		HideZoomCard ();
@@ -56,6 +59,9 @@ public class GameManager : MonoBehaviour {
 			}
 		}
 		if (!playerAlive) {
+			PlayerPrefs.SetInt ("Crystal1HP", 10);
+			PlayerPrefs.SetInt ("Crystal2HP", 10);
+			PlayerPrefs.SetInt ("Crystal3HP", 10);
 			endText.text = "Defeat";
 			restartButton.SetActive (true);
 			Time.timeScale = 0.0f;
@@ -68,6 +74,9 @@ public class GameManager : MonoBehaviour {
 			}
 		}
 		if (!enemyAlive) {
+			PlayerPrefs.SetInt ("Crystal1HP", playerCrystals [0].GetHealth());
+			PlayerPrefs.SetInt ("Crystal2HP", playerCrystals [1].GetHealth());
+			PlayerPrefs.SetInt ("Crystal3HP", playerCrystals [2].GetHealth());
 			endText.text = "Victory!";
 			restartButton.SetActive (true);
 			Time.timeScale = 0.0f;
@@ -116,6 +125,7 @@ public class GameManager : MonoBehaviour {
 	}
 
 	public void EndTurn() {
+		selectedCard = null;
 		if (playerTurn) {
 			//Player attack
 			StartCoroutine(UnitsAttack(playerSpots, enemySpots));
@@ -125,6 +135,7 @@ public class GameManager : MonoBehaviour {
 		}
 	}
 
+	//Causes units to attack starting from front top row, front collumn, to bottom row, back collumn
 	IEnumerator UnitsAttack(SpotStats[] attackingSpots, SpotStats[] defendingSpots) {
 		bool startedPlayerTurn = playerTurn;
 		if (startedPlayerTurn) {
@@ -132,7 +143,7 @@ public class GameManager : MonoBehaviour {
 			playerTurn = false;
 		}
 		for (int i = 0; i < attackingSpots.Length; i++) {
-			if (attackingSpots [i].hasUnit) {
+			if (attackingSpots [i].hasUnit && attackingSpots[i].damage > 0) {
 				attackingSpots [i].unitAnimation.Play ("Attack");
 				yield return new WaitForSeconds (0.7f);
 				if (attackingSpots [i].collumn == 1) {

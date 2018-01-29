@@ -43,14 +43,17 @@ public class EnemyAI : MonoBehaviour {
 		StartCoroutine (DecideAction ());
 	}
 
+    // Summons a unit card at spot
 	void SummonUnit(SpotStats spot, Card card) {
 		spot.AddUnit (card);
 	}
 
+    // Casts a spell card at spot
 	void CastSpell(SpotStats spot, Card card) {
 		spot.UseSpell (card);
 	}
 		
+    // Selects a random open spot on enemy side
 	int SelectRandomOpenSpot() {
 		List<int> openSpots = new List<int> ();
 		for (int i = 0; i < gm.enemySpots.Length; i++) {
@@ -137,6 +140,19 @@ public class EnemyAI : MonoBehaviour {
 
 	IEnumerator DecideAction() {
 		actionCounter++;
+
+		//Chance to cast a spell before summoning units
+		if (actionCounter < 5 && Random.Range (0, actionCounter * 6) == 0) {
+			actionCounter++;
+			List<int> possibleSpells = OffensiveSpell ();
+			if (possibleSpells.Count > 0) {
+				int castSpot = possibleSpells [Random.Range (0, possibleSpells.Count)];
+				int spellCard = Random.Range (0, offensiveSpells.Length);
+				CastSpell (gm.playerSpots [castSpot], offensiveSpells [spellCard]);
+				yield return new WaitForSeconds (0.7f);
+			}
+		}
+
 		int summonCard;
 		List<int> possibleSpots = new List<int>();
 		GetPlayerUnits ();
@@ -179,18 +195,8 @@ public class EnemyAI : MonoBehaviour {
 			}
 		}
 		yield return new WaitForSeconds(0.7f);
-		if (Random.Range(0,actionCounter * 5) == 0) {
-			actionCounter++;
-			List<int> possibleSpells = OffensiveSpell();
-			if (possibleSpells.Count > 0) {
-				int castSpot = possibleSpells[Random.Range (0, possibleSpells.Count)];
-				int spellCard = Random.Range (0, offensiveSpells.Length);
-				CastSpell (gm.playerSpots [castSpot], offensiveSpells[spellCard]);
-				yield return new WaitForSeconds(0.7f);
-			}
-		}
 
-		if (Random.Range (0, actionCounter * 5) == 0) {
+		if (actionCounter < 5 && Random.Range (0, actionCounter * 6) == 0) {
 			StartCoroutine (DecideAction ());
 		} else {
 			gm.EndTurn ();

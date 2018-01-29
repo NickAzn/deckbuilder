@@ -29,6 +29,7 @@ public class Player : MonoBehaviour {
 		for (int i = 0; i < hand.Length; i++) {
 			hand [i].SetActive (false);
 		}
+
 		DrawCard (5);
 	}
 
