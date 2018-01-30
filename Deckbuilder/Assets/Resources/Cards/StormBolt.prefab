@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4120261998545380}
   - component: {fileID: 114305136590519174}
   m_Layer: 0
-  m_Name: Storm Bolt
+  m_Name: StormBolt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4359649814128852}
   - component: {fileID: 114608320322548614}
   m_Layer: 0
-  m_Name: Sacrificial Lamb
+  m_Name: NaturesClaim
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

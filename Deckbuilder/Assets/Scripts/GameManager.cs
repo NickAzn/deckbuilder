@@ -24,9 +24,11 @@ public class GameManager : MonoBehaviour {
 	public GameObject restartButton;
 
 	void Start() {
-		playerCrystals [0].SetHealth (PlayerPrefs.GetInt ("Crystal1HP"));
-		playerCrystals [1].SetHealth (PlayerPrefs.GetInt ("Crystal2HP"));
-		playerCrystals [2].SetHealth (PlayerPrefs.GetInt ("Crystal3HP"));
+		int[] crystalHealth = SaveLoad.LoadCrystalHealth ();
+		playerCrystals [0].SetHealth (crystalHealth[0]);
+		playerCrystals [1].SetHealth (crystalHealth[1]);
+		playerCrystals [2].SetHealth (crystalHealth[2]);
+
 		Time.timeScale = 1.0f;
 		zoomCardStats = zoomCard.GetComponent<Card> ();
 		HideZoomCard ();
@@ -59,9 +61,8 @@ public class GameManager : MonoBehaviour {
 			}
 		}
 		if (!playerAlive) {
-			PlayerPrefs.SetInt ("Crystal1HP", 10);
-			PlayerPrefs.SetInt ("Crystal2HP", 10);
-			PlayerPrefs.SetInt ("Crystal3HP", 10);
+			SaveLoad.ResetCrystalHealth ();
+			SaveLoad.ResetPlayerDeck ();
 			endText.text = "Defeat";
 			restartButton.SetActive (true);
 			Time.timeScale = 0.0f;
@@ -74,9 +75,7 @@ public class GameManager : MonoBehaviour {
 			}
 		}
 		if (!enemyAlive) {
-			PlayerPrefs.SetInt ("Crystal1HP", playerCrystals [0].GetHealth());
-			PlayerPrefs.SetInt ("Crystal2HP", playerCrystals [1].GetHealth());
-			PlayerPrefs.SetInt ("Crystal3HP", playerCrystals [2].GetHealth());
+			SaveLoad.SaveCrystalHealth (playerCrystals [0].GetHealth(), playerCrystals [1].GetHealth(), playerCrystals [2].GetHealth());
 			endText.text = "Victory!";
 			restartButton.SetActive (true);
 			Time.timeScale = 0.0f;
@@ -102,6 +101,7 @@ public class GameManager : MonoBehaviour {
 				playerCrystals [2].TakeDamage (enemySpots [unitIteration].damage);
 			}
 		}
+		CheckGameEnded ();
 	}
 
 	void HitCrystal(int unitIteration, bool hitEnemySide, int damage) {

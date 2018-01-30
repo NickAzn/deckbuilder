@@ -141,6 +141,8 @@ public class EnemyAI : MonoBehaviour {
 	IEnumerator DecideAction() {
 		actionCounter++;
 
+		yield return new WaitForSeconds (0.7f);
+
 		//Chance to cast a spell before summoning units
 		if (actionCounter < 5 && Random.Range (0, actionCounter * 6) == 0) {
 			actionCounter++;
@@ -158,7 +160,6 @@ public class EnemyAI : MonoBehaviour {
 		GetPlayerUnits ();
 		GetPlayerCrystals ();
 		GetCrystals ();
-		yield return new WaitForSeconds (0.7f);
 
 		if (aggroMeter >= 3) {
 			possibleSpots = AggroPlay ();
@@ -232,11 +233,11 @@ public class EnemyAI : MonoBehaviour {
 		}
 		return possibleSummons;
 	}
-
-	//Attempts to attack player rows with no units guarding the crystal
-	//If all crystals are guarded, make a defensive play instead
+		
 	List<int> AggroPlay() {
 		List<int> possibleSummons = new List<int>();
+
+		//Attempts to attack player rows with no units guarding the crystal
 		if (pRow1CrystalUp && playerR1FrontHp == 0) {
 			if (!gm.enemySpots [0].hasUnit) {
 				possibleSummons.Add(0);
@@ -258,8 +259,30 @@ public class EnemyAI : MonoBehaviour {
 				possibleSummons.Add(5);
 			}
 		}
+
+		//If all rows are guarded, attack any row that has a crystal alive
 		if (possibleSummons.Count == 0) {
-			possibleSummons = DefensivePlay ();
+			if (pRow1CrystalUp) {
+				if (!gm.enemySpots [0].hasUnit) {
+					possibleSummons.Add(0);
+				} else if (!gm.enemySpots [3].hasUnit) {
+					possibleSummons.Add(3);
+				}
+			}
+			if (pRow2CrystalUp) {
+				if (!gm.enemySpots [1].hasUnit) {
+					possibleSummons.Add(1);
+				} else if (!gm.enemySpots [4].hasUnit) {
+					possibleSummons.Add(4);
+				}
+			}
+			if (pRow3CrystalUp) {
+				if (!gm.enemySpots [2].hasUnit) {
+					possibleSummons.Add(2);
+				} else if (!gm.enemySpots [5].hasUnit) {
+					possibleSummons.Add(5);
+				}
+			}
 		}
 		return possibleSummons;
 	}

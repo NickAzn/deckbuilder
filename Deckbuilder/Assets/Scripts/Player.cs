@@ -24,6 +24,12 @@ public class Player : MonoBehaviour {
 	public GameObject sacButton;
 
 	void Start() {
+		if (SaveLoad.LoadPlayerDeck () != null) {
+			deck = SaveLoad.LoadPlayerDeck ();
+		}
+
+		SaveLoad.SavePlayerDeck (deck);
+
 		//Update UI and hide all possible cards in hand
 		UpdateUI ();
 		for (int i = 0; i < hand.Length; i++) {
@@ -66,7 +72,7 @@ public class Player : MonoBehaviour {
 			if (openIndex >= 0) {
 				if (deck.Count == 0) {
 					if (ResetDeck ()) {
-						DrawCard (amount - i);
+						i--;
 					}
 				} else {
 					int j = Random.Range (0, deck.Count);
