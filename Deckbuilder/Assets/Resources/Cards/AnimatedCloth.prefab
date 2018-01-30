@@ -53,6 +53,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   baseCard: {fileID: 114934376419062240}
   cardAnimation: {fileID: 22100000, guid: f1015d4e59ebf7a49a44214d304fa0a4, type: 2}
+  cardSprite: {fileID: 21300000, guid: c5a01e6ae7e02894da5e138a367553a8, type: 3}
   manaCost: 1
   isUnit: 1
   isSpell: 0

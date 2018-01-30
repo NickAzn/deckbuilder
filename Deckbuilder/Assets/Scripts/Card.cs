@@ -10,6 +10,7 @@ public class Card : MonoBehaviour {
 	public Card baseCard;
 
 	public RuntimeAnimatorController cardAnimation;
+	public Sprite cardSprite;
 
 	public int manaCost;
 
@@ -42,7 +43,9 @@ public class Card : MonoBehaviour {
 	SpriteRenderer sr;
 
 	void Start() {
-		gm = GameObject.Find ("GameManager").GetComponent<GameManager> ();
+		if (GameObject.Find ("GameManager") != null) {
+			gm = GameObject.Find ("GameManager").GetComponent<GameManager> ();
+		}
 		sr = GetComponent<SpriteRenderer> ();
 		UpdateUI ();
 	}
@@ -88,7 +91,10 @@ public class Card : MonoBehaviour {
 	}
 
 	void OnMouseDown() {
-		gm.selectedCard = this;
+		if (gm != null) {
+			gm.selectedCard = this;
+
+		}
 		sr.color = clickColor;
 	}
 
@@ -97,10 +103,39 @@ public class Card : MonoBehaviour {
 	}
 
 	void OnMouseOver() {
-		gm.ShowZoomCard (this);
+		if (gm != null) {
+			gm.ShowZoomCard (this);
+		}
 	}
 
 	void OnMouseExit() {
-		gm.HideZoomCard ();
+		if (gm != null) {
+			gm.HideZoomCard ();
+		}
+	}
+
+	public static int SortCardsByCost(Card card1, Card card2) {
+		if (card1 == null) {
+			if (card2 == null) {
+				return 0;
+			} else {
+				return -1;
+			}
+		} else {
+			if (card2 == null) {
+				return 1;
+			} else {
+				int card1Cost = card1.manaCost;
+				int card2Cost = card2.manaCost;
+
+				if (card1Cost < card2Cost) {
+					return -1;
+				} else if (card1Cost > card2Cost) {
+					return 1;
+				} else {
+					return 0;
+				}
+			}
+		}
 	}
 }

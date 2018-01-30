@@ -53,6 +53,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   baseCard: {fileID: 114618712277928762}
   cardAnimation: {fileID: 9100000, guid: 2d4e3e6ad5385cc4fa0e17f93b042b4c, type: 2}
+  cardSprite: {fileID: 21300000, guid: 37906ff7514e0084c960459ff708b0f5, type: 3}
   manaCost: 2
   isUnit: 1
   isSpell: 0
@@ -69,3 +70,6 @@ MonoBehaviour:
   manaUI: {fileID: 0}
   cardArt: {fileID: 0}
   clickColor: {r: 0, g: 0, b: 0, a: 0}
+  spellSacrifice: 0
+  spellCardDraw: 0
+  unitRelentless: 0

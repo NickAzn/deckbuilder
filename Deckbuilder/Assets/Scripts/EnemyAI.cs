@@ -69,6 +69,12 @@ public class EnemyAI : MonoBehaviour {
 		}
 	}
 
+	IEnumerator ShowCard(Card card, float time) {
+		gm.ShowZoomCard (card);
+		yield return new WaitForSeconds (time);
+		gm.HideZoomCard ();
+	}
+
 	void GetPlayerUnits() {
 		playerR1Atk = 0;
 		playerR2Atk = 0;
@@ -151,7 +157,7 @@ public class EnemyAI : MonoBehaviour {
 				int castSpot = possibleSpells [Random.Range (0, possibleSpells.Count)];
 				int spellCard = Random.Range (0, offensiveSpells.Length);
 				CastSpell (gm.playerSpots [castSpot], offensiveSpells [spellCard]);
-				yield return new WaitForSeconds (0.7f);
+				yield return ShowCard(offensiveSpells[spellCard], 1.5f);
 			}
 		}
 
@@ -195,7 +201,7 @@ public class EnemyAI : MonoBehaviour {
 				SummonUnit (gm.enemySpots [summonSpot], lateUnits [summonCard]);
 			}
 		}
-		yield return new WaitForSeconds(0.7f);
+		yield return new WaitForSeconds (0.7f);
 
 		if (actionCounter < 5 && Random.Range (0, actionCounter * 6) == 0) {
 			StartCoroutine (DecideAction ());
