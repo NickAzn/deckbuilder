@@ -29,6 +29,7 @@ public class SpotStats : MonoBehaviour {
 	SpriteRenderer sr;
 
 	public bool relentless = false;
+	public int deathDraw = 0;
 
 	void Start() {
 		sr = GetComponent<SpriteRenderer> ();
@@ -52,7 +53,10 @@ public class SpotStats : MonoBehaviour {
 			hasUnit = true;
 			health = card.health;
 			damage = card.attack;
+
 			relentless = card.unitRelentless;
+			deathDraw = card.unitDeathDraw;
+
 			unitAnimation.runtimeAnimatorController = card.cardAnimation;
 			origCard = card.baseCard;
 			UpdateUI ();
@@ -61,7 +65,7 @@ public class SpotStats : MonoBehaviour {
 
 	public void UseSpell(Card card) {
 		if (hasUnit) {
-			StartCoroutine(DelaySpell (card));
+			StartCoroutine(DelaySpell (card.baseCard));
 			spellAnimation.runtimeAnimatorController = card.cardAnimation;
 			spellAnimation.gameObject.SetActive (true);
 		}
@@ -72,17 +76,18 @@ public class SpotStats : MonoBehaviour {
 		yield return new WaitForSeconds (waitTime);
 		spellAnimation.gameObject.SetActive (false);
 
-		if (card.attack > 0) {
-			TakeDamage (card.attack);
+		if (card.spellCardDraw > 0) {
+			player.DrawCard (card.spellCardDraw);
 		}
 		if (card.health > 0) {
 			TakeDamage (-card.health);
 		}
-		if (card.spellSacrifice) {
-			TakeDamage (health * 2);
+
+		if (card.attack > 0) {
+			TakeDamage (card.attack);
 		}
-		if (card.spellCardDraw > 0) {
-			player.DrawCard (card.spellCardDraw);
+		if (card.spellSacrifice) {
+			RemoveUnit ();
 		}
 	}
 
@@ -103,6 +108,11 @@ public class SpotStats : MonoBehaviour {
 		damage = 0;
 		relentless = false;
 		if (playerSide) {
+			if (deathDraw > 0) {
+				player.DrawCard (deathDraw);
+				deathDraw = 0;
+			}
+				
 			player.DiscardCard (origCard);
 		}
 		UpdateUI ();

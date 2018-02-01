@@ -10,6 +10,9 @@ public class CardHolder : MonoBehaviour {
 	public Image cardArt;
 	public Text manaCost;
 
+	public bool deckCard;
+	public int position;
+
 	public void UpdateUI() {
 		cardArt.sprite = origCard.cardSprite;
 		manaCost.text = origCard.manaCost.ToString ();

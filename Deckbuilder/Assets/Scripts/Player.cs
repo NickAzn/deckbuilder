@@ -67,20 +67,20 @@ public class Player : MonoBehaviour {
 	//If the deck is empty, recycle the discards back into deck
 	//Do not draw if deck and discards are empty or hand is full
 	public void DrawCard(int amount) {
-		for (int i = 0; i < amount; i++) {
+		if (amount > 0) {
 			int openIndex = FindOpenHand ();
 			if (openIndex >= 0) {
 				if (deck.Count == 0) {
-					if (ResetDeck ()) {
-						i--;
-					}
+					ResetDeck ();
+					DrawCard (amount);
 				} else {
 					int j = Random.Range (0, deck.Count);
-					hand[openIndex].GetComponent<Card>().CopyStats(deck[j]);
+					hand [openIndex].GetComponent<Card> ().CopyStats (deck [j]);
 					hand [openIndex].GetComponent<Card> ().baseCard = deck [j];
 					hand [openIndex].SetActive (true);
 					deck.RemoveAt (j);
 					UpdateUI ();
+					DrawCard (amount - 1);
 				}
 			}
 		}

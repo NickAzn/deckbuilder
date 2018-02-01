@@ -590,6 +590,7 @@ MonoBehaviour:
   player: {fileID: 356550592}
   origCard: {fileID: 0}
   relentless: 0
+  deathDraw: 0
 --- !u!4 &41026971
 Transform:
   m_ObjectHideFlags: 0
@@ -1650,6 +1651,7 @@ MonoBehaviour:
   player: {fileID: 356550592}
   origCard: {fileID: 0}
   relentless: 0
+  deathDraw: 0
 --- !u!4 &226625668
 Transform:
   m_ObjectHideFlags: 0
@@ -1871,6 +1873,7 @@ MonoBehaviour:
   player: {fileID: 356550592}
   origCard: {fileID: 0}
   relentless: 0
+  deathDraw: 0
 --- !u!4 &238943845
 Transform:
   m_ObjectHideFlags: 0
@@ -2004,6 +2007,7 @@ MonoBehaviour:
   player: {fileID: 356550592}
   origCard: {fileID: 0}
   relentless: 0
+  deathDraw: 0
 --- !u!4 &243269488
 Transform:
   m_ObjectHideFlags: 0
@@ -2567,6 +2571,7 @@ MonoBehaviour:
   player: {fileID: 356550592}
   origCard: {fileID: 0}
   relentless: 0
+  deathDraw: 0
 --- !u!4 &297346804
 Transform:
   m_ObjectHideFlags: 0
@@ -2796,8 +2801,8 @@ MonoBehaviour:
   - {fileID: 114934376419062240, guid: 04926b8157c5427439280c0435cb498c, type: 2}
   - {fileID: 114934376419062240, guid: 04926b8157c5427439280c0435cb498c, type: 2}
   - {fileID: 114934376419062240, guid: 04926b8157c5427439280c0435cb498c, type: 2}
-  - {fileID: 114934376419062240, guid: 04926b8157c5427439280c0435cb498c, type: 2}
-  - {fileID: 114934376419062240, guid: 04926b8157c5427439280c0435cb498c, type: 2}
+  - {fileID: 114641982781604766, guid: 3470b8178dcc0fa45be8f9b1578e754d, type: 2}
+  - {fileID: 114641982781604766, guid: 3470b8178dcc0fa45be8f9b1578e754d, type: 2}
   - {fileID: 114608320322548614, guid: 902a034b643ca73498873ab1bdb305be, type: 2}
   - {fileID: 114594836883534366, guid: 7064b1548deab4949af447145dd3c547, type: 2}
   - {fileID: 114594836883534366, guid: 7064b1548deab4949af447145dd3c547, type: 2}
@@ -2808,6 +2813,9 @@ MonoBehaviour:
   - {fileID: 114947882670045886, guid: a13d19a28d808bc4e8c771f207b72492, type: 2}
   - {fileID: 114947882670045886, guid: a13d19a28d808bc4e8c771f207b72492, type: 2}
   - {fileID: 114618712277928762, guid: f74e131a86610804f9ae90eb75bdfec1, type: 2}
+  - {fileID: 114641982781604766, guid: 3470b8178dcc0fa45be8f9b1578e754d, type: 2}
+  - {fileID: 114753647423312842, guid: 3ab367ab1ae99544e869c62faf557ead, type: 2}
+  - {fileID: 114753647423312842, guid: 3ab367ab1ae99544e869c62faf557ead, type: 2}
   discards: []
   hand:
   - {fileID: 1693680028}
@@ -4212,6 +4220,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   baseCard: {fileID: 0}
   cardAnimation: {fileID: 0}
+  cardSprite: {fileID: 0}
   manaCost: 1
   isUnit: 0
   isSpell: 0
@@ -4231,6 +4240,7 @@ MonoBehaviour:
   spellSacrifice: 0
   spellCardDraw: 0
   unitRelentless: 0
+  unitDeathDraw: 0
 --- !u!212 &640729026
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -4572,6 +4582,7 @@ MonoBehaviour:
   player: {fileID: 356550592}
   origCard: {fileID: 0}
   relentless: 0
+  deathDraw: 0
 --- !u!4 &703841867
 Transform:
   m_ObjectHideFlags: 0
@@ -5548,6 +5559,7 @@ MonoBehaviour:
   player: {fileID: 356550592}
   origCard: {fileID: 0}
   relentless: 0
+  deathDraw: 0
 --- !u!4 &924561176
 Transform:
   m_ObjectHideFlags: 0
@@ -8455,6 +8467,7 @@ MonoBehaviour:
   player: {fileID: 356550592}
   origCard: {fileID: 0}
   relentless: 0
+  deathDraw: 0
 --- !u!4 &989083277
 Transform:
   m_ObjectHideFlags: 0
@@ -9635,6 +9648,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   baseCard: {fileID: 0}
   cardAnimation: {fileID: 0}
+  cardSprite: {fileID: 0}
   manaCost: 1
   isUnit: 0
   isSpell: 0
@@ -9654,6 +9668,7 @@ MonoBehaviour:
   spellSacrifice: 0
   spellCardDraw: 0
   unitRelentless: 0
+  unitDeathDraw: 0
 --- !u!212 &1207710727
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -10640,6 +10655,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   baseCard: {fileID: 0}
   cardAnimation: {fileID: 0}
+  cardSprite: {fileID: 0}
   manaCost: 1
   isUnit: 0
   isSpell: 0
@@ -10659,6 +10675,7 @@ MonoBehaviour:
   spellSacrifice: 0
   spellCardDraw: 0
   unitRelentless: 0
+  unitDeathDraw: 0
 --- !u!212 &1281059177
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -11031,6 +11048,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   baseCard: {fileID: 0}
   cardAnimation: {fileID: 0}
+  cardSprite: {fileID: 0}
   manaCost: 1
   isUnit: 0
   isSpell: 0
@@ -11050,6 +11068,7 @@ MonoBehaviour:
   spellSacrifice: 0
   spellCardDraw: 0
   unitRelentless: 0
+  unitDeathDraw: 0
 --- !u!212 &1358663790
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -11360,6 +11379,7 @@ MonoBehaviour:
   player: {fileID: 356550592}
   origCard: {fileID: 0}
   relentless: 0
+  deathDraw: 0
 --- !u!4 &1367420884
 Transform:
   m_ObjectHideFlags: 0
@@ -11432,6 +11452,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   baseCard: {fileID: 0}
   cardAnimation: {fileID: 0}
+  cardSprite: {fileID: 0}
   manaCost: 0
   isUnit: 0
   isSpell: 0
@@ -11451,6 +11472,7 @@ MonoBehaviour:
   spellSacrifice: 0
   spellCardDraw: 0
   unitRelentless: 0
+  unitDeathDraw: 0
 --- !u!114 &1369395370
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12453,6 +12475,7 @@ MonoBehaviour:
   player: {fileID: 356550592}
   origCard: {fileID: 0}
   relentless: 0
+  deathDraw: 0
 --- !u!4 &1520711321
 Transform:
   m_ObjectHideFlags: 0
@@ -12585,6 +12608,7 @@ MonoBehaviour:
   player: {fileID: 356550592}
   origCard: {fileID: 0}
   relentless: 0
+  deathDraw: 0
 --- !u!4 &1523926442
 Transform:
   m_ObjectHideFlags: 0
@@ -13469,6 +13493,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   baseCard: {fileID: 0}
   cardAnimation: {fileID: 0}
+  cardSprite: {fileID: 0}
   manaCost: 1
   isUnit: 0
   isSpell: 0
@@ -13488,6 +13513,7 @@ MonoBehaviour:
   spellSacrifice: 0
   spellCardDraw: 0
   unitRelentless: 0
+  unitDeathDraw: 0
 --- !u!212 &1693680031
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -16207,6 +16233,7 @@ MonoBehaviour:
   player: {fileID: 356550592}
   origCard: {fileID: 0}
   relentless: 0
+  deathDraw: 0
 --- !u!4 &2028569240
 Transform:
   m_ObjectHideFlags: 0

@@ -39,6 +39,7 @@ public class Card : MonoBehaviour {
 	public int spellCardDraw = 0;
 
 	public bool unitRelentless = false;
+	public int unitDeathDraw = 0;
 
 	SpriteRenderer sr;
 
@@ -86,6 +87,7 @@ public class Card : MonoBehaviour {
 		spellCardDraw = otherCard.spellCardDraw;
 
 		unitRelentless = otherCard.unitRelentless;
+		unitDeathDraw = otherCard.unitDeathDraw;
 
 		UpdateUI ();
 	}
@@ -114,6 +116,7 @@ public class Card : MonoBehaviour {
 		}
 	}
 
+	// Sort cards based on cost
 	public static int SortCardsByCost(Card card1, Card card2) {
 		if (card1 == null) {
 			if (card2 == null) {

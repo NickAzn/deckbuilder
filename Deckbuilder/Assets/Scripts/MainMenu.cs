@@ -8,6 +8,7 @@ public class MainMenu : MonoBehaviour {
 	public void NewGame() {
 		SaveLoad.ResetCrystalHealth ();
 		SaveLoad.ResetPlayerDeck ();
+		SaveLoad.ResetPlayerLibrary ();
 		SceneManager.LoadScene ("GameBoard");
 	}
 }
