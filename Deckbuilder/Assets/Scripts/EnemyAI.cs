@@ -9,6 +9,7 @@ public class EnemyAI : MonoBehaviour {
 	public Card[] midUnits;
 	public Card[] lateUnits;
 	public Card[] offensiveSpells;
+	public Card[] enchantSpells;
 	public GameManager gm;
 	public int aggroMeter;
 	int actionCounter = 0;
@@ -69,6 +70,7 @@ public class EnemyAI : MonoBehaviour {
 		}
 	}
 
+	// Shows card being played so player knows what the AI is using
 	IEnumerator ShowCard(Card card, float time) {
 		gm.ShowZoomCard (card);
 		yield return new WaitForSeconds (time);
@@ -150,14 +152,16 @@ public class EnemyAI : MonoBehaviour {
 		yield return new WaitForSeconds (0.7f);
 
 		//Chance to cast a spell before summoning units
-		if (actionCounter < 5 && Random.Range (0, actionCounter * 6) == 0) {
+		if (actionCounter < 5 && Random.Range (0, actionCounter * 8) == 0) {
 			actionCounter++;
 			List<int> possibleSpells = OffensiveSpell ();
 			if (possibleSpells.Count > 0) {
 				int castSpot = possibleSpells [Random.Range (0, possibleSpells.Count)];
 				int spellCard = Random.Range (0, offensiveSpells.Length);
 				CastSpell (gm.playerSpots [castSpot], offensiveSpells [spellCard]);
-				yield return ShowCard(offensiveSpells[spellCard], 1.5f);
+				yield return ShowCard (offensiveSpells [spellCard], 1.5f);
+			} else {
+				actionCounter--;
 			}
 		}
 
@@ -203,7 +207,20 @@ public class EnemyAI : MonoBehaviour {
 		}
 		yield return new WaitForSeconds (0.7f);
 
-		if (actionCounter < 5 && Random.Range (0, actionCounter * 6) == 0) {
+		if (actionCounter < 5 && Random.Range (0, actionCounter * 8) == 0) {
+			actionCounter++;
+			List<int> possibleSpells = Enchant ();
+			if (possibleSpells.Count > 0) {
+				int castSpot = possibleSpells [Random.Range (0, possibleSpells.Count)];
+				int spellCard = Random.Range (0, enchantSpells.Length);
+				CastSpell (gm.enemySpots [castSpot], enchantSpells [spellCard]);
+				yield return ShowCard (enchantSpells [spellCard], 1.5f);
+			} else {
+				actionCounter--;
+			}
+		}
+
+		if (actionCounter < 5 && Random.Range (0, actionCounter * 8) == 0) {
 			StartCoroutine (DecideAction ());
 		} else {
 			gm.EndTurn ();
@@ -234,8 +251,9 @@ public class EnemyAI : MonoBehaviour {
 				possibleSummons.Add(5);
 			}
 		}
+		// If no crystals are threatened, make an aggressive play instead
 		if (possibleSummons.Count == 0) {
-			possibleSummons.Add(SelectRandomOpenSpot ());
+			possibleSummons = AggroPlay ();
 		}
 		return possibleSummons;
 	}
@@ -293,10 +311,22 @@ public class EnemyAI : MonoBehaviour {
 		return possibleSummons;
 	}
 
+	// Finds all spots an offensive spell can be played
 	List<int> OffensiveSpell() {
 		List<int> possibleSpells = new List<int> ();
 		for (int i = 0; i < gm.playerSpots.Length; i++) {
 			if (gm.playerSpots [i].hasUnit) {
+				possibleSpells.Add (i);
+			}
+		}
+		return possibleSpells;
+	}
+
+	// Finds all spots an enchantment spell can be played
+	List<int> Enchant() {
+		List<int> possibleSpells = new List<int> ();
+		for (int i = 0; i < gm.enemySpots.Length; i++) {
+			if (gm.enemySpots [i].hasUnit && gm.enemySpots [i].enchantment.origCard == null) {
 				possibleSpells.Add (i);
 			}
 		}

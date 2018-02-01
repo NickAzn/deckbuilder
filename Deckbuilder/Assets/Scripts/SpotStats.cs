@@ -20,6 +20,7 @@ public class SpotStats : MonoBehaviour {
 	public Animator unitAnimation;
 	public Animator spellAnimation;
 	public Animator summonAnimation;
+	public EnchantHolder enchantment;
 
 	public bool playerSide;
 	public Player player;
@@ -30,6 +31,7 @@ public class SpotStats : MonoBehaviour {
 
 	public bool relentless = false;
 	public int deathDraw = 0;
+	public int fury = 0;
 
 	void Start() {
 		sr = GetComponent<SpriteRenderer> ();
@@ -38,7 +40,21 @@ public class SpotStats : MonoBehaviour {
 		UpdateUI ();
 	}
 
+	public void NewTurn() {
+		if (origCard != null) {
+			if (origCard.unitFury > 0) {
+				fury += origCard.unitFury;
+			}
+			if (enchantment.origCard != null) {
+				if (enchantment.origCard.unitFury > 0) {
+					fury += enchantment.origCard.unitFury;
+				}
+			}
+		}
+	}
+		
 	void Update() {
+		// If the player can use selected card here, highlight this spot
 		if (CanUseCard()) {
 			highlighter.SetActive (true);
 		} else {
@@ -56,6 +72,13 @@ public class SpotStats : MonoBehaviour {
 
 			relentless = card.unitRelentless;
 			deathDraw = card.unitDeathDraw;
+			fury = card.unitFury;
+
+			if (playerSide) {
+				if (card.unitManaFont > 0) {
+					player.IncreaseMaxMana (card.unitManaFont);
+				}
+			}
 
 			unitAnimation.runtimeAnimatorController = card.cardAnimation;
 			origCard = card.baseCard;
@@ -63,6 +86,7 @@ public class SpotStats : MonoBehaviour {
 		}
 	}
 
+	// Runs spell animation are delays spell effect until animation finishes
 	public void UseSpell(Card card) {
 		if (hasUnit) {
 			StartCoroutine(DelaySpell (card.baseCard));
@@ -71,26 +95,55 @@ public class SpotStats : MonoBehaviour {
 		}
 	}
 
+	// Delays spell effect to allow animation to finish
 	IEnumerator DelaySpell(Card card) {
+		//Hide spell animation after it finishes
 		float waitTime = card.cardAnimation.animationClips [0].length * 0.95f;
 		yield return new WaitForSeconds (waitTime);
 		spellAnimation.gameObject.SetActive (false);
 
-		if (card.spellCardDraw > 0) {
-			player.DrawCard (card.spellCardDraw);
-		}
-		if (card.health > 0) {
-			TakeDamage (-card.health);
-		}
-
-		if (card.attack > 0) {
-			TakeDamage (card.attack);
-		}
-		if (card.spellSacrifice) {
-			RemoveUnit ();
+		//If the spell is not an enchant, it is an instant spell
+		if (!card.spellEnchant) {
+			if (card.spellCardDraw > 0) {
+				player.DrawCard (card.spellCardDraw);	//Draw cards equal to spellCardDraw
+			}
+			if (card.attack > 0) {
+				TakeDamage (card.attack);	//Take damage based equal to the card's attack
+			}
+			if (card.spellSacrifice) {
+				RemoveUnit ();				//Sacrifices this unit if the spell has spellSacrifice true
+			}
+			if (card.spellAttackReduce > 0) {
+				damage -= card.spellAttackReduce;	// Reduce units attack by spellAttackReduce effect of card
+			}
+			//Discard to player discards if the player casted this card
+			if (!playerSide && card.enemySideCast) {
+				player.DiscardCard (card);
+			} else if (playerSide && card.playerSideCast) {
+				player.DiscardCard (card);
+			}
+		} else {
+			enchantment.DisplayCard (card.baseCard);	//Spell is an enchantent, so it uses the enchant spot
+			if (card.health > 0) {
+				health += card.health;	// Increase unit's health by enchantment's health
+			}
+			if (card.attack > 0) {
+				damage += card.attack;	// Increase unit's damage by the enchantment's attack
+			}
+			if (card.spellAttackReduce > 0) {
+				damage -= card.spellAttackReduce;	// Reduce units attack by spellAttackReduce effect of card
+			}
+			if (card.unitRelentless) {
+				relentless = true;		// Gives unit relentless, if the enchant has relentless
+			}
+			if (card.unitFury > 0) {
+				fury += card.unitFury;
+			}
+			UpdateUI ();	// Update with new stats for enchantment
 		}
 	}
 
+	// Plays the summoning animation then hides it after it finishes
 	IEnumerator PlaySummonAnimation() {
 		summonAnimation.gameObject.SetActive (true);
 		summonAnimation.Play ("Summoning");
@@ -107,14 +160,23 @@ public class SpotStats : MonoBehaviour {
 		health = 0;
 		damage = 0;
 		relentless = false;
+		fury = 0;
 		if (playerSide) {
 			if (deathDraw > 0) {
 				player.DrawCard (deathDraw);
 				deathDraw = 0;
 			}
+			if (origCard.unitManaFont > 0) {
+				player.IncreaseMaxMana (-origCard.unitManaFont);
+			}
+
+			if (enchantment.origCard != null) {
+				player.DiscardCard (enchantment.origCard);
+			}
 				
 			player.DiscardCard (origCard);
 		}
+		enchantment.RemoveCard ();
 		UpdateUI ();
 	}
 
@@ -125,6 +187,7 @@ public class SpotStats : MonoBehaviour {
 		}
 	}
 
+	// Check if the selected card can be used on this spot
 	bool CanUseCard() {
 		if (gm.selectedCard != null) {
 			if (gm.isPlayerTurn ()) {
@@ -133,6 +196,12 @@ public class SpotStats : MonoBehaviour {
 					if (selCard.playerSideCast && playerSide) {
 						if (selCard.isUnit && !hasUnit) {
 							return true;
+						} else if (selCard.spellEnchant && hasUnit) {
+							if (enchantment.origCard == null) {
+								return true;
+							} else {
+								return false;
+							}
 						} else if (selCard.isSpell && hasUnit) {
 							return true;
 						}

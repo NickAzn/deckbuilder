@@ -18,6 +18,7 @@ public class Crystal : MonoBehaviour {
 
 	}
 
+	// Crystal takes given amount of damage
 	public void TakeDamage(int amount) {
 		health -= amount;
 		if (health <= 0) {
@@ -26,6 +27,7 @@ public class Crystal : MonoBehaviour {
 		UpdateUI();
 	}
 
+	// Updates the health text UI and sprite to full state, damaged state, or destroyed state
 	void UpdateUI() {
 		if (health <= 0) {
 			sr.sprite = healthStates [2];
@@ -37,6 +39,7 @@ public class Crystal : MonoBehaviour {
 		hpUI.text = health.ToString ();
 	}
 
+	// Checks if the crystal has more than 0 health
 	public bool isAlive() {
 		if (health > 0) {
 			return true;
@@ -44,10 +47,12 @@ public class Crystal : MonoBehaviour {
 		return false;
 	}
 
+	// Sets the amount of health the crystal has
 	public void SetHealth(int amount) {
 		health = amount;
 	}
 
+	// Get the amount of health the crystal has
 	public int GetHealth() {
 		return health;
 	}

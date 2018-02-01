@@ -24,7 +24,7 @@ public class DeckBuilder : MonoBehaviour {
 	List<GameObject> libraryCards = new List<GameObject>();
 
 	void Start () {
-		// load the player deck and sort by the cost of the cards
+		// load the player deck and library
 		deck = SaveLoad.LoadPlayerDeck ();
 		library = SaveLoad.LoadPlayerLibrary ();
 		zoomCard.CopyStats (deck [0]);
@@ -35,12 +35,15 @@ public class DeckBuilder : MonoBehaviour {
 
 	void RefreshUI() {
 		if (deck != null) {
+			// Sort the deck by mana cost
 			deck.Sort (Card.SortCardsByCost);
 
+			// Removes all previous display cards
 			foreach (GameObject dc in deckCards) {
 				Destroy (dc);
 			}
 
+			// Creates UI for all new cards, and expands the deck section if needed
 			deckCards = new List<GameObject> ();
 			for (int i = 0; i < deck.Count; i++) {
 				GameObject dc = Instantiate (deckCard) as GameObject;
@@ -67,12 +70,15 @@ public class DeckBuilder : MonoBehaviour {
 		}
 
 		if (library != null) {
+			// Sorts the library by mana cost
 			library.Sort (Card.SortCardsByCost);
 
+			// Removes all previous display cards
 			foreach (GameObject dc in libraryCards) {
 				Destroy (dc);
 			}
 
+			// Creates UI for all new cards, and expands the library section if needed
 			libraryCards = new List<GameObject> ();
 			for (int i = 0; i < library.Count; i++) {
 				GameObject dc = Instantiate (deckCard) as GameObject;
@@ -102,6 +108,7 @@ public class DeckBuilder : MonoBehaviour {
 		}
 	}
 
+	// Selects card and shows zoomed version with card stats
 	public void SelectCard(CardHolder cardHolder) {
 		zoomCard.CopyStats (cardHolder.origCard);
 		selCardHolder = cardHolder;
@@ -114,12 +121,14 @@ public class DeckBuilder : MonoBehaviour {
 		}
 	}
 
+	// Deselects the card
 	void DeselectCard() {
 		selCardHolder = null;
 		removeCardButton.SetActive (false);
 		addCardButton.SetActive (false);
 	}
 
+	// Adds selected card from library to the player deck
 	public void AddSelectedCard() {
 		deck.Add (selCardHolder.GetComponent<CardHolder>().origCard);
 		library.RemoveAt(selCardHolder.position);
@@ -128,6 +137,7 @@ public class DeckBuilder : MonoBehaviour {
 		RefreshUI ();
 	}
 
+	// Removes the selected card from the deck and places it in the library
 	public void RemoveSelectedCard() {
 		deck.RemoveAt (selCardHolder.position);
 		library.Add (selCardHolder.GetComponent<CardHolder>().origCard);
@@ -136,6 +146,7 @@ public class DeckBuilder : MonoBehaviour {
 		RefreshUI ();
 	}
 
+	// Removes all cards from the deck and places them in the library
 	public void ResetDeck() {
 		for (int i = 0; i < deck.Count; i++) {
 			library.Add (deck[i]);
@@ -147,6 +158,7 @@ public class DeckBuilder : MonoBehaviour {
 		RefreshUI ();
 	}
 
+	// If the deck has atleast 20 cards, save the deck
 	public void SaveDeck() {
 		if (deck.Count >= 20) {
 			SaveLoad.SavePlayerDeck (deck);

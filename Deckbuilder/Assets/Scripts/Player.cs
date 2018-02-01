@@ -97,7 +97,7 @@ public class Player : MonoBehaviour {
 	}
 
 	public void DiscardCard(Card card) {
-		discards.Add (card.baseCard);
+		discards.Add (card);
 		UpdateUI ();
 	}
 
@@ -116,7 +116,6 @@ public class Player : MonoBehaviour {
 				spot.AddUnit (card);
 			} else if (card.isSpell) {
 				spot.UseSpell (card);
-				DiscardCard (card);
 			}
 			DisableSelectedCard ();
 			UpdateUI ();
@@ -153,10 +152,18 @@ public class Player : MonoBehaviour {
 			mana++;
 			sacs++;
 			int cardNum = DisableSelectedCard ();
-			DiscardCard (hand [cardNum].GetComponent<Card> ());
+			DiscardCard (hand [cardNum].GetComponent<Card> ().baseCard);
 			hand [cardNum].SetActive (false);
 			UpdateUI ();
 		}
+	}
+
+	public void IncreaseMaxMana(int amount) {
+		maxMana += amount;
+	}
+
+	public void IncreaseCurrentMana(int amount) {
+		mana += amount;
 	}
 
 	public void NewTurn() {

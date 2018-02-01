@@ -14,11 +14,11 @@ public class Card : MonoBehaviour {
 
 	public int manaCost;
 
-	public bool isUnit;
-	public bool isSpell;
+	public bool isUnit;		// Sets card to be a unit
+	public bool isSpell;	// Sets card to be a spell
 
-	public bool playerSideCast;
-	public bool enemySideCast;
+	public bool playerSideCast;	// ALlows player to cast this card on player side
+	public bool enemySideCast;	// Allows player to cast this card on enemy side
 
 	public int attack;
 	public int health;
@@ -35,11 +35,15 @@ public class Card : MonoBehaviour {
 
 	public Color clickColor;
 
-	public bool spellSacrifice = false;
-	public int spellCardDraw = 0;
+	public bool spellEnchant = false;	// When true, sets spell as enchant, so it uses a spot's enchant spot
+	public bool spellSacrifice = false;	// When true, spell will remove the unit it is casted on
+	public int spellCardDraw = 0;		// When > 0, spell will make the player draw that amount of cards
+	public int spellAttackReduce = 0;	// WHen > 0, spell/enchant will reduce the attack of unit it is casted on
 
-	public bool unitRelentless = false;
-	public int unitDeathDraw = 0;
+	public bool unitRelentless = false;	// When true, unit will continue attacking past first target, if it has extra attack
+	public int unitDeathDraw = 0;		// When > 0, player will draw that amount of cards on unit death
+	public int unitManaFont = 0;		// When > 0, player gains that amount of max mana while unit is alive
+	public int unitFury = 0;			// WHen > 0, unit attack that amount of additional times
 
 	SpriteRenderer sr;
 
@@ -50,7 +54,8 @@ public class Card : MonoBehaviour {
 		sr = GetComponent<SpriteRenderer> ();
 		UpdateUI ();
 	}
-
+		
+	//Update the card's UI to the card's current stats
 	void UpdateUI() {
 		cardArt.runtimeAnimatorController = cardAnimation;
 		nameUI.text = cardName;
@@ -68,6 +73,7 @@ public class Card : MonoBehaviour {
 		manaUI.text = manaCost.ToString ();
 	}
 
+	//Copies all stats from otherCard
 	public void CopyStats(Card otherCard) {
 		isUnit = otherCard.isUnit;
 		isSpell = otherCard.isSpell;
@@ -83,40 +89,49 @@ public class Card : MonoBehaviour {
 		cardName = otherCard.cardName;
 		manaCost = otherCard.manaCost;
 
+		spellEnchant = otherCard.spellEnchant;
 		spellSacrifice = otherCard.spellSacrifice;
 		spellCardDraw = otherCard.spellCardDraw;
+		spellAttackReduce = otherCard.spellAttackReduce;
 
 		unitRelentless = otherCard.unitRelentless;
 		unitDeathDraw = otherCard.unitDeathDraw;
+		unitManaFont = otherCard.unitManaFont;
+		unitFury = otherCard.unitFury;
 
 		UpdateUI ();
 	}
 
+	//When clicked, set gamemanager's selected card to this card
 	void OnMouseDown() {
 		if (gm != null) {
 			gm.selectedCard = this;
 
 		}
+		//Change color to give player feedback that they clicked the card
 		sr.color = clickColor;
 	}
 
+	//When mouse is released from a click, change color back to white from the click color
 	void OnMouseUp() {
 		sr.color = Color.white;
 	}
 
+	//When hovering over the card, show a zoomed version of card for readability
 	void OnMouseOver() {
 		if (gm != null) {
 			gm.ShowZoomCard (this);
 		}
 	}
 
+	//When mouse is no longer hovering over the card, stop showing the zoomed card
 	void OnMouseExit() {
 		if (gm != null) {
 			gm.HideZoomCard ();
 		}
 	}
 
-	// Sort cards based on cost
+	// Sort cards based on mana cost, if mana cost is the same, sort alphabetically
 	public static int SortCardsByCost(Card card1, Card card2) {
 		if (card1 == null) {
 			if (card2 == null) {
@@ -136,9 +151,14 @@ public class Card : MonoBehaviour {
 				} else if (card1Cost > card2Cost) {
 					return 1;
 				} else {
-					return 0;
+					return SortCardsByName(card1, card2);
 				}
 			}
 		}
+	}
+
+	// Sorts cards alphabetically
+	public static int SortCardsByName(Card card1, Card card2) {
+		return (card1.name.CompareTo (card2.name));
 	}
 }

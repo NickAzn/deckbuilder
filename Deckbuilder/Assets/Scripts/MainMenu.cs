@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour {
 
+	// Starts a fresh game
 	public void NewGame() {
 		SaveLoad.ResetCrystalHealth ();
 		SaveLoad.ResetPlayerDeck ();

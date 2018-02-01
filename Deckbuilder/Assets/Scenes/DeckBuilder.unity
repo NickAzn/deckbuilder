@@ -439,7 +439,7 @@ MonoBehaviour:
   m_Elasticity: 0.1
   m_Inertia: 1
   m_DecelerationRate: 0.135
-  m_ScrollSensitivity: -20
+  m_ScrollSensitivity: -25
   m_Viewport: {fileID: 0}
   m_HorizontalScrollbar: {fileID: 1975595138}
   m_VerticalScrollbar: {fileID: 0}
@@ -794,7 +794,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: -250, y: 105.000015}
+  m_AnchoredPosition: {x: -500, y: 105.000015}
   m_SizeDelta: {x: 100, y: 64}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &281989288
@@ -1989,8 +1989,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1845670129}
   m_HandleRect: {fileID: 1845670128}
   m_Direction: 2
-  m_Value: 0
-  m_Size: 0.99999994
+  m_Value: 0.5
+  m_Size: 0.9999998
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -2531,7 +2531,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: -100, y: 105.00004}
+  m_AnchoredPosition: {x: -350, y: 105.00004}
   m_SizeDelta: {x: 100, y: 64}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1659726705
@@ -2854,9 +2854,11 @@ MonoBehaviour:
   manaUI: {fileID: 288838681}
   cardArt: {fileID: 1199123933}
   clickColor: {r: 0, g: 0, b: 0, a: 0}
+  spellEnchant: 0
   spellSacrifice: 0
   spellCardDraw: 0
   unitRelentless: 0
+  unitDeathDraw: 0
 --- !u!114 &1758757119
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3230,8 +3232,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1354821076}
   m_HandleRect: {fileID: 1354821075}
   m_Direction: 0
-  m_Value: 0
-  m_Size: 1
+  m_Value: 0.5
+  m_Size: 0.9999999
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
