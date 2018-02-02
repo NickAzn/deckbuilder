@@ -62,7 +62,7 @@ MonoBehaviour:
   attack: 0
   health: 1
   cardName: Mana Wisp
-  description: While this unit is in play, increase your max mana by 1
+  description: When this unit is summoned, increase your current mana by 3
   nameUI: {fileID: 0}
   descUI: {fileID: 0}
   atkUI: {fileID: 0}
@@ -73,6 +73,9 @@ MonoBehaviour:
   spellEnchant: 0
   spellSacrifice: 0
   spellCardDraw: 0
+  spellAttackReduce: 0
   unitRelentless: 0
   unitDeathDraw: 0
-  unitManaFont: 1
+  unitManaFont: 0
+  unitFury: 0
+  manaBoost: 3

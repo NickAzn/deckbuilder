@@ -54,7 +54,7 @@ MonoBehaviour:
   baseCard: {fileID: 114540127464893966}
   cardAnimation: {fileID: 22100000, guid: 82e0c0efe5db7fc409d8ffcb649c4e5e, type: 2}
   cardSprite: {fileID: 21300006, guid: 2fef5ae9e25c55e4aa9d0dee49fbc2af, type: 3}
-  manaCost: 4
+  manaCost: 3
   isUnit: 0
   isSpell: 1
   playerSideCast: 1
@@ -78,3 +78,4 @@ MonoBehaviour:
   unitDeathDraw: 0
   unitManaFont: 0
   unitFury: 1
+  manaBoost: 0

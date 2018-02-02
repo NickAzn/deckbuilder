@@ -43,7 +43,9 @@ public class Card : MonoBehaviour {
 	public bool unitRelentless = false;	// When true, unit will continue attacking past first target, if it has extra attack
 	public int unitDeathDraw = 0;		// When > 0, player will draw that amount of cards on unit death
 	public int unitManaFont = 0;		// When > 0, player gains that amount of max mana while unit is alive
-	public int unitFury = 0;			// WHen > 0, unit attack that amount of additional times
+	public int unitFury = 0;			// When > 0, unit attack that amount of additional times
+
+	public int manaBoost = 0;			// When > 0, this card grants that amount of current mana the turn it is used
 
 	SpriteRenderer sr;
 
@@ -98,6 +100,8 @@ public class Card : MonoBehaviour {
 		unitDeathDraw = otherCard.unitDeathDraw;
 		unitManaFont = otherCard.unitManaFont;
 		unitFury = otherCard.unitFury;
+
+		manaBoost = otherCard.manaBoost;
 
 		UpdateUI ();
 	}

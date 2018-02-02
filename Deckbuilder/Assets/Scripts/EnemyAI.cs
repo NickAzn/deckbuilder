@@ -149,6 +149,13 @@ public class EnemyAI : MonoBehaviour {
 	IEnumerator DecideAction() {
 		actionCounter++;
 
+		// Reduce chance of doing extra actions early on
+		if (turnCounter < 4) {
+			actionCounter += 2;
+		} else if (turnCounter < 7) {
+			actionCounter++;
+		}
+
 		yield return new WaitForSeconds (0.7f);
 
 		//Chance to cast a spell before summoning units
@@ -165,7 +172,7 @@ public class EnemyAI : MonoBehaviour {
 			}
 		}
 
-		int summonCard;
+		Card summonCard;
 		List<int> possibleSpots = new List<int>();
 		GetPlayerUnits ();
 		GetPlayerCrystals ();
@@ -191,19 +198,21 @@ public class EnemyAI : MonoBehaviour {
 			possibleSpots.Add (SelectRandomOpenSpot ());
 		}
 
-
+		bool manaBoosted = false;
 		if (possibleSpots.Count > 0 && possibleSpots [0] > -1) {
 			int summonSpot = possibleSpots[Random.Range (0, possibleSpots.Count)];
 			if (turnCounter < 2) {
-				summonCard = Random.Range (0, earlyUnits.Length);
-				SummonUnit (gm.enemySpots [summonSpot], earlyUnits [summonCard]);
-			} else if (turnCounter < 6) {
-				summonCard = Random.Range (0, midUnits.Length);
-				SummonUnit (gm.enemySpots [summonSpot], midUnits [summonCard]);
+				summonCard = earlyUnits[Random.Range (0, earlyUnits.Length)];
+			} else if (turnCounter < 7) {
+				summonCard = midUnits[Random.Range (0, midUnits.Length)];
 			} else {
-				summonCard = Random.Range (0, lateUnits.Length);
-				SummonUnit (gm.enemySpots [summonSpot], lateUnits [summonCard]);
+				summonCard = lateUnits[Random.Range (0, lateUnits.Length)];
 			}
+			if (summonCard.manaBoost > 0) {
+				manaBoosted = true;
+				actionCounter--;
+			}
+			SummonUnit (gm.enemySpots [summonSpot], summonCard);
 		}
 		yield return new WaitForSeconds (0.7f);
 
@@ -220,7 +229,7 @@ public class EnemyAI : MonoBehaviour {
 			}
 		}
 
-		if (actionCounter < 5 && Random.Range (0, actionCounter * 8) == 0) {
+		if ((actionCounter < 5 && Random.Range (0, actionCounter * 8) == 0) || manaBoosted) {
 			StartCoroutine (DecideAction ());
 		} else {
 			gm.EndTurn ();

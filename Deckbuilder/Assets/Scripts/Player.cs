@@ -117,6 +117,9 @@ public class Player : MonoBehaviour {
 			} else if (card.isSpell) {
 				spot.UseSpell (card);
 			}
+			if (card.manaBoost > 0) {
+				mana += card.manaBoost;
+			}
 			DisableSelectedCard ();
 			UpdateUI ();
 			return true;
