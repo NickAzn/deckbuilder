@@ -30,8 +30,10 @@ public class SpotStats : MonoBehaviour {
 	SpriteRenderer sr;
 
 	public bool relentless = false;
-	public int deathDraw = 0;
+	int deathDraw = 0;
 	public int fury = 0;
+	public int armor = 0;
+	int magicArmor = 0;
 
 	void Start() {
 		sr = GetComponent<SpriteRenderer> ();
@@ -73,6 +75,8 @@ public class SpotStats : MonoBehaviour {
 			relentless = card.unitRelentless;
 			deathDraw = card.unitDeathDraw;
 			fury = card.unitFury;
+			armor = card.armor;
+			magicArmor = card.magicArmor;
 
 			if (playerSide) {
 				if (card.unitManaFont > 0) {
@@ -108,7 +112,7 @@ public class SpotStats : MonoBehaviour {
 				player.DrawCard (card.spellCardDraw);	//Draw cards equal to spellCardDraw
 			}
 			if (card.attack > 0) {
-				TakeDamage (card.attack);	//Take damage based equal to the card's attack
+				TakeDamage (card.attack - magicArmor);	//Take damage based equal to the card's attack
 			}
 			if (card.spellSacrifice) {
 				RemoveUnit ();				//Sacrifices this unit if the spell has spellSacrifice true
@@ -139,6 +143,12 @@ public class SpotStats : MonoBehaviour {
 			if (card.unitFury > 0) {
 				fury += card.unitFury;
 			}
+			if (card.armor > 0) {
+				armor += card.armor;
+			}
+			if (card.magicArmor > 0) {
+				magicArmor += card.magicArmor;
+			}
 			UpdateUI ();	// Update with new stats for enchantment
 		}
 	}
@@ -161,6 +171,8 @@ public class SpotStats : MonoBehaviour {
 		damage = 0;
 		relentless = false;
 		fury = 0;
+		armor = 0;
+		magicArmor = 0;
 		if (playerSide) {
 			if (deathDraw > 0) {
 				player.DrawCard (deathDraw);
@@ -232,14 +244,14 @@ public class SpotStats : MonoBehaviour {
 		gm.HideZoomCard ();
 	}
 
-	//Damages another spot
-	public void Attack(SpotStats enemy) {
-		enemy.TakeDamage (damage);
-	}
+//	//Damages another spot
+//	public void Attack(SpotStats enemy) {
+//		enemy.TakeDamage (damage);
+//	}
 
 	//Take damage, if health is 0 or less, remove unit
 	public void TakeDamage(int amount) {
-		if (hasUnit) {
+		if (hasUnit && amount > 0) {
 			health -= amount;
 			UpdateUI ();
 			if (health <= 0) {

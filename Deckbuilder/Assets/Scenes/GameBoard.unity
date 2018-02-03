@@ -591,8 +591,8 @@ MonoBehaviour:
   player: {fileID: 356550592}
   origCard: {fileID: 0}
   relentless: 0
-  deathDraw: 0
   fury: 0
+  armor: 0
 --- !u!4 &41026971
 Transform:
   m_ObjectHideFlags: 0
@@ -1060,7 +1060,7 @@ RectTransform:
   m_GameObject: {fileID: 104936001}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 90}
-  m_LocalScale: {x: 0.0010416667, y: 0.0010416667, z: 0.015625}
+  m_LocalScale: {x: 0.01041667, y: 0.01041667, z: 0.015625}
   m_Children: []
   m_Father: {fileID: 1693680032}
   m_RootOrder: 3
@@ -1068,7 +1068,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
   m_AnchoredPosition: {x: -0.421875, y: 0.671875}
-  m_SizeDelta: {x: 120, y: 120}
+  m_SizeDelta: {x: 12, y: 12}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &104936003
 MonoBehaviour:
@@ -1082,7 +1082,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_EffectColor: {r: 0, g: 0, b: 0, a: 1}
-  m_EffectDistance: {x: 3, y: -3}
+  m_EffectDistance: {x: 0.5, y: -0.5}
   m_UseGraphicAlpha: 1
 --- !u!114 &104936004
 MonoBehaviour:
@@ -1105,7 +1105,7 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 100
+    m_FontSize: 10
     m_FontStyle: 1
     m_BestFit: 0
     m_MinSize: 0
@@ -1745,8 +1745,8 @@ MonoBehaviour:
   player: {fileID: 356550592}
   origCard: {fileID: 0}
   relentless: 0
-  deathDraw: 0
   fury: 0
+  armor: 0
 --- !u!4 &226625668
 Transform:
   m_ObjectHideFlags: 0
@@ -1969,8 +1969,8 @@ MonoBehaviour:
   player: {fileID: 356550592}
   origCard: {fileID: 0}
   relentless: 0
-  deathDraw: 0
   fury: 0
+  armor: 0
 --- !u!4 &238943845
 Transform:
   m_ObjectHideFlags: 0
@@ -2105,8 +2105,8 @@ MonoBehaviour:
   player: {fileID: 356550592}
   origCard: {fileID: 0}
   relentless: 0
-  deathDraw: 0
   fury: 0
+  armor: 0
 --- !u!4 &243269488
 Transform:
   m_ObjectHideFlags: 0
@@ -2671,8 +2671,8 @@ MonoBehaviour:
   player: {fileID: 356550592}
   origCard: {fileID: 0}
   relentless: 0
-  deathDraw: 0
   fury: 0
+  armor: 0
 --- !u!4 &297346804
 Transform:
   m_ObjectHideFlags: 0
@@ -3013,6 +3013,8 @@ MonoBehaviour:
   - {fileID: 114970434036914916, guid: 78004a5192f69af4f82533024069b79c, type: 2}
   - {fileID: 114970434036914916, guid: 78004a5192f69af4f82533024069b79c, type: 2}
   - {fileID: 114540127464893966, guid: 126c83ee062af7f4f9d8c81d34c56b99, type: 2}
+  - {fileID: 114961555846674112, guid: f1ae198d5299cca4b9b62895c9dc2066, type: 2}
+  - {fileID: 114961555846674112, guid: f1ae198d5299cca4b9b62895c9dc2066, type: 2}
   discards: []
   hand:
   - {fileID: 1693680028}
@@ -3430,7 +3432,7 @@ RectTransform:
   m_GameObject: {fileID: 398447534}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 90}
-  m_LocalScale: {x: 0.0010416667, y: 0.0010416667, z: 0.015625}
+  m_LocalScale: {x: 0.01041667, y: 0.01041667, z: 0.015625}
   m_Children: []
   m_Father: {fileID: 1358663791}
   m_RootOrder: 2
@@ -3438,7 +3440,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
   m_AnchoredPosition: {x: 0, y: -0.21875}
-  m_SizeDelta: {x: 850, y: 300}
+  m_SizeDelta: {x: 85, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &398447536
 MonoBehaviour:
@@ -3461,7 +3463,7 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 60
+    m_FontSize: 6
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 3
@@ -3827,7 +3829,7 @@ RectTransform:
   m_GameObject: {fileID: 483315225}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 90}
-  m_LocalScale: {x: 0.0010416667, y: 0.0010416667, z: 0.015625}
+  m_LocalScale: {x: 0.01041667, y: 0.01041667, z: 0.015625}
   m_Children: []
   m_Father: {fileID: 1693680032}
   m_RootOrder: 2
@@ -3835,7 +3837,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
   m_AnchoredPosition: {x: 0, y: -0.21875}
-  m_SizeDelta: {x: 850, y: 300}
+  m_SizeDelta: {x: 85, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &483315227
 MonoBehaviour:
@@ -3858,10 +3860,10 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 60
+    m_FontSize: 6
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 3
+    m_MinSize: 0
     m_MaxSize: 60
     m_Alignment: 0
     m_AlignByGeometry: 0
@@ -4733,10 +4735,14 @@ MonoBehaviour:
   spellEnchant: 0
   spellSacrifice: 0
   spellCardDraw: 0
+  spellAttackReduce: 0
   unitRelentless: 0
   unitDeathDraw: 0
   unitManaFont: 0
   unitFury: 0
+  manaBoost: 0
+  armor: 0
+  magicArmor: 0
 --- !u!212 &640729026
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -5307,8 +5313,8 @@ MonoBehaviour:
   player: {fileID: 356550592}
   origCard: {fileID: 0}
   relentless: 0
-  deathDraw: 0
   fury: 0
+  armor: 0
 --- !u!4 &703841867
 Transform:
   m_ObjectHideFlags: 0
@@ -5579,7 +5585,7 @@ RectTransform:
   m_GameObject: {fileID: 774421662}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 90}
-  m_LocalScale: {x: 0.0010416667, y: 0.0010416667, z: 0.015625}
+  m_LocalScale: {x: 0.01041667, y: 0.01041667, z: 0.015625}
   m_Children: []
   m_Father: {fileID: 1281059178}
   m_RootOrder: 2
@@ -5587,7 +5593,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
   m_AnchoredPosition: {x: 0, y: -0.21875}
-  m_SizeDelta: {x: 850, y: 300}
+  m_SizeDelta: {x: 85, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &774421664
 MonoBehaviour:
@@ -5610,7 +5616,7 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 60
+    m_FontSize: 6
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 3
@@ -5654,7 +5660,7 @@ RectTransform:
   m_GameObject: {fileID: 781180620}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 90}
-  m_LocalScale: {x: 0.0010416667, y: 0.0010416667, z: 0.015625}
+  m_LocalScale: {x: 0.01041667, y: 0.01041667, z: 0.015625}
   m_Children: []
   m_Father: {fileID: 640729027}
   m_RootOrder: 3
@@ -5662,7 +5668,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
   m_AnchoredPosition: {x: -0.421875, y: 0.671875}
-  m_SizeDelta: {x: 120, y: 120}
+  m_SizeDelta: {x: 12, y: 12}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &781180622
 MonoBehaviour:
@@ -5676,7 +5682,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_EffectColor: {r: 0, g: 0, b: 0, a: 1}
-  m_EffectDistance: {x: 3, y: -3}
+  m_EffectDistance: {x: 0.5, y: -0.5}
   m_UseGraphicAlpha: 1
 --- !u!114 &781180623
 MonoBehaviour:
@@ -5699,7 +5705,7 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 100
+    m_FontSize: 10
     m_FontStyle: 1
     m_BestFit: 0
     m_MinSize: 0
@@ -6211,7 +6217,7 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 100
+    m_FontSize: 10
     m_FontStyle: 1
     m_BestFit: 0
     m_MinSize: 0
@@ -6235,7 +6241,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_EffectColor: {r: 0, g: 0, b: 0, a: 1}
-  m_EffectDistance: {x: 3, y: -3}
+  m_EffectDistance: {x: 0.5, y: -0.5}
   m_UseGraphicAlpha: 1
 --- !u!222 &913716838
 CanvasRenderer:
@@ -6251,7 +6257,7 @@ RectTransform:
   m_GameObject: {fileID: 913716835}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 90}
-  m_LocalScale: {x: 0.0010416667, y: 0.0010416667, z: 0.015625}
+  m_LocalScale: {x: 0.01041667, y: 0.01041667, z: 0.015625}
   m_Children: []
   m_Father: {fileID: 1207710728}
   m_RootOrder: 3
@@ -6259,7 +6265,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
   m_AnchoredPosition: {x: -0.421875, y: 0.671875}
-  m_SizeDelta: {x: 120, y: 120}
+  m_SizeDelta: {x: 12, y: 12}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &924561172
 GameObject:
@@ -6377,8 +6383,8 @@ MonoBehaviour:
   player: {fileID: 356550592}
   origCard: {fileID: 0}
   relentless: 0
-  deathDraw: 0
   fury: 0
+  armor: 0
 --- !u!4 &924561176
 Transform:
   m_ObjectHideFlags: 0
@@ -9287,8 +9293,8 @@ MonoBehaviour:
   player: {fileID: 356550592}
   origCard: {fileID: 0}
   relentless: 0
-  deathDraw: 0
   fury: 0
+  armor: 0
 --- !u!4 &989083277
 Transform:
   m_ObjectHideFlags: 0
@@ -9332,7 +9338,7 @@ RectTransform:
   m_GameObject: {fileID: 1034803661}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 90}
-  m_LocalScale: {x: 0.0010416667, y: 0.0010416667, z: 0.015625}
+  m_LocalScale: {x: 0.01041667, y: 0.01041667, z: 0.015625}
   m_Children: []
   m_Father: {fileID: 1358663791}
   m_RootOrder: 3
@@ -9340,7 +9346,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
   m_AnchoredPosition: {x: -0.421875, y: 0.671875}
-  m_SizeDelta: {x: 120, y: 120}
+  m_SizeDelta: {x: 12, y: 12}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1034803663
 MonoBehaviour:
@@ -9354,7 +9360,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_EffectColor: {r: 0, g: 0, b: 0, a: 1}
-  m_EffectDistance: {x: 3, y: -3}
+  m_EffectDistance: {x: 0.5, y: -0.5}
   m_UseGraphicAlpha: 1
 --- !u!114 &1034803664
 MonoBehaviour:
@@ -9377,7 +9383,7 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 100
+    m_FontSize: 10
     m_FontStyle: 1
     m_BestFit: 0
     m_MinSize: 0
@@ -9879,7 +9885,7 @@ RectTransform:
   m_GameObject: {fileID: 1060808734}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 90}
-  m_LocalScale: {x: 0.0010416667, y: 0.0010416667, z: 0.015625}
+  m_LocalScale: {x: 0.01041667, y: 0.01041667, z: 0.015625}
   m_Children: []
   m_Father: {fileID: 1281059178}
   m_RootOrder: 1
@@ -9887,7 +9893,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 960, y: 75}
+  m_SizeDelta: {x: 96, y: 7.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1060808736
 MonoBehaviour:
@@ -9910,7 +9916,7 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 67
+    m_FontSize: 7
     m_FontStyle: 1
     m_BestFit: 0
     m_MinSize: 0
@@ -11013,10 +11019,14 @@ MonoBehaviour:
   spellEnchant: 0
   spellSacrifice: 0
   spellCardDraw: 0
+  spellAttackReduce: 0
   unitRelentless: 0
   unitDeathDraw: 0
   unitManaFont: 0
   unitFury: 0
+  manaBoost: 0
+  armor: 0
+  magicArmor: 0
 --- !u!212 &1207710727
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -11782,7 +11792,7 @@ RectTransform:
   m_GameObject: {fileID: 1260007913}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 90}
-  m_LocalScale: {x: 0.0010416667, y: 0.0010416667, z: 0.015625}
+  m_LocalScale: {x: 0.01041667, y: 0.01041667, z: 0.015625}
   m_Children: []
   m_Father: {fileID: 640729027}
   m_RootOrder: 1
@@ -11790,7 +11800,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 960, y: 75}
+  m_SizeDelta: {x: 96, y: 7.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1260007915
 MonoBehaviour:
@@ -11813,7 +11823,7 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 67
+    m_FontSize: 7
     m_FontStyle: 1
     m_BestFit: 0
     m_MinSize: 0
@@ -12251,10 +12261,14 @@ MonoBehaviour:
   spellEnchant: 0
   spellSacrifice: 0
   spellCardDraw: 0
+  spellAttackReduce: 0
   unitRelentless: 0
   unitDeathDraw: 0
   unitManaFont: 0
   unitFury: 0
+  manaBoost: 0
+  armor: 0
+  magicArmor: 0
 --- !u!212 &1281059177
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -12647,10 +12661,14 @@ MonoBehaviour:
   spellEnchant: 0
   spellSacrifice: 0
   spellCardDraw: 0
+  spellAttackReduce: 0
   unitRelentless: 0
   unitDeathDraw: 0
   unitManaFont: 0
   unitFury: 0
+  manaBoost: 0
+  armor: 0
+  magicArmor: 0
 --- !u!212 &1358663790
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -12962,8 +12980,8 @@ MonoBehaviour:
   player: {fileID: 356550592}
   origCard: {fileID: 0}
   relentless: 0
-  deathDraw: 0
   fury: 0
+  armor: 0
 --- !u!4 &1367420884
 Transform:
   m_ObjectHideFlags: 0
@@ -13056,10 +13074,14 @@ MonoBehaviour:
   spellEnchant: 0
   spellSacrifice: 0
   spellCardDraw: 0
+  spellAttackReduce: 0
   unitRelentless: 0
   unitDeathDraw: 0
   unitManaFont: 0
   unitFury: 0
+  manaBoost: 0
+  armor: 0
+  magicArmor: 0
 --- !u!114 &1369395370
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13127,7 +13149,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 935, y: 70}
+  m_SizeDelta: {x: 935, y: 75}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1383812197
 MonoBehaviour:
@@ -13150,7 +13172,7 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 60
+    m_FontSize: 65
     m_FontStyle: 1
     m_BestFit: 0
     m_MinSize: 0
@@ -13180,7 +13202,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_EffectColor: {r: 1, g: 1, b: 1, a: 0.5019608}
-  m_EffectDistance: {x: 6, y: -6}
+  m_EffectDistance: {x: 2, y: -2}
   m_UseGraphicAlpha: 0
 --- !u!1 &1400776848
 GameObject:
@@ -13536,7 +13558,7 @@ RectTransform:
   m_GameObject: {fileID: 1455957968}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 90}
-  m_LocalScale: {x: 0.0010416667, y: 0.0010416667, z: 0.015625}
+  m_LocalScale: {x: 0.01041667, y: 0.01041667, z: 0.015625}
   m_Children: []
   m_Father: {fileID: 1693680032}
   m_RootOrder: 1
@@ -13544,7 +13566,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
   m_AnchoredPosition: {x: -0.000030517578, y: 0}
-  m_SizeDelta: {x: 960, y: 75}
+  m_SizeDelta: {x: 96, y: 7.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1455957970
 MonoBehaviour:
@@ -13567,11 +13589,11 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 67
+    m_FontSize: 7
     m_FontStyle: 1
     m_BestFit: 0
     m_MinSize: 0
-    m_MaxSize: 70
+    m_MaxSize: 78
     m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
@@ -14154,8 +14176,8 @@ MonoBehaviour:
   player: {fileID: 356550592}
   origCard: {fileID: 0}
   relentless: 0
-  deathDraw: 0
   fury: 0
+  armor: 0
 --- !u!4 &1520711321
 Transform:
   m_ObjectHideFlags: 0
@@ -14289,8 +14311,8 @@ MonoBehaviour:
   player: {fileID: 356550592}
   origCard: {fileID: 0}
   relentless: 0
-  deathDraw: 0
   fury: 0
+  armor: 0
 --- !u!4 &1523926442
 Transform:
   m_ObjectHideFlags: 0
@@ -15423,10 +15445,14 @@ MonoBehaviour:
   spellEnchant: 0
   spellSacrifice: 0
   spellCardDraw: 0
+  spellAttackReduce: 0
   unitRelentless: 0
   unitDeathDraw: 0
   unitManaFont: 0
   unitFury: 0
+  manaBoost: 0
+  armor: 0
+  magicArmor: 0
 --- !u!212 &1693680031
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -15874,7 +15900,7 @@ RectTransform:
   m_GameObject: {fileID: 1728375546}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 90}
-  m_LocalScale: {x: 0.0010416667, y: 0.0010416667, z: 0.015625}
+  m_LocalScale: {x: 0.01041667, y: 0.01041667, z: 0.015625}
   m_Children: []
   m_Father: {fileID: 640729027}
   m_RootOrder: 2
@@ -15882,7 +15908,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
   m_AnchoredPosition: {x: 0, y: -0.21875}
-  m_SizeDelta: {x: 850, y: 300}
+  m_SizeDelta: {x: 85, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1728375548
 MonoBehaviour:
@@ -15905,7 +15931,7 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 60
+    m_FontSize: 6
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 3
@@ -16037,7 +16063,7 @@ RectTransform:
   m_GameObject: {fileID: 1776636082}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 90}
-  m_LocalScale: {x: 0.0010416667, y: 0.0010416667, z: 0.015625}
+  m_LocalScale: {x: 0.01041667, y: 0.01041667, z: 0.015625}
   m_Children: []
   m_Father: {fileID: 1207710728}
   m_RootOrder: 2
@@ -16045,7 +16071,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
   m_AnchoredPosition: {x: 0, y: -0.21875}
-  m_SizeDelta: {x: 850, y: 300}
+  m_SizeDelta: {x: 85, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1776636084
 CanvasRenderer:
@@ -16074,7 +16100,7 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 60
+    m_FontSize: 6
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 3
@@ -16111,7 +16137,7 @@ RectTransform:
   m_GameObject: {fileID: 1785747969}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 90}
-  m_LocalScale: {x: 0.0010416667, y: 0.0010416667, z: 0.015625}
+  m_LocalScale: {x: 0.01041667, y: 0.01041667, z: 0.015625}
   m_Children: []
   m_Father: {fileID: 1358663791}
   m_RootOrder: 1
@@ -16119,7 +16145,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 960, y: 75}
+  m_SizeDelta: {x: 96, y: 7.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1785747972
 MonoBehaviour:
@@ -16142,7 +16168,7 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 67
+    m_FontSize: 7
     m_FontStyle: 1
     m_BestFit: 0
     m_MinSize: 0
@@ -16398,15 +16424,15 @@ RectTransform:
   m_GameObject: {fileID: 1804075853}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.1, y: 0.1, z: 1}
+  m_LocalScale: {x: 0.05, y: 0.05, z: 1}
   m_Children: []
   m_Father: {fileID: 1369395368}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -22}
-  m_SizeDelta: {x: 850, y: 300}
+  m_AnchoredPosition: {x: 0.05, y: -21.54}
+  m_SizeDelta: {x: 1752, y: 611.43}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1804075855
 MonoBehaviour:
@@ -16429,7 +16455,7 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 60
+    m_FontSize: 110
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 0
@@ -16839,7 +16865,7 @@ RectTransform:
   m_GameObject: {fileID: 1848096451}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 90}
-  m_LocalScale: {x: 0.0010416667, y: 0.0010416667, z: 0.015625}
+  m_LocalScale: {x: 0.01041667, y: 0.01041667, z: 0.015625}
   m_Children: []
   m_Father: {fileID: 1207710728}
   m_RootOrder: 1
@@ -16847,7 +16873,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 960, y: 75}
+  m_SizeDelta: {x: 96, y: 7.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1848096453
 CanvasRenderer:
@@ -16876,7 +16902,7 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 67
+    m_FontSize: 7
     m_FontStyle: 1
     m_BestFit: 0
     m_MinSize: 0
@@ -18324,11 +18350,13 @@ MonoBehaviour:
   midUnits:
   - {fileID: 114618712277928762, guid: f74e131a86610804f9ae90eb75bdfec1, type: 2}
   - {fileID: 114934376419062240, guid: 04926b8157c5427439280c0435cb498c, type: 2}
+  - {fileID: 114970434036914916, guid: 78004a5192f69af4f82533024069b79c, type: 2}
   lateUnits:
   - {fileID: 114618712277928762, guid: f74e131a86610804f9ae90eb75bdfec1, type: 2}
   - {fileID: 114947882670045886, guid: a13d19a28d808bc4e8c771f207b72492, type: 2}
   - {fileID: 114594836883534366, guid: 7064b1548deab4949af447145dd3c547, type: 2}
   - {fileID: 114753647423312842, guid: 3ab367ab1ae99544e869c62faf557ead, type: 2}
+  - {fileID: 114970434036914916, guid: 78004a5192f69af4f82533024069b79c, type: 2}
   offensiveSpells:
   - {fileID: 114305136590519174, guid: e3bc4b1083919f245867c44d03792fbf, type: 2}
   enchantSpells:
@@ -18537,8 +18565,8 @@ MonoBehaviour:
   player: {fileID: 356550592}
   origCard: {fileID: 0}
   relentless: 0
-  deathDraw: 0
   fury: 0
+  armor: 0
 --- !u!4 &2028569240
 Transform:
   m_ObjectHideFlags: 0
@@ -19549,7 +19577,7 @@ RectTransform:
   m_GameObject: {fileID: 2112523342}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 90}
-  m_LocalScale: {x: 0.0010416667, y: 0.0010416667, z: 0.015625}
+  m_LocalScale: {x: 0.01041667, y: 0.01041667, z: 0.015625}
   m_Children: []
   m_Father: {fileID: 1281059178}
   m_RootOrder: 3
@@ -19557,7 +19585,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
   m_AnchoredPosition: {x: -0.421875, y: 0.671875}
-  m_SizeDelta: {x: 120, y: 120}
+  m_SizeDelta: {x: 12, y: 12}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2112523344
 MonoBehaviour:
@@ -19571,7 +19599,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_EffectColor: {r: 0, g: 0, b: 0, a: 1}
-  m_EffectDistance: {x: 3, y: -3}
+  m_EffectDistance: {x: 0.5, y: -0.5}
   m_UseGraphicAlpha: 1
 --- !u!114 &2112523345
 MonoBehaviour:
@@ -19594,7 +19622,7 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 100
+    m_FontSize: 10
     m_FontStyle: 1
     m_BestFit: 0
     m_MinSize: 0

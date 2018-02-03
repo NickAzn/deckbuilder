@@ -164,39 +164,39 @@ public class GameManager : MonoBehaviour {
 				yield return new WaitForSeconds (0.7f);
 				if (attackingSpots [i].collumn == 1) {		// If the unit is in collumn one, attack the enemy at i and i + 3, or the crystal
 					if (defendingSpots [i].hasUnit) {
-						if (attackingSpots [i].damage > defendingSpots [i].health && attackingSpots[i].relentless) {	// If unit has relentless, keep attacking with remaining damage
-							if (attackingSpots [i].damage > (defendingSpots [i+3].health + defendingSpots [i].health) 
+						if (attackingSpots [i].damage > (defendingSpots [i].health + defendingSpots[i].armor) && attackingSpots[i].relentless) {	// If unit has relentless, keep attacking with remaining damage
+							if (attackingSpots [i].damage > (defendingSpots [i+3].health + defendingSpots [i].health + defendingSpots[i].armor + defendingSpots[i + 3].armor) 
 								&& attackingSpots[i].relentless) {
 								HitCrystal (i, startedPlayerTurn, 
-									attackingSpots[i].damage - defendingSpots[i+3].health - defendingSpots[i].health);
+									attackingSpots[i].damage - defendingSpots[i+3].health - defendingSpots[i].health - defendingSpots[i].armor - defendingSpots[i + 3].armor);
 							}
-							defendingSpots [i+3].TakeDamage (attackingSpots [i].damage - defendingSpots [i].health);
+							defendingSpots [i+3].TakeDamage (attackingSpots [i].damage - defendingSpots [i].health - defendingSpots[i].armor - defendingSpots[i+3].armor);
 						}
-						attackingSpots [i].Attack (defendingSpots [i]);
+						defendingSpots [i].TakeDamage(attackingSpots[i].damage - defendingSpots[i].armor);
 					} else if (defendingSpots [i + 3].hasUnit) {
-						if (attackingSpots [i].damage > defendingSpots [i+3].health && attackingSpots[i].relentless) {
-							HitCrystal (i, startedPlayerTurn, attackingSpots[i].damage - defendingSpots[i+3].health);
+						if (attackingSpots [i].damage > (defendingSpots [i+3].health + defendingSpots[i+3].armor) && attackingSpots[i].relentless) {
+							HitCrystal (i, startedPlayerTurn, attackingSpots[i].damage - defendingSpots[i+3].health - defendingSpots[i+3].armor);
 						}
-						attackingSpots [i].Attack (defendingSpots [i + 3]);
+						defendingSpots [i + 3].TakeDamage (attackingSpots[i].damage - defendingSpots[i+3].armor);
 					} else {
 						HitCrystal (i, startedPlayerTurn);
 					}
 				} else {									// If the unit is in collumn 2, attack enemy at i-3 and i, or the crystal
 					if (defendingSpots [i - 3].hasUnit) {
-						if (attackingSpots [i].damage > defendingSpots [i-3].health && attackingSpots[i].relentless) {
-							if (attackingSpots [i].damage > (defendingSpots [i-3].health + defendingSpots [i].health) 
+						if (attackingSpots [i].damage > (defendingSpots [i-3].health + defendingSpots[i-3].armor) && attackingSpots[i].relentless) {
+							if (attackingSpots [i].damage > (defendingSpots [i-3].health + defendingSpots [i].health + defendingSpots[i].armor + defendingSpots[i-3].armor) 
 								&& attackingSpots[i].relentless) {
 								HitCrystal (i, startedPlayerTurn, 
-									attackingSpots[i].damage - defendingSpots[i-3].health - defendingSpots[i].health);
+									attackingSpots[i].damage - defendingSpots[i-3].health - defendingSpots[i].health - defendingSpots[i-3].armor - defendingSpots[i].armor);
 							}
-							defendingSpots [i].TakeDamage (attackingSpots [i].damage - defendingSpots [i-3].health);
+							defendingSpots [i].TakeDamage (attackingSpots [i].damage - defendingSpots [i-3].health - defendingSpots[i-3].armor - defendingSpots[i].armor);
 						}
-						attackingSpots [i].Attack (defendingSpots [i - 3]);
+						defendingSpots [i - 3].TakeDamage (attackingSpots [i].damage - defendingSpots [i - 3].armor);
 					} else if (defendingSpots [i].hasUnit) {
-						if (attackingSpots [i].damage > defendingSpots [i].health && attackingSpots[i].relentless) {
-							HitCrystal (i, startedPlayerTurn, attackingSpots[i].damage - defendingSpots[i].health);
+						if (attackingSpots [i].damage > (defendingSpots [i].health + defendingSpots[i].armor) && attackingSpots[i].relentless) {
+							HitCrystal (i, startedPlayerTurn, attackingSpots[i].damage - defendingSpots[i].health - defendingSpots[i].armor);
 						}
-						attackingSpots [i].Attack (defendingSpots [i]);
+						defendingSpots [i].TakeDamage(attackingSpots[i].damage - defendingSpots[i].armor);
 					} else {
 						HitCrystal (i, startedPlayerTurn);
 					}

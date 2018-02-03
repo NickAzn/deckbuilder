@@ -24,6 +24,7 @@ public class Card : MonoBehaviour {
 	public int health;
 
 	public string cardName;
+	[TextArea]
 	public string description;
 
 	public Text nameUI;
@@ -46,6 +47,9 @@ public class Card : MonoBehaviour {
 	public int unitFury = 0;			// When > 0, unit attack that amount of additional times
 
 	public int manaBoost = 0;			// When > 0, this card grants that amount of current mana the turn it is used
+	public int armor = 0;				// Reduce damage taken from units by armor value
+	public int magicArmor = 0;			// Reduce damage taken from spells by magicArmor value
+	public int crystalPact = 0;			// Card damages crystal in the row it was used by crystalPact value
 
 	SpriteRenderer sr;
 
@@ -102,6 +106,9 @@ public class Card : MonoBehaviour {
 		unitFury = otherCard.unitFury;
 
 		manaBoost = otherCard.manaBoost;
+		armor = otherCard.armor;
+		magicArmor = otherCard.magicArmor;
+		crystalPact = otherCard.crystalPact;
 
 		UpdateUI ();
 	}

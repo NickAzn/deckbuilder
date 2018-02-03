@@ -120,6 +120,9 @@ public class Player : MonoBehaviour {
 			if (card.manaBoost > 0) {
 				mana += card.manaBoost;
 			}
+			if (card.crystalPact > 0) {
+				gm.playerCrystals [spot.row - 1].TakeDamage (card.crystalPact);
+			}
 			DisableSelectedCard ();
 			UpdateUI ();
 			return true;

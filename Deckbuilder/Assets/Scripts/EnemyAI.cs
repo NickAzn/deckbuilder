@@ -29,6 +29,9 @@ public class EnemyAI : MonoBehaviour {
 	bool row2CrystalUp = false;
 	bool row3CrystalUp = false;
 
+	int extraActionMult = 8;
+	int cardCount = 4;
+
 	//Summons a unit at the start of the game, but does not attack with it
 	void Start() {
 		int summonSpot = SelectRandomOpenSpot ();
@@ -40,6 +43,10 @@ public class EnemyAI : MonoBehaviour {
 		turnCounter++;
 
 		actionCounter = 0;
+		cardCount += 2;
+		if (cardCount > 5) {
+			cardCount = 5;
+		}
 
 		StartCoroutine (DecideAction ());
 	}
@@ -148,18 +155,16 @@ public class EnemyAI : MonoBehaviour {
 
 	IEnumerator DecideAction() {
 		actionCounter++;
+		cardCount--;
 
-		// Reduce chance of doing extra actions early on
-		if (turnCounter < 4) {
-			actionCounter += 2;
-		} else if (turnCounter < 7) {
-			actionCounter++;
+		if (turnCounter < 6) {
+			extraActionMult = 13 - turnCounter;
 		}
 
 		yield return new WaitForSeconds (0.7f);
 
 		//Chance to cast a spell before summoning units
-		if (actionCounter < 5 && Random.Range (0, actionCounter * 8) == 0) {
+		if (cardCount > 0 && Random.Range (0, actionCounter * extraActionMult) == 0) {
 			actionCounter++;
 			List<int> possibleSpells = OffensiveSpell ();
 			if (possibleSpells.Count > 0) {
@@ -167,6 +172,7 @@ public class EnemyAI : MonoBehaviour {
 				int spellCard = Random.Range (0, offensiveSpells.Length);
 				CastSpell (gm.playerSpots [castSpot], offensiveSpells [spellCard]);
 				yield return ShowCard (offensiveSpells [spellCard], 1.5f);
+				cardCount--;
 			} else {
 				actionCounter--;
 			}
@@ -210,13 +216,12 @@ public class EnemyAI : MonoBehaviour {
 			}
 			if (summonCard.manaBoost > 0) {
 				manaBoosted = true;
-				actionCounter--;
 			}
 			SummonUnit (gm.enemySpots [summonSpot], summonCard);
 		}
 		yield return new WaitForSeconds (0.7f);
 
-		if (actionCounter < 5 && Random.Range (0, actionCounter * 8) == 0) {
+		if (cardCount > 0 && Random.Range (0, actionCounter * extraActionMult) == 0) {
 			actionCounter++;
 			List<int> possibleSpells = Enchant ();
 			if (possibleSpells.Count > 0) {
@@ -224,12 +229,13 @@ public class EnemyAI : MonoBehaviour {
 				int spellCard = Random.Range (0, enchantSpells.Length);
 				CastSpell (gm.enemySpots [castSpot], enchantSpells [spellCard]);
 				yield return ShowCard (enchantSpells [spellCard], 1.5f);
+				cardCount--;
 			} else {
 				actionCounter--;
 			}
 		}
 
-		if ((actionCounter < 5 && Random.Range (0, actionCounter * 8) == 0) || manaBoosted) {
+		if ((cardCount > 0 && Random.Range (0, actionCounter * extraActionMult) == 0) || (manaBoosted && actionCounter < 6)) {
 			StartCoroutine (DecideAction ());
 		} else {
 			gm.EndTurn ();
