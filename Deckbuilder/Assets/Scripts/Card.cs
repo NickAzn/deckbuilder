@@ -81,6 +81,8 @@ public class Card : MonoBehaviour {
 
 	//Copies all stats from otherCard
 	public void CopyStats(Card otherCard) {
+		baseCard = otherCard.baseCard;
+
 		isUnit = otherCard.isUnit;
 		isSpell = otherCard.isSpell;
 

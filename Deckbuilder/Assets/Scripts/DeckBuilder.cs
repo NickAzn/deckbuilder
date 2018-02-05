@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class DeckBuilder : MonoBehaviour {
 	
@@ -15,9 +16,13 @@ public class DeckBuilder : MonoBehaviour {
 	public CardHolder selCardHolder;
 
 	public GameObject addCardButton;
+	public GameObject addAllCardButton;
 	public GameObject removeCardButton;
+	public GameObject removeAllCardButton;
 
 	public Text deckCardCount;
+	public GameObject deckFeedback;
+	public Text deckFeedbackText;
 
 	List<GameObject> deckCards = new List<GameObject>();
 	List<GameObject> libraryCards = new List<GameObject>();
@@ -28,7 +33,10 @@ public class DeckBuilder : MonoBehaviour {
 		library = SaveLoad.LoadPlayerLibrary ();
 		zoomCard.CopyStats (deck [0]);
 		addCardButton.SetActive (false);
+		addAllCardButton.SetActive (false);
 		removeCardButton.SetActive (false);
+		removeAllCardButton.SetActive (false);
+		deckFeedback.SetActive (false);
 		RefreshUI ();
 	}
 
@@ -132,10 +140,14 @@ public class DeckBuilder : MonoBehaviour {
 		selCardHolder = cardHolder;
 		if (cardHolder.deckCard) {
 			removeCardButton.SetActive (true);
+			removeAllCardButton.SetActive (true);
 			addCardButton.SetActive (false);
+			addAllCardButton.SetActive (false);
 		} else {
 			removeCardButton.SetActive (false);
+			removeAllCardButton.SetActive (false);
 			addCardButton.SetActive (true);
+			addAllCardButton.SetActive (true);
 		}
 	}
 
@@ -143,7 +155,9 @@ public class DeckBuilder : MonoBehaviour {
 	void DeselectCard() {
 		selCardHolder = null;
 		removeCardButton.SetActive (false);
+		removeAllCardButton.SetActive (false);
 		addCardButton.SetActive (false);
+		addAllCardButton.SetActive (false);
 	}
 
 	// Adds selected card from library to the player deck
@@ -155,10 +169,34 @@ public class DeckBuilder : MonoBehaviour {
 		RefreshUI ();
 	}
 
+	// Adds all copies of the selected card from library to the deck
+	public void AddAllSelectedCard() {
+		int cardCount = CardCounter (selCardHolder.GetComponent<CardHolder> ().origCard.name, library);
+		for (int i = 0; i < cardCount; i++) {
+			deck.Add (selCardHolder.GetComponent<CardHolder> ().origCard);
+			library.RemoveAt (selCardHolder.position);
+		}
+
+		DeselectCard ();
+		RefreshUI ();
+	}
+
 	// Removes the selected card from the deck and places it in the library
 	public void RemoveSelectedCard() {
 		deck.RemoveAt (selCardHolder.position);
 		library.Add (selCardHolder.GetComponent<CardHolder>().origCard);
+
+		DeselectCard ();
+		RefreshUI ();
+	}
+
+	// Removes all copies of the selected card from the deck to the library
+	public void RemoveAllSelectedCard() {
+		int cardCount = CardCounter (selCardHolder.GetComponent<CardHolder> ().origCard.name, deck);
+		for (int i = 0; i < cardCount; i++) {
+			deck.RemoveAt (selCardHolder.position);
+			library.Add (selCardHolder.GetComponent<CardHolder> ().origCard);
+		}
 
 		DeselectCard ();
 		RefreshUI ();
@@ -181,6 +219,18 @@ public class DeckBuilder : MonoBehaviour {
 		if (deck.Count >= 25) {
 			SaveLoad.SavePlayerDeck (deck);
 			SaveLoad.SavePlayerLibrary (library);
+			deckFeedbackText.text = "Deck saved.";
+		} else {
+			deckFeedbackText.text = "Could not save deck.\nDeck requires atleast 25 cards.\nYour deck has " + deck.Count.ToString() + " cards.";
 		}
+		deckFeedback.SetActive (true);
+	}
+
+	public void CloseDeckSaveFeedback() {
+		deckFeedback.SetActive (false);
+	}
+
+	public void ExitToGame() {
+		SceneManager.LoadScene ("GameBoard");
 	}
 }

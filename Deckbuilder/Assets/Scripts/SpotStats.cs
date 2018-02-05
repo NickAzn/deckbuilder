@@ -91,16 +91,16 @@ public class SpotStats : MonoBehaviour {
 	}
 
 	// Runs spell animation are delays spell effect until animation finishes
-	public void UseSpell(Card card) {
+	public void UseSpell(Card card, bool playerCast) {
 		if (hasUnit) {
-			StartCoroutine(DelaySpell (card.baseCard));
+			StartCoroutine(DelaySpell (card.baseCard, playerCast));
 			spellAnimation.runtimeAnimatorController = card.cardAnimation;
 			spellAnimation.gameObject.SetActive (true);
 		}
 	}
 
 	// Delays spell effect to allow animation to finish
-	IEnumerator DelaySpell(Card card) {
+	IEnumerator DelaySpell(Card card, bool playerCast) {
 		//Hide spell animation after it finishes
 		float waitTime = card.cardAnimation.animationClips [0].length * 0.95f;
 		yield return new WaitForSeconds (waitTime);
@@ -108,8 +108,11 @@ public class SpotStats : MonoBehaviour {
 
 		//If the spell is not an enchant, it is an instant spell
 		if (!card.spellEnchant) {
-			if (card.spellCardDraw > 0) {
-				player.DrawCard (card.spellCardDraw);	//Draw cards equal to spellCardDraw
+			if (playerCast) {
+				if (card.spellCardDraw > 0) {
+					player.DrawCard (card.spellCardDraw);	//Draw cards equal to spellCardDraw
+				}
+				player.DiscardCard (card);	// Discards the card if the player used it
 			}
 			if (card.attack > 0) {
 				TakeDamage (card.attack - magicArmor);	//Take damage based equal to the card's attack
@@ -119,12 +122,6 @@ public class SpotStats : MonoBehaviour {
 			}
 			if (card.spellAttackReduce > 0) {
 				damage -= card.spellAttackReduce;	// Reduce units attack by spellAttackReduce effect of card
-			}
-			//Discard to player discards if the player casted this card
-			if (!playerSide && card.enemySideCast) {
-				player.DiscardCard (card);
-			} else if (playerSide && card.playerSideCast) {
-				player.DiscardCard (card);
 			}
 		} else {
 			enchantment.DisplayCard (card.baseCard);	//Spell is an enchantent, so it uses the enchant spot

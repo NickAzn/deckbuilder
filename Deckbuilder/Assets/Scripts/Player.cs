@@ -76,7 +76,6 @@ public class Player : MonoBehaviour {
 				} else {
 					int j = Random.Range (0, deck.Count);
 					hand [openIndex].GetComponent<Card> ().CopyStats (deck [j]);
-					hand [openIndex].GetComponent<Card> ().baseCard = deck [j];
 					hand [openIndex].SetActive (true);
 					deck.RemoveAt (j);
 					UpdateUI ();
@@ -115,7 +114,7 @@ public class Player : MonoBehaviour {
 			if (card.isUnit) {
 				spot.AddUnit (card);
 			} else if (card.isSpell) {
-				spot.UseSpell (card);
+				spot.UseSpell (card, true);
 			}
 			if (card.manaBoost > 0) {
 				mana += card.manaBoost;

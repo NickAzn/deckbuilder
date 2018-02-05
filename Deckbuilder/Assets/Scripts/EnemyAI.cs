@@ -43,7 +43,7 @@ public class EnemyAI : MonoBehaviour {
 		turnCounter++;
 
 		actionCounter = 0;
-		cardCount += 2;
+		cardCount++;
 		if (cardCount > 5) {
 			cardCount = 5;
 		}
@@ -58,7 +58,7 @@ public class EnemyAI : MonoBehaviour {
 
     // Casts a spell card at spot
 	void CastSpell(SpotStats spot, Card card) {
-		spot.UseSpell (card);
+		spot.UseSpell (card, false);
 	}
 		
     // Selects a random open spot on enemy side

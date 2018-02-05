@@ -23,6 +23,15 @@ public class GameManager : MonoBehaviour {
 	public Text endText;				// Set in editor to UI Text to display game over text
 	public GameObject restartButton;	// Set in editor to button with GameManager.Restart()
 
+	public Card[] commonCards;
+	public Card[] uncommonCards;
+	public Card[] rareCards;
+	public Card[] ultimateCards;
+
+	public GameObject rewardScreen;
+	public GameObject rewardCard1;
+	public GameObject rewardCard2;
+
 	void Start() {
 		// Set player crystal health to the saved value
 		int[] crystalHealth = SaveLoad.LoadCrystalHealth ();
@@ -30,8 +39,6 @@ public class GameManager : MonoBehaviour {
 		playerCrystals [1].SetHealth (crystalHealth[1]);
 		playerCrystals [2].SetHealth (crystalHealth[2]);
 
-		// Set timeScale to 1
-		Time.timeScale = 1.0f;
 		// Hide the zoomCard
 		zoomCardStats = zoomCard.GetComponent<Card> ();
 		HideZoomCard ();
@@ -39,11 +46,19 @@ public class GameManager : MonoBehaviour {
 		enemy.aggroMeter = Random.Range (0, 4);
 		// Hides the restart button
 		restartButton.SetActive (false);
+		rewardScreen.SetActive (false);
 	}
 
 	//Reload the scene
 	public void Restart() {
+		Time.timeScale = 1.0f;
 		SceneManager.LoadScene ("GameBoard");
+	}
+
+	//Loads the deckbuilder
+	public void LoadDeckBuilder() {
+		Time.timeScale = 1.0f;
+		SceneManager.LoadScene ("DeckBuilder");
 	}
 
 	//Hide the zoom card
@@ -62,6 +77,43 @@ public class GameManager : MonoBehaviour {
 		return playerTurn;
 	}
 
+	void WinGame() {
+		List<Card> library = SaveLoad.LoadPlayerLibrary ();
+		if (library == null) {
+			library = new List<Card> ();
+		}
+
+		int randomCard1 = Random.Range (0, 100);
+		int randomCard2 = Random.Range (0, 100);
+
+		if (randomCard1 < 50) {
+			rewardCard1.GetComponent<Card> ().CopyStats (commonCards [Random.Range (0, commonCards.Length)]);
+		} else if (randomCard1 < 80) {
+			rewardCard1.GetComponent<Card> ().CopyStats (uncommonCards [Random.Range (0, uncommonCards.Length)]);
+		} else if (randomCard1 < 95) {
+			rewardCard1.GetComponent<Card> ().CopyStats (rareCards [Random.Range (0, rareCards.Length)]);
+		} else {
+			rewardCard1.GetComponent<Card> ().CopyStats (ultimateCards [Random.Range (0, ultimateCards.Length)]);
+		}
+
+		if (randomCard2 < 50) {
+			rewardCard2.GetComponent<Card> ().CopyStats (commonCards [Random.Range (0, commonCards.Length)]);
+		} else if (randomCard2 < 80) {
+			rewardCard2.GetComponent<Card> ().CopyStats (uncommonCards [Random.Range (0, uncommonCards.Length)]);
+		} else if (randomCard2 < 95) {
+			rewardCard2.GetComponent<Card> ().CopyStats (rareCards [Random.Range (0, rareCards.Length)]);
+		} else {
+			rewardCard2.GetComponent<Card> ().CopyStats (ultimateCards [Random.Range (0, ultimateCards.Length)]);
+		}
+
+		library.Add(rewardCard1.GetComponent<Card>().baseCard);
+		library.Add(rewardCard2.GetComponent<Card>().baseCard);
+
+		SaveLoad.SavePlayerLibrary(library);
+
+		rewardScreen.SetActive (true);
+	}
+
 	//Checks if either side has all crystals destroyed
 	public void CheckGameEnded() {
 		bool playerAlive = false;
@@ -74,6 +126,7 @@ public class GameManager : MonoBehaviour {
 		if (!playerAlive) {
 			SaveLoad.ResetCrystalHealth ();
 			SaveLoad.ResetPlayerDeck ();
+			SaveLoad.ResetPlayerLibrary ();
 			endText.text = "Defeat";
 			restartButton.SetActive (true);
 			Time.timeScale = 0.0f;
@@ -88,8 +141,7 @@ public class GameManager : MonoBehaviour {
 		//If all enemy crystals are destroyed, the player wins and continues
 		if (!enemyAlive) {
 			SaveLoad.SaveCrystalHealth (playerCrystals [0].GetHealth(), playerCrystals [1].GetHealth(), playerCrystals [2].GetHealth());
-			endText.text = "Victory!";
-			restartButton.SetActive (true);
+			WinGame ();
 			Time.timeScale = 0.0f;
 		}
 	}
