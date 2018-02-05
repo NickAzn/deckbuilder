@@ -18,7 +18,6 @@ public class DeckBuilder : MonoBehaviour {
 	public GameObject removeCardButton;
 
 	public Text deckCardCount;
-	public Text libraryCardCount;
 
 	List<GameObject> deckCards = new List<GameObject>();
 	List<GameObject> libraryCards = new List<GameObject>();
@@ -31,6 +30,16 @@ public class DeckBuilder : MonoBehaviour {
 		addCardButton.SetActive (false);
 		removeCardButton.SetActive (false);
 		RefreshUI ();
+	}
+
+	int CardCounter(string name, List<Card> list) {
+		int counter = 0;
+		foreach (Card card in list) {
+			if (card.name.Equals (name)) {
+				counter++;
+			}
+		}
+		return counter;
 	}
 
 	void RefreshUI() {
@@ -47,26 +56,33 @@ public class DeckBuilder : MonoBehaviour {
 			deckCards = new List<GameObject> ();
 			for (int i = 0; i < deck.Count; i++) {
 				GameObject dc = Instantiate (deckCard) as GameObject;
+				CardHolder cd = dc.GetComponent<CardHolder> ();
 				deckCards.Add (dc);
-				dc.GetComponent<CardHolder> ().origCard = deck [i];
-				dc.GetComponent<CardHolder> ().position = i;
-				dc.GetComponent<CardHolder> ().deckCard = true;
-				dc.GetComponent<CardHolder> ().UpdateUI ();
+				cd.origCard = deck [i];
+				cd.position = i;
+				cd.deckCard = true;
+				cd.UpdateUI ();
 				dc.transform.SetParent (deckUI);
 				dc.GetComponent<RectTransform> ().anchorMax = new Vector2 (0f, 0.5f);
 				dc.GetComponent<RectTransform> ().anchorMin = new Vector2 (0f, 0.5f);
-				dc.GetComponent<RectTransform> ().anchoredPosition = new Vector3 ((150f * (i + 1) - 40f), 0f, 0f);
+				dc.GetComponent<RectTransform> ().anchoredPosition = new Vector3 ((150f * (deckCards.Count) - 40f), 0f, 0f);
 				dc.transform.localScale = new Vector3 (2f, 2f, 2f);
+				int cardCount = CardCounter (deck [i].name, deck);
+				cd.cardCount.text = cardCount.ToString () + "x";
+				i += (cardCount - 1);
+
 			}
-			if (deck.Count > 7) {
-				deckUI.GetComponent<RectTransform> ().sizeDelta = new Vector2 ((150f * (deck.Count - 7)) - 80f, 0f);
-				deckUI.GetComponent<RectTransform> ().anchoredPosition = new Vector2 ((75f * (deck.Count - 7)) - 40f, 0f);
+			if (deckCards.Count > 7) {
+				deckUI.GetComponent<RectTransform> ().sizeDelta = new Vector2 ((150f * (deckCards.Count - 7)) - 80f, 0f);
+				deckUI.GetComponent<RectTransform> ().anchoredPosition = new Vector2 ((75f * (deckCards.Count - 7)) - 40f, 0f);
 			} else {
 				deckUI.GetComponent<RectTransform> ().sizeDelta = new Vector2 (0f, 0f);
 				deckUI.GetComponent<RectTransform> ().anchoredPosition = new Vector2 (0f, 0f);
 			}
+			deckCardCount.text = deck.Count.ToString ();
 		} else {
 			deck = new List<Card> ();
+			deckCardCount.text = "0";
 		}
 
 		if (library != null) {
@@ -82,27 +98,29 @@ public class DeckBuilder : MonoBehaviour {
 			libraryCards = new List<GameObject> ();
 			for (int i = 0; i < library.Count; i++) {
 				GameObject dc = Instantiate (deckCard) as GameObject;
-				deckCards.Add (dc);
-				dc.GetComponent<CardHolder> ().origCard = library [i];
-				dc.GetComponent<CardHolder> ().position = i;
-				dc.GetComponent<CardHolder> ().deckCard = false;
-				dc.GetComponent<CardHolder> ().UpdateUI ();
+				CardHolder cd = dc.GetComponent<CardHolder> ();
+				libraryCards.Add (dc);
+				cd.origCard = library [i];
+				cd.position = i;
+				cd.deckCard = false;
+				cd.UpdateUI ();
 				dc.transform.SetParent (libraryUI);
 				dc.GetComponent<RectTransform> ().anchorMax = new Vector2 (0f, 1f);
 				dc.GetComponent<RectTransform> ().anchorMin = new Vector2 (0f, 1f);
-				dc.GetComponent<RectTransform> ().anchoredPosition = new Vector3 (80f + (150 * (i % 6)), -80f - (150f * (i / 6)), 0f);
+				dc.GetComponent<RectTransform> ().anchoredPosition = new Vector3 (80f + (150 * ((libraryCards.Count - 1) % 6)), -80f - (150f * ((libraryCards.Count - 1)/ 6)), 0f);
 				dc.transform.localScale = new Vector3 (2f, 2f, 2f);
+				int cardCount = CardCounter (library [i].name, library);
+				cd.cardCount.text = cardCount.ToString () + "x";
+				i += (cardCount - 1);
 			}
 
-			if (library.Count > 12) {
-				libraryUI.GetComponent<RectTransform> ().sizeDelta = new Vector2 (0f, (150f * ((library.Count / 6) - 1)) - 80f);
-				libraryUI.GetComponent<RectTransform> ().anchoredPosition = new Vector2 (0f, -(75f * ((library.Count / 6) - 1)) + 40f);
+			if (libraryCards.Count > 12) {
+				libraryUI.GetComponent<RectTransform> ().sizeDelta = new Vector2 (0f, (150f * ((libraryCards.Count / 6) - 1)) - 80f);
+				libraryUI.GetComponent<RectTransform> ().anchoredPosition = new Vector2 (0f, -(75f * ((libraryCards.Count / 6) - 1)) + 40f);
 			} else {
 				libraryUI.GetComponent<RectTransform> ().sizeDelta = new Vector2 (0f, 0f);
 				libraryUI.GetComponent<RectTransform> ().anchoredPosition = new Vector2 (0f, 0f);
 			}
-				
-
 		} else {
 			library = new List<Card> ();
 		}
@@ -158,9 +176,9 @@ public class DeckBuilder : MonoBehaviour {
 		RefreshUI ();
 	}
 
-	// If the deck has atleast 20 cards, save the deck
+	// If the deck has atleast 25 cards, save the deck
 	public void SaveDeck() {
-		if (deck.Count >= 20) {
+		if (deck.Count >= 25) {
 			SaveLoad.SavePlayerDeck (deck);
 			SaveLoad.SavePlayerLibrary (library);
 		}

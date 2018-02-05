@@ -172,6 +172,13 @@ public class EnemyAI : MonoBehaviour {
 				int spellCard = Random.Range (0, offensiveSpells.Length);
 				CastSpell (gm.playerSpots [castSpot], offensiveSpells [spellCard]);
 				yield return ShowCard (offensiveSpells [spellCard], 1.5f);
+				if (offensiveSpells [spellCard].spellCardDraw > 0) {
+					cardCount += offensiveSpells [spellCard].spellCardDraw;
+					if (cardCount > 5) {
+						cardCount = 5;
+					}
+				}
+
 				cardCount--;
 			} else {
 				actionCounter--;

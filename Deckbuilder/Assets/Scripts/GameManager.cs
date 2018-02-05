@@ -63,7 +63,7 @@ public class GameManager : MonoBehaviour {
 	}
 
 	//Checks if either side has all crystals destroyed
-	void CheckGameEnded() {
+	public void CheckGameEnded() {
 		bool playerAlive = false;
 		for (int i = 0; i < playerCrystals.Length; i++) {
 			if (playerCrystals [i].isAlive ()) {

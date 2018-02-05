@@ -11,6 +11,7 @@ public class CardHolder : MonoBehaviour {
 
 	public Image cardArt;
 	public Text manaCost;
+	public Text cardCount;
 
 	public bool deckCard;
 	public int position;
