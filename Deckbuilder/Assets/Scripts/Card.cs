@@ -39,7 +39,11 @@ public class Card : MonoBehaviour {
 	public bool spellEnchant = false;	// When true, sets spell as enchant, so it uses a spot's enchant spot
 	public bool spellSacrifice = false;	// When true, spell will remove the unit it is casted on
 	public int spellCardDraw = 0;		// When > 0, spell will make the player draw that amount of cards
-	public int spellAttackReduce = 0;	// WHen > 0, spell/enchant will reduce the attack of unit it is casted on
+	public int spellAttackReduce = 0;	// When > 0, spell/enchant will reduce the attack of unit it is casted on
+	public int spellStartDamage = 0;	// When > 0, deal damage to enemy unit in same row
+	public bool spellStartLifeSteal = false;	// When true, damage dealt at start of turn from spellStartDamage increases health.
+	public int spellRowHit = 0;			// When > 0, deal damage to enemy units in same row
+	public int spellCollumnHit = 0;		// When > 0, deal damage to enemy units in same collumn
 
 	public bool unitRelentless = false;	// When true, unit will continue attacking past first target, if it has extra attack
 	public int unitDeathDraw = 0;		// When > 0, player will draw that amount of cards on unit death
@@ -101,6 +105,10 @@ public class Card : MonoBehaviour {
 		spellSacrifice = otherCard.spellSacrifice;
 		spellCardDraw = otherCard.spellCardDraw;
 		spellAttackReduce = otherCard.spellAttackReduce;
+		spellStartDamage = otherCard.spellStartDamage;
+		spellStartLifeSteal = otherCard.spellStartLifeSteal;
+		spellRowHit = otherCard.spellRowHit;
+		spellCollumnHit = otherCard.spellCollumnHit;
 
 		unitRelentless = otherCard.unitRelentless;
 		unitDeathDraw = otherCard.unitDeathDraw;

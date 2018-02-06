@@ -33,7 +33,7 @@ public class SpotStats : MonoBehaviour {
 	int deathDraw = 0;
 	public int fury = 0;
 	public int armor = 0;
-	int magicArmor = 0;
+	public int magicArmor = 0;
 
 	void Start() {
 		sr = GetComponent<SpriteRenderer> ();
@@ -50,6 +50,37 @@ public class SpotStats : MonoBehaviour {
 			if (enchantment.origCard != null) {
 				if (enchantment.origCard.unitFury > 0) {
 					fury += enchantment.origCard.unitFury;
+				}
+				if (enchantment.origCard.spellStartDamage > 0) {
+					int spellDamage = enchantment.origCard.spellStartDamage;
+					bool hit = false;
+					if (playerSide) {
+						if (gm.enemySpots [row - 1].hasUnit) {
+							spellDamage -= gm.enemySpots [row - 1].magicArmor;
+							gm.enemySpots [row - 1].SpellSecondaryEffect(enchantment.origCard);
+							hit = true;
+						} else if (gm.enemySpots [row + 2].hasUnit) {
+							spellDamage -= gm.enemySpots [row + 2].magicArmor;
+							gm.enemySpots [row + 2].SpellSecondaryEffect(enchantment.origCard);
+							hit = true;
+						}
+					} else {
+						if (gm.playerSpots [row - 1].hasUnit) {
+							spellDamage -= gm.playerSpots [row - 1].magicArmor;
+							gm.playerSpots [row - 1].SpellSecondaryEffect(enchantment.origCard);
+							hit = true;
+						} else if (gm.playerSpots [row + 2].hasUnit) {
+							spellDamage -= gm.playerSpots [row + 2].magicArmor;
+							gm.playerSpots [row + 2].SpellSecondaryEffect(enchantment.origCard);
+							hit = true;
+						}
+					}
+					if (enchantment.origCard.spellStartLifeSteal && hit == true) {
+						if (spellDamage > 0) {
+							health += spellDamage;
+							UpdateUI ();
+						}
+					}
 				}
 			}
 		}
@@ -94,17 +125,35 @@ public class SpotStats : MonoBehaviour {
 	public void UseSpell(Card card, bool playerCast) {
 		if (hasUnit) {
 			StartCoroutine(DelaySpell (card.baseCard, playerCast));
-			spellAnimation.runtimeAnimatorController = card.cardAnimation;
-			spellAnimation.gameObject.SetActive (true);
 		}
+	}
+
+	public void SpellSecondaryEffect(Card card) {
+		StartCoroutine (PlaySpellAnimation(card.cardAnimation));
+		if (card.spellStartDamage > 0) {
+			TakeDamage (card.spellStartDamage - magicArmor);
+		}
+		if (card.spellCollumnHit > 0) {
+			TakeDamage (card.spellCollumnHit - magicArmor);
+		}
+		if (card.spellRowHit > 0) {
+			TakeDamage (card.spellRowHit - magicArmor);
+		}
+
+	}
+
+	IEnumerator PlaySpellAnimation(RuntimeAnimatorController controller) {
+		spellAnimation.runtimeAnimatorController = controller;
+		spellAnimation.gameObject.SetActive (true);
+		float waitTime = controller.animationClips [0].length * 0.95f;
+		yield return new WaitForSeconds (waitTime);
+		spellAnimation.gameObject.SetActive (false);
 	}
 
 	// Delays spell effect to allow animation to finish
 	IEnumerator DelaySpell(Card card, bool playerCast) {
-		//Hide spell animation after it finishes
-		float waitTime = card.cardAnimation.animationClips [0].length * 0.95f;
-		yield return new WaitForSeconds (waitTime);
-		spellAnimation.gameObject.SetActive (false);
+		//Play Spell animation
+		yield return PlaySpellAnimation(card.cardAnimation);
 
 		//If the spell is not an enchant, it is an instant spell
 		if (!card.spellEnchant) {
@@ -112,8 +161,38 @@ public class SpotStats : MonoBehaviour {
 				if (card.spellCardDraw > 0) {
 					player.DrawCard (card.spellCardDraw);	//Draw cards equal to spellCardDraw
 				}
+				if (card.spellCollumnHit > 0) {
+					foreach (SpotStats spot in gm.enemySpots) {
+						if (collumn == spot.collumn && !spot.Equals (this)) {
+							spot.SpellSecondaryEffect (card);
+						}
+					}
+				}
+				if (card.spellRowHit > 0) {
+					foreach (SpotStats spot in gm.enemySpots) {
+						if (row == spot.row && !spot.Equals (this)) {
+							spot.SpellSecondaryEffect (card);
+						}
+					}
+				}
 				player.DiscardCard (card);	// Discards the card if the player used it
+			} else {
+				if (card.spellCollumnHit > 0) {
+					foreach (SpotStats spot in gm.playerSpots) {
+						if (collumn == spot.collumn && !spot.Equals (this)) {
+							spot.SpellSecondaryEffect (card);
+						}
+					}
+				}
+				if (card.spellRowHit > 0) {
+					foreach (SpotStats spot in gm.playerSpots) {
+						if (row == spot.row && !spot.Equals (this)) {
+							spot.SpellSecondaryEffect (card);
+						}
+					}
+				}
 			}
+
 			if (card.attack > 0) {
 				TakeDamage (card.attack - magicArmor);	//Take damage based equal to the card's attack
 			}

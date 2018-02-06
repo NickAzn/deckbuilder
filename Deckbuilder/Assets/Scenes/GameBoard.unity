@@ -189,6 +189,10 @@ MonoBehaviour:
   spellSacrifice: 0
   spellCardDraw: 0
   spellAttackReduce: 0
+  spellStartDamage: 0
+  spellStartLifeSteal: 0
+  spellRowHit: 0
+  spellCollumnHit: 0
   unitRelentless: 0
   unitDeathDraw: 0
   unitManaFont: 0
@@ -801,6 +805,7 @@ MonoBehaviour:
   relentless: 0
   fury: 0
   armor: 0
+  magicArmor: 0
 --- !u!4 &41026971
 Transform:
   m_ObjectHideFlags: 0
@@ -2124,6 +2129,7 @@ MonoBehaviour:
   relentless: 0
   fury: 0
   armor: 0
+  magicArmor: 0
 --- !u!4 &226625668
 Transform:
   m_ObjectHideFlags: 0
@@ -2348,6 +2354,7 @@ MonoBehaviour:
   relentless: 0
   fury: 0
   armor: 0
+  magicArmor: 0
 --- !u!4 &238943845
 Transform:
   m_ObjectHideFlags: 0
@@ -2484,6 +2491,7 @@ MonoBehaviour:
   relentless: 0
   fury: 0
   armor: 0
+  magicArmor: 0
 --- !u!4 &243269488
 Transform:
   m_ObjectHideFlags: 0
@@ -3050,6 +3058,7 @@ MonoBehaviour:
   relentless: 0
   fury: 0
   armor: 0
+  magicArmor: 0
 --- !u!4 &297346804
 Transform:
   m_ObjectHideFlags: 0
@@ -4018,7 +4027,7 @@ MonoBehaviour:
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
-    m_VerticalOverflow: 0
+    m_VerticalOverflow: 1
     m_LineSpacing: 1
   m_Text: Description
 --- !u!222 &398447537
@@ -4096,8 +4105,10 @@ MonoBehaviour:
   - {fileID: 114594836883534366, guid: 7064b1548deab4949af447145dd3c547, type: 2}
   - {fileID: 114753647423312842, guid: 3ab367ab1ae99544e869c62faf557ead, type: 2}
   - {fileID: 114947882670045886, guid: a13d19a28d808bc4e8c771f207b72492, type: 2}
+  - {fileID: 114067229439835902, guid: 5fdfdc8cc53576241a0acf94a65677ff, type: 2}
+  - {fileID: 114195245604149660, guid: 29dcfe1641c148e408e318b3f8a08359, type: 2}
   rareCards:
-  - {fileID: 114463602804174820, guid: bf414acc39b315142bbcd0887d349548, type: 2}
+  - {fileID: 114224432382225192, guid: e0fb0b2df46b6234ca3551ccef282bd3, type: 2}
   - {fileID: 114846245563046474, guid: 4517bbd8881f3e945b7e0583eb22c434, type: 2}
   - {fileID: 114540127464893966, guid: 126c83ee062af7f4f9d8c81d34c56b99, type: 2}
   - {fileID: 114608320322548614, guid: 902a034b643ca73498873ab1bdb305be, type: 2}
@@ -4603,7 +4614,7 @@ MonoBehaviour:
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
-    m_VerticalOverflow: 0
+    m_VerticalOverflow: 1
     m_LineSpacing: 1
   m_Text: Description
 --- !u!222 &483315228
@@ -5470,6 +5481,10 @@ MonoBehaviour:
   spellSacrifice: 0
   spellCardDraw: 0
   spellAttackReduce: 0
+  spellStartDamage: 0
+  spellStartLifeSteal: 0
+  spellRowHit: 0
+  spellCollumnHit: 0
   unitRelentless: 0
   unitDeathDraw: 0
   unitManaFont: 0
@@ -6139,6 +6154,7 @@ MonoBehaviour:
   relentless: 0
   fury: 0
   armor: 0
+  magicArmor: 0
 --- !u!4 &703841867
 Transform:
   m_ObjectHideFlags: 0
@@ -6450,7 +6466,7 @@ MonoBehaviour:
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
-    m_VerticalOverflow: 0
+    m_VerticalOverflow: 1
     m_LineSpacing: 1
   m_Text: Description
 --- !u!222 &774421665
@@ -7332,6 +7348,7 @@ MonoBehaviour:
   relentless: 0
   fury: 0
   armor: 0
+  magicArmor: 0
 --- !u!4 &924561176
 Transform:
   m_ObjectHideFlags: 0
@@ -10494,6 +10511,7 @@ MonoBehaviour:
   relentless: 0
   fury: 0
   armor: 0
+  magicArmor: 0
 --- !u!4 &989083277
 Transform:
   m_ObjectHideFlags: 0
@@ -12293,6 +12311,10 @@ MonoBehaviour:
   spellSacrifice: 0
   spellCardDraw: 0
   spellAttackReduce: 0
+  spellStartDamage: 0
+  spellStartLifeSteal: 0
+  spellRowHit: 0
+  spellCollumnHit: 0
   unitRelentless: 0
   unitDeathDraw: 0
   unitManaFont: 0
@@ -13536,6 +13558,10 @@ MonoBehaviour:
   spellSacrifice: 0
   spellCardDraw: 0
   spellAttackReduce: 0
+  spellStartDamage: 0
+  spellStartLifeSteal: 0
+  spellRowHit: 0
+  spellCollumnHit: 0
   unitRelentless: 0
   unitDeathDraw: 0
   unitManaFont: 0
@@ -14026,6 +14052,10 @@ MonoBehaviour:
   spellSacrifice: 0
   spellCardDraw: 0
   spellAttackReduce: 0
+  spellStartDamage: 0
+  spellStartLifeSteal: 0
+  spellRowHit: 0
+  spellCollumnHit: 0
   unitRelentless: 0
   unitDeathDraw: 0
   unitManaFont: 0
@@ -14347,6 +14377,7 @@ MonoBehaviour:
   relentless: 0
   fury: 0
   armor: 0
+  magicArmor: 0
 --- !u!4 &1367420884
 Transform:
   m_ObjectHideFlags: 0
@@ -14440,6 +14471,10 @@ MonoBehaviour:
   spellSacrifice: 0
   spellCardDraw: 0
   spellAttackReduce: 0
+  spellStartDamage: 0
+  spellStartLifeSteal: 0
+  spellRowHit: 0
+  spellCollumnHit: 0
   unitRelentless: 0
   unitDeathDraw: 0
   unitManaFont: 0
@@ -15633,6 +15668,7 @@ MonoBehaviour:
   relentless: 0
   fury: 0
   armor: 0
+  magicArmor: 0
 --- !u!4 &1520711321
 Transform:
   m_ObjectHideFlags: 0
@@ -15768,6 +15804,7 @@ MonoBehaviour:
   relentless: 0
   fury: 0
   armor: 0
+  magicArmor: 0
 --- !u!4 &1523926442
 Transform:
   m_ObjectHideFlags: 0
@@ -17079,6 +17116,10 @@ MonoBehaviour:
   spellSacrifice: 0
   spellCardDraw: 0
   spellAttackReduce: 0
+  spellStartDamage: 0
+  spellStartLifeSteal: 0
+  spellRowHit: 0
+  spellCollumnHit: 0
   unitRelentless: 0
   unitDeathDraw: 0
   unitManaFont: 0
@@ -17574,7 +17615,7 @@ MonoBehaviour:
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
-    m_VerticalOverflow: 0
+    m_VerticalOverflow: 1
     m_LineSpacing: 1
   m_Text: Description
 --- !u!222 &1728375549
@@ -17659,6 +17700,10 @@ MonoBehaviour:
   spellSacrifice: 0
   spellCardDraw: 0
   spellAttackReduce: 0
+  spellStartDamage: 0
+  spellStartLifeSteal: 0
+  spellRowHit: 0
+  spellCollumnHit: 0
   unitRelentless: 0
   unitDeathDraw: 0
   unitManaFont: 0
@@ -17982,7 +18027,7 @@ MonoBehaviour:
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
-    m_VerticalOverflow: 0
+    m_VerticalOverflow: 1
     m_LineSpacing: 1
   m_Text: Description
 --- !u!1 &1785747969
@@ -18337,7 +18382,7 @@ MonoBehaviour:
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
-    m_VerticalOverflow: 0
+    m_VerticalOverflow: 1
     m_LineSpacing: 1
   m_Text: 'Henlo I am a card and I do stuff
 
@@ -20319,13 +20364,18 @@ MonoBehaviour:
   - {fileID: 114594836883534366, guid: 7064b1548deab4949af447145dd3c547, type: 2}
   - {fileID: 114753647423312842, guid: 3ab367ab1ae99544e869c62faf557ead, type: 2}
   - {fileID: 114970434036914916, guid: 78004a5192f69af4f82533024069b79c, type: 2}
+  - {fileID: 114224432382225192, guid: e0fb0b2df46b6234ca3551ccef282bd3, type: 2}
   offensiveSpells:
   - {fileID: 114305136590519174, guid: e3bc4b1083919f245867c44d03792fbf, type: 2}
   - {fileID: 114171572672525456, guid: ed0957d89c8e91b419a2f86f26e291ee, type: 2}
+  - {fileID: 114195245604149660, guid: 29dcfe1641c148e408e318b3f8a08359, type: 2}
   enchantSpells:
   - {fileID: 114846245563046474, guid: 4517bbd8881f3e945b7e0583eb22c434, type: 2}
+  - {fileID: 114067229439835902, guid: 5fdfdc8cc53576241a0acf94a65677ff, type: 2}
   gm: {fileID: 398680108}
   aggroMeter: 0
+  earlyCardTurns: 2
+  midCardTurns: 6
 --- !u!4 &2017360920
 Transform:
   m_ObjectHideFlags: 0
@@ -20530,6 +20580,7 @@ MonoBehaviour:
   relentless: 0
   fury: 0
   armor: 0
+  magicArmor: 0
 --- !u!4 &2028569240
 Transform:
   m_ObjectHideFlags: 0

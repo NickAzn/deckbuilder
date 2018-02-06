@@ -12,6 +12,9 @@ public class EnemyAI : MonoBehaviour {
 	public Card[] enchantSpells;
 	public GameManager gm;
 	public int aggroMeter;
+	public int earlyCardTurns;
+	public int midCardTurns;
+
 	int actionCounter = 0;
 
 	int playerR1Atk = 0;
@@ -214,9 +217,9 @@ public class EnemyAI : MonoBehaviour {
 		bool manaBoosted = false;
 		if (possibleSpots.Count > 0 && possibleSpots [0] > -1) {
 			int summonSpot = possibleSpots[Random.Range (0, possibleSpots.Count)];
-			if (turnCounter < 2) {
+			if (turnCounter < earlyCardTurns) {
 				summonCard = earlyUnits[Random.Range (0, earlyUnits.Length)];
-			} else if (turnCounter < 7) {
+			} else if (turnCounter < midCardTurns) {
 				summonCard = midUnits[Random.Range (0, midUnits.Length)];
 			} else {
 				summonCard = lateUnits[Random.Range (0, lateUnits.Length)];
