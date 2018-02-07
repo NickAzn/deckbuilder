@@ -848,7 +848,7 @@ GameObject:
   - component: {fileID: 266891092}
   - component: {fileID: 266891091}
   m_Layer: 5
-  m_Name: SaveFeedback
+  m_Name: Feedback
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1424,8 +1424,8 @@ MonoBehaviour:
   removeCardButton: {fileID: 327255382}
   removeAllCardButton: {fileID: 2060898084}
   deckCardCount: {fileID: 1051783967}
-  deckFeedback: {fileID: 266891089}
-  deckFeedbackText: {fileID: 1252373252}
+  feedback: {fileID: 266891089}
+  feedbackText: {fileID: 1252373252}
 --- !u!4 &389596125
 Transform:
   m_ObjectHideFlags: 0
@@ -2497,8 +2497,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1845670129}
   m_HandleRect: {fileID: 1845670128}
   m_Direction: 2
-  m_Value: 0
-  m_Size: 1
+  m_Value: 1
+  m_Size: 0.99999994
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -3726,6 +3726,10 @@ MonoBehaviour:
   spellSacrifice: 0
   spellCardDraw: 0
   spellAttackReduce: 0
+  spellStartDamage: 0
+  spellStartLifeSteal: 0
+  spellRowHit: 0
+  spellCollumnHit: 0
   unitRelentless: 0
   unitDeathDraw: 0
   unitManaFont: 0
@@ -4421,7 +4425,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 389596124}
-        m_MethodName: CloseDeckSaveFeedback
+        m_MethodName: CloseFeedback
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

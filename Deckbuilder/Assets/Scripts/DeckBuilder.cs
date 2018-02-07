@@ -21,8 +21,8 @@ public class DeckBuilder : MonoBehaviour {
 	public GameObject removeAllCardButton;
 
 	public Text deckCardCount;
-	public GameObject deckFeedback;
-	public Text deckFeedbackText;
+	public GameObject feedback;
+	public Text feedbackText;
 
 	List<GameObject> deckCards = new List<GameObject>();
 	List<GameObject> libraryCards = new List<GameObject>();
@@ -36,7 +36,7 @@ public class DeckBuilder : MonoBehaviour {
 		addAllCardButton.SetActive (false);
 		removeCardButton.SetActive (false);
 		removeAllCardButton.SetActive (false);
-		deckFeedback.SetActive (false);
+		feedback.SetActive (false);
 		RefreshUI ();
 	}
 
@@ -162,23 +162,36 @@ public class DeckBuilder : MonoBehaviour {
 
 	// Adds selected card from library to the player deck
 	public void AddSelectedCard() {
-		deck.Add (selCardHolder.GetComponent<CardHolder>().origCard);
-		library.RemoveAt(selCardHolder.position);
-
-		DeselectCard ();
-		RefreshUI ();
+		int cardCount = CardCounter (selCardHolder.GetComponent<CardHolder> ().origCard.name, deck);
+		if (cardCount < 3) {
+			deck.Add (selCardHolder.GetComponent<CardHolder> ().origCard);
+			library.RemoveAt (selCardHolder.position);
+			DeselectCard ();
+			RefreshUI ();
+		} else {
+			feedbackText.text = "Cannot add card.\nOnly 3 copies of a card may be in a deck.";
+			feedback.SetActive (true);
+		}
 	}
 
 	// Adds all copies of the selected card from library to the deck
 	public void AddAllSelectedCard() {
-		int cardCount = CardCounter (selCardHolder.GetComponent<CardHolder> ().origCard.name, library);
-		for (int i = 0; i < cardCount; i++) {
-			deck.Add (selCardHolder.GetComponent<CardHolder> ().origCard);
-			library.RemoveAt (selCardHolder.position);
+		int cardCountDeck = CardCounter (selCardHolder.GetComponent<CardHolder> ().origCard.name, deck);
+		if (cardCountDeck < 3) {
+			int cardCountLibrary = CardCounter (selCardHolder.GetComponent<CardHolder> ().origCard.name, library);
+			if (cardCountLibrary > (3 - cardCountDeck)) {
+				cardCountLibrary = 3 - cardCountDeck;
+			}
+			for (int i = 0; i < cardCountLibrary; i++) {
+				deck.Add (selCardHolder.GetComponent<CardHolder> ().origCard);
+				library.RemoveAt (selCardHolder.position);
+			}
+			DeselectCard ();
+			RefreshUI ();
+		} else {
+			feedbackText.text = "Cannot add card.\nOnly 3 copies of a card may be in a deck.";
+			feedback.SetActive (true);
 		}
-
-		DeselectCard ();
-		RefreshUI ();
 	}
 
 	// Removes the selected card from the deck and places it in the library
@@ -219,15 +232,15 @@ public class DeckBuilder : MonoBehaviour {
 		if (deck.Count >= 25) {
 			SaveLoad.SavePlayerDeck (deck);
 			SaveLoad.SavePlayerLibrary (library);
-			deckFeedbackText.text = "Deck saved.";
+			feedbackText.text = "Deck saved.";
 		} else {
-			deckFeedbackText.text = "Could not save deck.\nDeck requires atleast 25 cards.\nYour deck has " + deck.Count.ToString() + " cards.";
+			feedbackText.text = "Could not save deck.\nDeck requires atleast 25 cards.\nYour deck has " + deck.Count.ToString() + " cards.";
 		}
-		deckFeedback.SetActive (true);
+		feedback.SetActive (true);
 	}
 
-	public void CloseDeckSaveFeedback() {
-		deckFeedback.SetActive (false);
+	public void CloseFeedback() {
+		feedback.SetActive (false);
 	}
 
 	public void ExitToGame() {
