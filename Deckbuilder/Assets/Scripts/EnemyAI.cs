@@ -46,7 +46,11 @@ public class EnemyAI : MonoBehaviour {
 		turnCounter++;
 
 		actionCounter = 0;
-		cardCount++;
+		if (turnCounter < midCardTurns) {
+			cardCount++;
+		} else {
+			cardCount += 2;
+		}
 		if (cardCount > 5) {
 			cardCount = 5;
 		}

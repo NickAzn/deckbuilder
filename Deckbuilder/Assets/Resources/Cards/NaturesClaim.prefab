@@ -54,7 +54,7 @@ MonoBehaviour:
   baseCard: {fileID: 114608320322548614}
   cardAnimation: {fileID: 22100000, guid: 9d6cd65bc055e0d4a81a269829b83fda, type: 2}
   cardSprite: {fileID: 21300002, guid: 061a9ca46c7fabd499673bd8d907895b, type: 3}
-  manaCost: 5
+  manaCost: 4
   isUnit: 0
   isSpell: 1
   playerSideCast: 1
@@ -70,6 +70,19 @@ MonoBehaviour:
   manaUI: {fileID: 0}
   cardArt: {fileID: 0}
   clickColor: {r: 0, g: 0, b: 0, a: 0}
+  spellEnchant: 0
   spellSacrifice: 1
   spellCardDraw: 3
+  spellAttackReduce: 0
+  spellStartDamage: 0
+  spellStartLifeSteal: 0
+  spellRowHit: 0
+  spellCollumnHit: 0
   unitRelentless: 0
+  unitDeathDraw: 0
+  unitManaFont: 0
+  unitFury: 0
+  manaBoost: 0
+  armor: 0
+  magicArmor: 0
+  crystalPact: 0

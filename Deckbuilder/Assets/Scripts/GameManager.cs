@@ -210,6 +210,8 @@ public class GameManager : MonoBehaviour {
 			endTurnButton.SetActive (false);
 			playerTurn = false;
 		}
+
+		yield return new WaitForSeconds(0.5f);
 		for (int i = 0; i < attackingSpots.Length; i++) {
 			if (attackingSpots [i].hasUnit && attackingSpots[i].damage > 0) {		//Check if the attackingSpot has a unit with damage > 0
 				attackingSpots [i].unitAnimation.Play ("Attack");					// If it does, play attack animation and wait for it to finish
@@ -259,6 +261,7 @@ public class GameManager : MonoBehaviour {
 				}
 			}
 		}
+		yield return new WaitForSeconds(0.5f);
 		// Start the new turn after attacking
 		if (startedPlayerTurn) {
 			foreach (SpotStats spot in enemySpots) {

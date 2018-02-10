@@ -66,6 +66,7 @@ public class DeckBuilder : MonoBehaviour {
 				GameObject dc = Instantiate (deckCard) as GameObject;
 				CardHolder cd = dc.GetComponent<CardHolder> ();
 				deckCards.Add (dc);
+				dc.GetComponent<Button> ().onClick.AddListener(delegate{SelectCard(cd);});
 				cd.origCard = deck [i];
 				cd.position = i;
 				cd.deckCard = true;
@@ -108,6 +109,7 @@ public class DeckBuilder : MonoBehaviour {
 				GameObject dc = Instantiate (deckCard) as GameObject;
 				CardHolder cd = dc.GetComponent<CardHolder> ();
 				libraryCards.Add (dc);
+				dc.GetComponent<Button> ().onClick.AddListener(delegate{SelectCard(cd);});
 				cd.origCard = library [i];
 				cd.position = i;
 				cd.deckCard = false;

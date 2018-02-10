@@ -9,62 +9,60 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1966352354004790}
+  m_RootGameObject: {fileID: 1304118390167166}
   m_IsPrefabParent: 1
---- !u!1 &1966352354004790
+--- !u!1 &1304118390167166
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
   m_Component:
-  - component: {fileID: 4253330360687690}
-  - component: {fileID: 114961555846674112}
+  - component: {fileID: 4590854751540030}
+  - component: {fileID: 114800451218087598}
   m_Layer: 0
-  m_Name: CrystalArmor
+  m_Name: Turtle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4253330360687690
+--- !u!4 &4590854751540030
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1966352354004790}
+  m_GameObject: {fileID: 1304118390167166}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -14.491377, y: -2.7315888, z: -0.03848517}
+  m_LocalPosition: {x: -11.4086685, y: -2.9193313, z: -0.03848517}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &114961555846674112
+--- !u!114 &114800451218087598
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1966352354004790}
+  m_GameObject: {fileID: 1304118390167166}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b85f16a64ffd7314882886f152f96910, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseCard: {fileID: 114961555846674112}
-  cardAnimation: {fileID: 22100000, guid: 98e6b175363f468408657b537a91c2dd, type: 2}
-  cardSprite: {fileID: 21300000, guid: 44dfd023424418b44bb5a457107fa7e8, type: 3}
-  manaCost: 1
-  isUnit: 0
-  isSpell: 1
+  baseCard: {fileID: 114800451218087598}
+  cardAnimation: {fileID: 22100000, guid: 72c0209bcc7d4174a89113d0c0ac38aa, type: 2}
+  cardSprite: {fileID: 21300000, guid: ade056fb52c599e4aab748f1a1be81ea, type: 3}
+  manaCost: 2
+  isUnit: 1
+  isSpell: 0
   playerSideCast: 1
   enemySideCast: 0
-  attack: -1
-  health: -1
-  cardName: Crystal Armor
-  description: 'Target unit you control gains 1 Armor
-
-    Crystal Pact* 1 (Your crystal behind target unit takes 1 damage)'
+  attack: 1
+  health: 2
+  cardName: Turtle
+  description: Armor* 1
   nameUI: {fileID: 0}
   descUI: {fileID: 0}
   atkUI: {fileID: 0}
@@ -72,7 +70,7 @@ MonoBehaviour:
   manaUI: {fileID: 0}
   cardArt: {fileID: 0}
   clickColor: {r: 0, g: 0, b: 0, a: 0}
-  spellEnchant: 1
+  spellEnchant: 0
   spellSacrifice: 0
   spellCardDraw: 0
   spellAttackReduce: 0
@@ -87,4 +85,4 @@ MonoBehaviour:
   manaBoost: 0
   armor: 1
   magicArmor: 0
-  crystalPact: 1
+  crystalPact: 0

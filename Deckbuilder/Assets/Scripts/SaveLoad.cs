@@ -11,6 +11,8 @@ public static class SaveLoad {
 	static string CRYSTAL_2_HP = "Crystal2HP";
 	static string CRYSTAL_3_HP = "Crystal3HP";
 
+	static string TOKENS = "Tokens";
+
 	//Saves the health of player crystals
 	public static void SaveCrystalHealth(int crystal1, int crystal2, int crystal3) {
 		PlayerPrefs.SetInt (CRYSTAL_1_HP, crystal1);
@@ -106,5 +108,13 @@ public static class SaveLoad {
 
 	public static void ResetPlayerLibrary() {
 		PlayerPrefs.SetString (PLAYER_LIBRARY, "");
+	}
+
+	public static void SavePlayerTokens(int amount) {
+		PlayerPrefs.SetInt (TOKENS, amount);
+	}
+
+	public static int LoadPlayerTokens() {
+		return PlayerPrefs.GetInt (TOKENS, 0);
 	}
 }

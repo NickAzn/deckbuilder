@@ -139,7 +139,7 @@ public class Card : MonoBehaviour {
 	}
 
 	//When hovering over the card, show a zoomed version of card for readability
-	void OnMouseOver() {
+	void OnMouseEnter() {
 		if (gm != null) {
 			gm.ShowZoomCard (this);
 		}

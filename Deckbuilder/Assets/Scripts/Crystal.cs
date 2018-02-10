@@ -5,7 +5,6 @@ using UnityEngine.UI;
 
 public class Crystal : MonoBehaviour {
 
-	public GameManager gm;
 	public Text hpUI;
 	int health = 10;
 
