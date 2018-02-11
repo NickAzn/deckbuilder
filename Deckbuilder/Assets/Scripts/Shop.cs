@@ -8,7 +8,8 @@ public class Shop : MonoBehaviour {
 	public Card zoomCard;
 	public GameObject deckCard;
 	public Transform libraryUI;
-	public CardHolder selCardHolder;
+	CardHolder selCardHolder;
+	int selCardPrice;
 
 	public Crystal[] playerCrystals;
 	public Button[] crystalRepairButtons;
@@ -21,16 +22,26 @@ public class Shop : MonoBehaviour {
 
 	public GameObject sellButton;
 	public GameObject sellAllButton;
+	public GameObject buyButton;
+
+	public CardHolder commonCard;
+	public CardHolder uncommonCard;
+	public CardHolder rareCard;
+	public CardHolder ultimateCard;
+	public CardHolder randomCard;
 
 	void Start() {
+		SaveLoad.GenerateNewShop ();
 		tokens = SaveLoad.LoadPlayerTokens ();
 		library = SaveLoad.LoadPlayerLibrary ();
 		sellButton.SetActive (false);
 		sellAllButton.SetActive (false);
+		buyButton.SetActive (false);
 
 		RefreshLibrary ();
 		RefreshCrystals ();
 		RefreshTokens ();
+		RefreshCards ();
 	}
 
 	void RefreshLibrary() {
@@ -112,6 +123,21 @@ public class Shop : MonoBehaviour {
 		}
 	}
 
+	void RefreshCards() {
+		Card[] shopCards = SaveLoad.LoadShopCards ();
+		commonCard.origCard = shopCards [0];
+		uncommonCard.origCard = shopCards [1];
+		rareCard.origCard = shopCards [2];
+		ultimateCard.origCard = shopCards [3];
+		randomCard.origCard = shopCards [4];
+
+		commonCard.UpdateUI ();
+		uncommonCard.UpdateUI ();
+		rareCard.UpdateUI ();
+		ultimateCard.UpdateUI ();
+		randomCard.UpdateUI ();
+	}
+
 	void RefreshTokens() {
 		tokenUI.text = tokens.ToString ();
 	}
@@ -132,14 +158,19 @@ public class Shop : MonoBehaviour {
 		if (cd.deckCard) {
 			sellButton.SetActive (true);
 			sellAllButton.SetActive (true);
+			buyButton.SetActive (false);
 		} else {
 			sellButton.SetActive (false);
 			sellAllButton.SetActive (false);
+			buyButton.SetActive (true);
 		}
 	}
 
 	void DeselectCard() {
 		selCardHolder = null;
+		sellButton.SetActive (false);
+		sellAllButton.SetActive (false);
+		buyButton.SetActive (false);
 	}
 
 	public void SellSelectCard() {
@@ -170,6 +201,23 @@ public class Shop : MonoBehaviour {
 		sellAllButton.SetActive (false);
 		RefreshLibrary ();
 		RefreshTokens ();
+	}
+
+	public void SetCardPrice(int price) {
+		selCardPrice = price;
+	}
+
+	public void BuySelectCard() {
+		if (tokens >= selCardPrice) {
+			tokens -= selCardPrice;
+			library.Add (selCardHolder.origCard);
+			selCardHolder.gameObject.SetActive (false);
+			SaveLoad.SavePlayerTokens (tokens);
+			SaveLoad.SavePlayerLibrary (library);
+			RefreshTokens ();
+			RefreshLibrary ();
+			DeselectCard ();
+		}
 	}
 
 	public void RepairCrystal(int crystal) {

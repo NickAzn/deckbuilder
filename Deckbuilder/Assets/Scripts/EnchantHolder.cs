@@ -32,7 +32,7 @@ public class EnchantHolder : MonoBehaviour {
 	}
 
 	// When mouse is hovering, show a zoomed version of the card with stats
-	void OnMouseOver() {
+	void OnMouseEnter() {
 		if (origCard != null) {
 			gm.ShowZoomCard (origCard);
 		}

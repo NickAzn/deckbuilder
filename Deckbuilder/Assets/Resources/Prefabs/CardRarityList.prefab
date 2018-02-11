@@ -1,0 +1,78 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &100100000
+Prefab:
+  m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications: []
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 1876474724159214}
+  m_IsPrefabParent: 1
+--- !u!1 &1876474724159214
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4351500239204612}
+  - component: {fileID: 114495910358707890}
+  m_Layer: 0
+  m_Name: CardRarityList
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4351500239204612
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1876474724159214}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -3.244081, y: 0.7211823, z: -0.009765625}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114495910358707890
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1876474724159214}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8af4c067e38948440b990ef8657b4af2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  commonCards:
+  - {fileID: 114961555846674112, guid: f1ae198d5299cca4b9b62895c9dc2066, type: 2}
+  - {fileID: 114934376419062240, guid: 04926b8157c5427439280c0435cb498c, type: 2}
+  - {fileID: 114641982781604766, guid: 3470b8178dcc0fa45be8f9b1578e754d, type: 2}
+  - {fileID: 114305136590519174, guid: e3bc4b1083919f245867c44d03792fbf, type: 2}
+  - {fileID: 114618712277928762, guid: f74e131a86610804f9ae90eb75bdfec1, type: 2}
+  - {fileID: 114165402513207620, guid: 760c0deabd3b52e44b138ecc7cca8ffe, type: 2}
+  - {fileID: 114800451218087598, guid: f02d53ec885e3b54b83184e2690b0964, type: 2}
+  uncommonCards:
+  - {fileID: 114171572672525456, guid: ed0957d89c8e91b419a2f86f26e291ee, type: 2}
+  - {fileID: 114125756811820270, guid: d51196b87351a0d49862e8c0de589e9e, type: 2}
+  - {fileID: 114970434036914916, guid: 78004a5192f69af4f82533024069b79c, type: 2}
+  - {fileID: 114594836883534366, guid: 7064b1548deab4949af447145dd3c547, type: 2}
+  - {fileID: 114753647423312842, guid: 3ab367ab1ae99544e869c62faf557ead, type: 2}
+  - {fileID: 114947882670045886, guid: a13d19a28d808bc4e8c771f207b72492, type: 2}
+  - {fileID: 114067229439835902, guid: 5fdfdc8cc53576241a0acf94a65677ff, type: 2}
+  - {fileID: 114195245604149660, guid: 29dcfe1641c148e408e318b3f8a08359, type: 2}
+  rareCards:
+  - {fileID: 114224432382225192, guid: e0fb0b2df46b6234ca3551ccef282bd3, type: 2}
+  - {fileID: 114846245563046474, guid: 4517bbd8881f3e945b7e0583eb22c434, type: 2}
+  - {fileID: 114540127464893966, guid: 126c83ee062af7f4f9d8c81d34c56b99, type: 2}
+  - {fileID: 114608320322548614, guid: 902a034b643ca73498873ab1bdb305be, type: 2}
+  - {fileID: 114198791212364370, guid: 9156c466274392b4bb02fadea85d08a0, type: 2}
+  ultimateCards:
+  - {fileID: 114463602804174820, guid: bf414acc39b315142bbcd0887d349548, type: 2}

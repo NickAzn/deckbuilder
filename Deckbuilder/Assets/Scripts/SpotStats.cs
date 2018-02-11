@@ -307,7 +307,7 @@ public class SpotStats : MonoBehaviour {
 	}
 
 	//Changes color when hovered over
-	void OnMouseOver() {
+	void OnMouseEnter() {
 		sr.color = hoverColor;
 		if (hasUnit) {
 			gm.ShowZoomCard (origCard);

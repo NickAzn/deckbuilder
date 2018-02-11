@@ -12,6 +12,12 @@ public static class SaveLoad {
 	static string CRYSTAL_3_HP = "Crystal3HP";
 
 	static string TOKENS = "Tokens";
+	static string COMMON_SHOP_CARD = "ShopCard1";
+	static string UNCOMMON_SHOP_CARD = "ShopCard2";
+	static string RARE_SHOP_CARD = "ShopCard3";
+	static string ULTIMATE_SHOP_CARD = "ShopCard4";
+	static string RANDOM_SHOP_CARD = "ShopCard5";
+
 
 	//Saves the health of player crystals
 	public static void SaveCrystalHealth(int crystal1, int crystal2, int crystal3) {
@@ -116,5 +122,39 @@ public static class SaveLoad {
 
 	public static int LoadPlayerTokens() {
 		return PlayerPrefs.GetInt (TOKENS, 0);
+	}
+
+	public static void GenerateNewShop() {
+		CardRarityHolder cards = Resources.Load<CardRarityHolder> ("Prefabs/CardRarityList");
+
+		PlayerPrefs.SetString(COMMON_SHOP_CARD, cards.commonCards[Random.Range(0, cards.commonCards.Length)].name);
+		PlayerPrefs.SetString(UNCOMMON_SHOP_CARD, cards.uncommonCards[Random.Range(0, cards.uncommonCards.Length)].name);
+		PlayerPrefs.SetString(RARE_SHOP_CARD, cards.rareCards[Random.Range(0, cards.rareCards.Length)].name);
+		PlayerPrefs.SetString(ULTIMATE_SHOP_CARD, cards.ultimateCards[Random.Range(0, cards.ultimateCards.Length)].name);
+
+		int randomCard = Random.Range (0, 100);
+		string randomCardName;
+		if (randomCard < 50) {
+			randomCardName = cards.commonCards [Random.Range (0, cards.commonCards.Length)].name;
+		} else if (randomCard < 80) {
+			randomCardName = cards.uncommonCards [Random.Range (0, cards.uncommonCards.Length)].name;
+		} else if (randomCard < 95) {
+			randomCardName = cards.rareCards [Random.Range (0, cards.rareCards.Length)].name;
+		} else {
+			randomCardName = cards.ultimateCards [Random.Range (0, cards.ultimateCards.Length)].name;
+		}
+		PlayerPrefs.SetString (RANDOM_SHOP_CARD, randomCardName);
+	}
+
+	public static Card[] LoadShopCards() {
+		Card[] shopCards = new Card[5];
+
+		shopCards[0] = Resources.Load<Card>("Cards/" + PlayerPrefs.GetString (COMMON_SHOP_CARD));
+		shopCards[1] = Resources.Load<Card>("Cards/" + PlayerPrefs.GetString (UNCOMMON_SHOP_CARD));
+		shopCards[2] = Resources.Load<Card>("Cards/" + PlayerPrefs.GetString (RARE_SHOP_CARD));
+		shopCards[3] = Resources.Load<Card>("Cards/" + PlayerPrefs.GetString (ULTIMATE_SHOP_CARD));
+		shopCards[4] = Resources.Load<Card>("Cards/" + PlayerPrefs.GetString (RANDOM_SHOP_CARD));
+
+		return shopCards;
 	}
 }

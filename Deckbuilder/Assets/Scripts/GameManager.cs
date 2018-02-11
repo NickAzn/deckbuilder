@@ -23,14 +23,10 @@ public class GameManager : MonoBehaviour {
 	public Text endText;				// Set in editor to UI Text to display game over text
 	public GameObject restartButton;	// Set in editor to button with GameManager.Restart()
 
-	public Card[] commonCards;
-	public Card[] uncommonCards;
-	public Card[] rareCards;
-	public Card[] ultimateCards;
-
 	public GameObject rewardScreen;
 	public GameObject rewardCard1;
 	public GameObject rewardCard2;
+	bool gameEnded = false;
 
 	void Start() {
 		// Set player crystal health to the saved value
@@ -68,8 +64,10 @@ public class GameManager : MonoBehaviour {
 
 	//Show the zoom card as the given card
 	public void ShowZoomCard(Card card) {
-		zoomCardStats.CopyStats (card);
-		zoomCard.SetActive (true);
+		if (!gameEnded) {
+			zoomCardStats.CopyStats (card);
+			zoomCard.SetActive (true);
+		}
 	}
 
 	//Allows other scripts to see if it is the player's turn
@@ -83,27 +81,29 @@ public class GameManager : MonoBehaviour {
 			library = new List<Card> ();
 		}
 
+		CardRarityHolder cards = Resources.Load<CardRarityHolder> ("Prefabs/CardRarityList");
+
 		int randomCard1 = Random.Range (0, 100);
 		int randomCard2 = Random.Range (0, 100);
 
 		if (randomCard1 < 50) {
-			rewardCard1.GetComponent<Card> ().CopyStats (commonCards [Random.Range (0, commonCards.Length)]);
+			rewardCard1.GetComponent<Card> ().CopyStats (cards.commonCards [Random.Range (0, cards.commonCards.Length)]);
 		} else if (randomCard1 < 80) {
-			rewardCard1.GetComponent<Card> ().CopyStats (uncommonCards [Random.Range (0, uncommonCards.Length)]);
+			rewardCard1.GetComponent<Card> ().CopyStats (cards.uncommonCards [Random.Range (0, cards.uncommonCards.Length)]);
 		} else if (randomCard1 < 95) {
-			rewardCard1.GetComponent<Card> ().CopyStats (rareCards [Random.Range (0, rareCards.Length)]);
+			rewardCard1.GetComponent<Card> ().CopyStats (cards.rareCards [Random.Range (0, cards.rareCards.Length)]);
 		} else {
-			rewardCard1.GetComponent<Card> ().CopyStats (ultimateCards [Random.Range (0, ultimateCards.Length)]);
+			rewardCard1.GetComponent<Card> ().CopyStats (cards.ultimateCards [Random.Range (0, cards.ultimateCards.Length)]);
 		}
 
 		if (randomCard2 < 50) {
-			rewardCard2.GetComponent<Card> ().CopyStats (commonCards [Random.Range (0, commonCards.Length)]);
+			rewardCard2.GetComponent<Card> ().CopyStats (cards.commonCards [Random.Range (0, cards.commonCards.Length)]);
 		} else if (randomCard2 < 80) {
-			rewardCard2.GetComponent<Card> ().CopyStats (uncommonCards [Random.Range (0, uncommonCards.Length)]);
+			rewardCard2.GetComponent<Card> ().CopyStats (cards.uncommonCards [Random.Range (0, cards.uncommonCards.Length)]);
 		} else if (randomCard2 < 95) {
-			rewardCard2.GetComponent<Card> ().CopyStats (rareCards [Random.Range (0, rareCards.Length)]);
+			rewardCard2.GetComponent<Card> ().CopyStats (cards.rareCards [Random.Range (0, cards.rareCards.Length)]);
 		} else {
-			rewardCard2.GetComponent<Card> ().CopyStats (ultimateCards [Random.Range (0, ultimateCards.Length)]);
+			rewardCard2.GetComponent<Card> ().CopyStats (cards.ultimateCards [Random.Range (0, cards.ultimateCards.Length)]);
 		}
 
 		library.Add(rewardCard1.GetComponent<Card>().baseCard);
@@ -112,6 +112,8 @@ public class GameManager : MonoBehaviour {
 		SaveLoad.SavePlayerLibrary(library);
 
 		rewardScreen.SetActive (true);
+		gameEnded = true;
+		HideZoomCard ();
 	}
 
 	//Checks if either side has all crystals destroyed
@@ -129,6 +131,7 @@ public class GameManager : MonoBehaviour {
 			SaveLoad.ResetPlayerLibrary ();
 			endText.text = "Defeat";
 			restartButton.SetActive (true);
+			gameEnded = true;
 			Time.timeScale = 0.0f;
 		}
 
