@@ -47,15 +47,19 @@ public class EnemyAI : MonoBehaviour {
 
 		actionCounter = 0;
 		if (turnCounter < midCardTurns) {
-			cardCount++;
+			DrawCards (1);
 		} else {
-			cardCount += 2;
-		}
-		if (cardCount > 5) {
-			cardCount = 5;
+			DrawCards (2);
 		}
 
 		StartCoroutine (DecideAction ());
+	}
+
+	public void DrawCards(int amount) {
+		cardCount += amount;
+		if (cardCount > 5) {
+			cardCount = 5;
+		}
 	}
 
     // Summons a unit card at spot
@@ -180,10 +184,7 @@ public class EnemyAI : MonoBehaviour {
 				CastSpell (gm.playerSpots [castSpot], offensiveSpells [spellCard]);
 				yield return ShowCard (offensiveSpells [spellCard], 1.5f);
 				if (offensiveSpells [spellCard].spellCardDraw > 0) {
-					cardCount += offensiveSpells [spellCard].spellCardDraw;
-					if (cardCount > 5) {
-						cardCount = 5;
-					}
+					DrawCards(offensiveSpells [spellCard].spellCardDraw);
 				}
 
 				cardCount--;

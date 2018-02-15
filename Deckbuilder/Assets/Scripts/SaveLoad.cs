@@ -18,6 +18,11 @@ public static class SaveLoad {
 	static string ULTIMATE_SHOP_CARD = "ShopCard4";
 	static string RANDOM_SHOP_CARD = "ShopCard5";
 
+	static string ENCOUNTERS = "Encounters";
+	static string CURRENT_ENCOUNTER = "CurrentEncounter";
+	static string SHOP_ENCOUNTER = "ShopEncounter";
+	static string STAGE_LEVEL = "Stage";
+
 
 	//Saves the health of player crystals
 	public static void SaveCrystalHealth(int crystal1, int crystal2, int crystal3) {
@@ -156,5 +161,46 @@ public static class SaveLoad {
 		shopCards[4] = Resources.Load<Card>("Cards/" + PlayerPrefs.GetString (RANDOM_SHOP_CARD));
 
 		return shopCards;
+	}
+
+	public static void RemoveShopCard(int shopCard) {
+		if (shopCard == 0) {
+			PlayerPrefs.DeleteKey (COMMON_SHOP_CARD);
+		} else if (shopCard == 1) {
+			PlayerPrefs.DeleteKey (UNCOMMON_SHOP_CARD);
+		} else if (shopCard == 2) {
+			PlayerPrefs.DeleteKey (RARE_SHOP_CARD);
+		} else if (shopCard == 3) {
+			PlayerPrefs.DeleteKey (ULTIMATE_SHOP_CARD);
+		} else {
+			PlayerPrefs.DeleteKey (RANDOM_SHOP_CARD);
+		}
+	}
+
+	public static void SaveStageLoadout(int stage, int encounters, int shopEncounter) {
+		PlayerPrefs.SetInt (STAGE_LEVEL, stage);
+		PlayerPrefs.SetInt (ENCOUNTERS, encounters);
+		PlayerPrefs.SetInt (SHOP_ENCOUNTER, shopEncounter);
+	}
+
+	public static int[] LoadStage() {
+		int[] stageLoadout = new int[4];
+		stageLoadout[0] = PlayerPrefs.GetInt (STAGE_LEVEL, -1);
+		if (stageLoadout [0] == -1) {
+			return null;
+		}
+		stageLoadout [1] = PlayerPrefs.GetInt (ENCOUNTERS);
+		stageLoadout [2] = PlayerPrefs.GetInt (SHOP_ENCOUNTER);
+		stageLoadout [3] = PlayerPrefs.GetInt (CURRENT_ENCOUNTER);
+		return stageLoadout;
+	}
+
+	public static void ResetStage() {
+		PlayerPrefs.SetInt (STAGE_LEVEL, -1);
+		SaveCurrentEncounter (0);
+	}
+
+	public static void SaveCurrentEncounter(int encounter) {
+		PlayerPrefs.SetInt (CURRENT_ENCOUNTER, encounter);
 	}
 }

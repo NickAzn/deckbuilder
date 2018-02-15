@@ -246,6 +246,6 @@ public class DeckBuilder : MonoBehaviour {
 	}
 
 	public void ExitToGame() {
-		SceneManager.LoadScene ("GameBoard");
+		SceneManager.LoadScene ("StageMap");
 	}
 }

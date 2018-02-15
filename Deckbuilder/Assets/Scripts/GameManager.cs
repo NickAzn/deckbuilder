@@ -45,16 +45,10 @@ public class GameManager : MonoBehaviour {
 		rewardScreen.SetActive (false);
 	}
 
-	//Reload the scene
-	public void Restart() {
+	//loads a new scene
+	public void LoadScene(string name) {
 		Time.timeScale = 1.0f;
-		SceneManager.LoadScene ("GameBoard");
-	}
-
-	//Loads the deckbuilder
-	public void LoadDeckBuilder() {
-		Time.timeScale = 1.0f;
-		SceneManager.LoadScene ("DeckBuilder");
+		SceneManager.LoadScene (name);
 	}
 
 	//Hide the zoom card

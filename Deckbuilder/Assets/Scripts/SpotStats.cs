@@ -263,6 +263,10 @@ public class SpotStats : MonoBehaviour {
 			}
 				
 			player.DiscardCard (origCard);
+		} else {
+			if (deathDraw > 0) {
+				gm.enemy.DrawCards (deathDraw);
+			}
 		}
 		enchantment.RemoveCard ();
 		UpdateUI ();

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class Shop : MonoBehaviour {
 
@@ -31,7 +32,7 @@ public class Shop : MonoBehaviour {
 	public CardHolder randomCard;
 
 	void Start() {
-		SaveLoad.GenerateNewShop ();
+		//SaveLoad.GenerateNewShop ();
 		tokens = SaveLoad.LoadPlayerTokens ();
 		library = SaveLoad.LoadPlayerLibrary ();
 		sellButton.SetActive (false);
@@ -125,17 +126,40 @@ public class Shop : MonoBehaviour {
 
 	void RefreshCards() {
 		Card[] shopCards = SaveLoad.LoadShopCards ();
-		commonCard.origCard = shopCards [0];
-		uncommonCard.origCard = shopCards [1];
-		rareCard.origCard = shopCards [2];
-		ultimateCard.origCard = shopCards [3];
-		randomCard.origCard = shopCards [4];
+		if (shopCards [0] != null) {
+			commonCard.origCard = shopCards [0];
+			commonCard.UpdateUI ();
+		} else {
+			commonCard.gameObject.SetActive (false);
+		}
 
-		commonCard.UpdateUI ();
-		uncommonCard.UpdateUI ();
-		rareCard.UpdateUI ();
-		ultimateCard.UpdateUI ();
-		randomCard.UpdateUI ();
+		if (shopCards [1] != null) {
+			uncommonCard.origCard = shopCards [1];
+			uncommonCard.UpdateUI ();
+		} else {
+			uncommonCard.gameObject.SetActive (false);
+		}
+
+		if (shopCards [2] != null) {
+			rareCard.origCard = shopCards [2];
+			rareCard.UpdateUI ();
+		} else {
+			rareCard.gameObject.SetActive (false);
+		}
+
+		if (shopCards [3] != null) {
+			ultimateCard.origCard = shopCards [3];
+			ultimateCard.UpdateUI ();
+		} else {
+			ultimateCard.gameObject.SetActive (false);
+		}
+
+		if (shopCards [4] != null) {
+			randomCard.origCard = shopCards [4];
+			randomCard.UpdateUI ();
+		} else {
+			randomCard.gameObject.SetActive (false);
+		}
 	}
 
 	void RefreshTokens() {
@@ -212,6 +236,18 @@ public class Shop : MonoBehaviour {
 			tokens -= selCardPrice;
 			library.Add (selCardHolder.origCard);
 			selCardHolder.gameObject.SetActive (false);
+			if (selCardPrice == 10) {
+				SaveLoad.RemoveShopCard (0);
+			} else if (selCardPrice == 15) {
+				SaveLoad.RemoveShopCard (1);
+			} else if (selCardPrice == 25) {
+				SaveLoad.RemoveShopCard (2);
+			} else if (selCardPrice == 50) {
+				SaveLoad.RemoveShopCard (3);
+			} else {
+				SaveLoad.RemoveShopCard (4);
+			}
+
 			SaveLoad.SavePlayerTokens (tokens);
 			SaveLoad.SavePlayerLibrary (library);
 			RefreshTokens ();
@@ -244,5 +280,9 @@ public class Shop : MonoBehaviour {
 			crystalRepairButtons [crystal].GetComponent<Image> ().sprite = Resources.Load <Sprite>("Textures/CrystalRepairIcon");
 			crystalRepairButtons [crystal].GetComponentInChildren<Text> ().text = "-5";
 		}
+	}
+		
+	public void ExitToGame() {
+		SceneManager.LoadScene ("StageMap");
 	}
 }
