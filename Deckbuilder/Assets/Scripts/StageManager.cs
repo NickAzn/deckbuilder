@@ -14,6 +14,8 @@ public class StageManager : MonoBehaviour {
 		int[] stageLoadout = SaveLoad.LoadStage ();
 		if (stageLoadout == null) {
 			GenerateStage (0);
+		} else if (stageLoadout [3] == stageLoadout [1]) {
+			GenerateStage (stageLoadout [0] + 1);
 		} else {
 			UpdateStageUI ();
 		}
@@ -34,11 +36,15 @@ public class StageManager : MonoBehaviour {
 		if (stage == 0) {
 			encounterCount = Random.Range (5, 8);
 			shopEncounter = Random.Range (3, encounterCount - 1);
+			SaveLoad.SaveCurrentEncounter (1);
+		} else if (stage == 1) {
+			encounterCount = Random.Range (7, 11);
+			shopEncounter = Random.Range (5, encounterCount - 1);
+			SaveLoad.SaveCurrentEncounter (0);
 		} else {
 			LoadScene ("MainMenu");
 		}
 		SaveLoad.SaveStageLoadout (stage, encounterCount, shopEncounter);
-		SaveLoad.SaveCurrentEncounter (1);
 		SaveLoad.GenerateNewShop ();
 
 		UpdateStageUI ();

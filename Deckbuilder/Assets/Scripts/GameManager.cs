@@ -9,9 +9,11 @@ public class GameManager : MonoBehaviour {
 	public SpotStats[] enemySpots;		// Set in editor, all enemy spots (6)
 	public Crystal[] playerCrystals;	// Set in editor, all player crystals (3)
 	public Crystal[] enemyCrystals;		// Set in editor, all enemy crystals (3)
+	public GameObject[] enemyAIs;		// Set in editor, all enemies for different stages.
+	public GameObject[] bossEnemyAIs;	// Set in editor, all enemy bosses for different stages
 
 	public Player player;		// Set in editor to the object with Player script
-	public EnemyAI enemy;		// Set in editor to the object running EnemyAI script
+	public EnemyAI enemy;		// Object running EnemyAI script
 
 	public Card selectedCard;
 	public GameObject zoomCard;		// Set in editor to a large Card for readability purposes
@@ -38,8 +40,33 @@ public class GameManager : MonoBehaviour {
 		// Hide the zoomCard
 		zoomCardStats = zoomCard.GetComponent<Card> ();
 		HideZoomCard ();
+
+		int[] stageLoadout = SaveLoad.LoadStage ();
+		if (stageLoadout != null) {
+			if (stageLoadout [3] == stageLoadout [1]) {
+				enemy = Instantiate (bossEnemyAIs [stageLoadout [0]]).GetComponent<EnemyAI> ();
+			} else {
+				enemy = Instantiate (enemyAIs [stageLoadout [0]]).GetComponent<EnemyAI> ();
+			}
+			if (stageLoadout [0] == 0) {
+				enemyCrystals [0].SetHealth (6);
+				enemyCrystals [1].SetHealth (6);
+				enemyCrystals [2].SetHealth (6);
+			} else if (stageLoadout [0] == 1) {
+				enemyCrystals [0].SetHealth (7);
+				enemyCrystals [1].SetHealth (10);
+				enemyCrystals [2].SetHealth (7);
+			}
+		} else {
+			enemy = Instantiate (enemyAIs [0]).GetComponent<EnemyAI> ();
+			enemyCrystals [0].SetHealth (6);
+			enemyCrystals [1].SetHealth (6);
+			enemyCrystals [2].SetHealth (6);
+		}
 		// Sets enemy AI aggro to a random value to determine how aggressive the AI will play
 		enemy.aggroMeter = Random.Range (0, 4);
+
+
 		// Hides the restart button
 		restartButton.SetActive (false);
 		rewardScreen.SetActive (false);
@@ -123,6 +150,7 @@ public class GameManager : MonoBehaviour {
 			SaveLoad.ResetCrystalHealth ();
 			SaveLoad.ResetPlayerDeck ();
 			SaveLoad.ResetPlayerLibrary ();
+			SaveLoad.ResetStage ();
 			endText.text = "Defeat";
 			restartButton.SetActive (true);
 			gameEnded = true;
