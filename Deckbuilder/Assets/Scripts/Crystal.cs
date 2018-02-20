@@ -11,8 +11,11 @@ public class Crystal : MonoBehaviour {
 	public Sprite[] healthStates;
 	SpriteRenderer sr;
 
-	void Start() {
+	void Awake() {
 		sr = GetComponent<SpriteRenderer> ();
+	}
+
+	void Start() {
 		UpdateUI ();
 
 	}
@@ -49,6 +52,7 @@ public class Crystal : MonoBehaviour {
 	// Sets the amount of health the crystal has
 	public void SetHealth(int amount) {
 		health = amount;
+		UpdateUI ();
 	}
 
 	// Get the amount of health the crystal has

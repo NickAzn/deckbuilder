@@ -37,6 +37,7 @@ public class EnemyAI : MonoBehaviour {
 
 	//Summons a unit at the start of the game, but does not attack with it
 	void Start() {
+		gm = GameObject.Find ("GameManager").GetComponent<GameManager> ();
 		int summonSpot = SelectRandomOpenSpot ();
 		int summonCard = Random.Range (0, earlyUnits.Length);
 		SummonUnit (gm.enemySpots [summonSpot], earlyUnits [summonCard]);
