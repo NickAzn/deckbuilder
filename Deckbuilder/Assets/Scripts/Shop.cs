@@ -55,6 +55,11 @@ public class Shop : MonoBehaviour {
 				Destroy (dc);
 			}
 
+			int rowCount = 6;
+			if (Camera.main.aspect < 1.7) {
+				rowCount = 5;
+			}
+
 			// Creates UI for all new cards, and expands the library section if needed
 			libraryCards = new List<GameObject> ();
 			for (int i = 0; i < library.Count; i++) {
@@ -69,16 +74,16 @@ public class Shop : MonoBehaviour {
 				dc.transform.SetParent (libraryUI);
 				dc.GetComponent<RectTransform> ().anchorMax = new Vector2 (0f, 1f);
 				dc.GetComponent<RectTransform> ().anchorMin = new Vector2 (0f, 1f);
-				dc.GetComponent<RectTransform> ().anchoredPosition = new Vector3 (80f + (150 * ((libraryCards.Count - 1) % 6)), -80f - (150f * ((libraryCards.Count - 1)/ 6)), 0f);
+				dc.GetComponent<RectTransform> ().anchoredPosition = new Vector3 (80f + (150 * ((libraryCards.Count - 1) % rowCount)), -80f - (150f * ((libraryCards.Count - 1)/ rowCount)), 0f);
 				dc.transform.localScale = new Vector3 (2f, 2f, 2f);
 				int cardCount = CardCounter (library [i].name, library);
 				cd.cardCount.text = cardCount.ToString () + "x";
 				i += (cardCount - 1);
 			}
 
-			if (libraryCards.Count > 6) {
-				libraryUI.GetComponent<RectTransform> ().sizeDelta = new Vector2 (0f, (180f * (libraryCards.Count / 6)) - 80f);
-				libraryUI.GetComponent<RectTransform> ().anchoredPosition = new Vector2 (0f, -(90f * (libraryCards.Count / 6)) + 40f);
+			if (libraryCards.Count > rowCount) {
+				libraryUI.GetComponent<RectTransform> ().sizeDelta = new Vector2 (0f, (180f * (libraryCards.Count / rowCount)) - 80f);
+				libraryUI.GetComponent<RectTransform> ().anchoredPosition = new Vector2 (0f, -(90f * (libraryCards.Count / rowCount)) + 40f);
 			} else {
 				libraryUI.GetComponent<RectTransform> ().sizeDelta = new Vector2 (0f, 0f);
 				libraryUI.GetComponent<RectTransform> ().anchoredPosition = new Vector2 (0f, 0f);

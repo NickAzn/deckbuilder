@@ -82,8 +82,12 @@ public class DeckBuilder : MonoBehaviour {
 
 			}
 			if (deckCards.Count > 7) {
-				deckUI.GetComponent<RectTransform> ().sizeDelta = new Vector2 ((150f * (deckCards.Count - 7)) - 80f, 0f);
-				deckUI.GetComponent<RectTransform> ().anchoredPosition = new Vector2 ((75f * (deckCards.Count - 7)) - 40f, 0f);
+				float sizeScale = 1.0f;
+				if (Camera.main.aspect < 1.7) {
+					sizeScale = 1.1f;
+				}
+				deckUI.GetComponent<RectTransform> ().sizeDelta = new Vector2 ((150f * (deckCards.Count - 7) * sizeScale) - 80f, 0f);
+				deckUI.GetComponent<RectTransform> ().anchoredPosition = new Vector2 ((75f * (deckCards.Count - 7) * sizeScale) - 40f, 0f);
 			} else {
 				deckUI.GetComponent<RectTransform> ().sizeDelta = new Vector2 (0f, 0f);
 				deckUI.GetComponent<RectTransform> ().anchoredPosition = new Vector2 (0f, 0f);
@@ -103,6 +107,11 @@ public class DeckBuilder : MonoBehaviour {
 				Destroy (dc);
 			}
 
+			int rowCount = 6;
+			if (Camera.main.aspect < 1.7) {
+				rowCount = 5;
+			}
+
 			// Creates UI for all new cards, and expands the library section if needed
 			libraryCards = new List<GameObject> ();
 			for (int i = 0; i < library.Count; i++) {
@@ -117,16 +126,16 @@ public class DeckBuilder : MonoBehaviour {
 				dc.transform.SetParent (libraryUI);
 				dc.GetComponent<RectTransform> ().anchorMax = new Vector2 (0f, 1f);
 				dc.GetComponent<RectTransform> ().anchorMin = new Vector2 (0f, 1f);
-				dc.GetComponent<RectTransform> ().anchoredPosition = new Vector3 (80f + (150 * ((libraryCards.Count - 1) % 6)), -80f - (150f * ((libraryCards.Count - 1)/ 6)), 0f);
+				dc.GetComponent<RectTransform> ().anchoredPosition = new Vector3 (80f + (150 * ((libraryCards.Count - 1) % rowCount)), -80f - (150f * ((libraryCards.Count - 1)/ rowCount)), 0f);
 				dc.transform.localScale = new Vector3 (2f, 2f, 2f);
 				int cardCount = CardCounter (library [i].name, library);
 				cd.cardCount.text = cardCount.ToString () + "x";
 				i += (cardCount - 1);
 			}
 
-			if (libraryCards.Count > 12) {
-				libraryUI.GetComponent<RectTransform> ().sizeDelta = new Vector2 (0f, (150f * ((libraryCards.Count / 6) - 1)) - 80f);
-				libraryUI.GetComponent<RectTransform> ().anchoredPosition = new Vector2 (0f, -(75f * ((libraryCards.Count / 6) - 1)) + 40f);
+			if (libraryCards.Count > (rowCount * 2)) {
+				libraryUI.GetComponent<RectTransform> ().sizeDelta = new Vector2 (0f, (150f * ((libraryCards.Count / rowCount) - 1)) - 80f);
+				libraryUI.GetComponent<RectTransform> ().anchoredPosition = new Vector2 (0f, -(75f * ((libraryCards.Count / rowCount) - 1)) + 40f);
 			} else {
 				libraryUI.GetComponent<RectTransform> ().sizeDelta = new Vector2 (0f, 0f);
 				libraryUI.GetComponent<RectTransform> ().anchoredPosition = new Vector2 (0f, 0f);
