@@ -62,10 +62,9 @@ MonoBehaviour:
   attack: -1
   health: -1
   cardName: Vampiric Aura
-  description: 'Enchant target unit you control. At the start of your turn, deal 1
-    damage to enemy unit in front.
-
-    The enchanted unit gains health equal to damage dealt.'
+  description: Enchant target unit you control. At the start of your turn, the enemy
+    in front of enchanted unit takes 1 damage. The enchanted unit gains health equal
+    to damage dealt.
   nameUI: {fileID: 0}
   descUI: {fileID: 0}
   atkUI: {fileID: 0}
