@@ -56,6 +56,10 @@ public class GameManager : MonoBehaviour {
 				enemyCrystals [0].SetHealth (7);
 				enemyCrystals [1].SetHealth (10);
 				enemyCrystals [2].SetHealth (7);
+			} else if (stageLoadout [0] == 2) {
+				enemyCrystals [0].SetHealth (10);
+				enemyCrystals [1].SetHealth (7);
+				enemyCrystals [2].SetHealth (10);
 			}
 		} else {
 			enemy = Instantiate (enemyAIs [0]).GetComponent<EnemyAI> ();

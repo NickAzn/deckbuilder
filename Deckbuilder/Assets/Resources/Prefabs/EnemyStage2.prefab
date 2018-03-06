@@ -9,30 +9,30 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1085663696166842}
+  m_RootGameObject: {fileID: 1602319324950050}
   m_IsPrefabParent: 1
---- !u!1 &1085663696166842
+--- !u!1 &1602319324950050
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
   m_Component:
-  - component: {fileID: 4548413320588680}
-  - component: {fileID: 114335067274960726}
+  - component: {fileID: 4152926195937112}
+  - component: {fileID: 114412466302220716}
   m_Layer: 0
-  m_Name: BossEnemyStage1
+  m_Name: EnemyStage2
   m_TagString: Untagged
   m_Icon: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4548413320588680
+--- !u!4 &4152926195937112
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1085663696166842}
+  m_GameObject: {fileID: 1602319324950050}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 6, y: -5, z: 1}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -40,12 +40,12 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &114335067274960726
+--- !u!114 &114412466302220716
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1085663696166842}
+  m_GameObject: {fileID: 1602319324950050}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d41cf02786432a14db6878eff6df86f3, type: 3}
@@ -53,6 +53,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   earlyUnits:
   - {fileID: 114934376419062240, guid: 04926b8157c5427439280c0435cb498c, type: 2}
+  - {fileID: 114641982781604766, guid: 3470b8178dcc0fa45be8f9b1578e754d, type: 2}
   midUnits:
   - {fileID: 114934376419062240, guid: 04926b8157c5427439280c0435cb498c, type: 2}
   - {fileID: 114125756811820270, guid: d51196b87351a0d49862e8c0de589e9e, type: 2}
@@ -63,15 +64,16 @@ MonoBehaviour:
   - {fileID: 114594836883534366, guid: 7064b1548deab4949af447145dd3c547, type: 2}
   - {fileID: 114947882670045886, guid: a13d19a28d808bc4e8c771f207b72492, type: 2}
   - {fileID: 114753647423312842, guid: 3ab367ab1ae99544e869c62faf557ead, type: 2}
-  - {fileID: 114224432382225192, guid: e0fb0b2df46b6234ca3551ccef282bd3, type: 2}
+  - {fileID: 114198791212364370, guid: 9156c466274392b4bb02fadea85d08a0, type: 2}
   offensiveSpells:
   - {fileID: 114171572672525456, guid: ed0957d89c8e91b419a2f86f26e291ee, type: 2}
-  - {fileID: 114195245604149660, guid: 29dcfe1641c148e408e318b3f8a08359, type: 2}
   - {fileID: 114165402513207620, guid: 760c0deabd3b52e44b138ecc7cca8ffe, type: 2}
+  - {fileID: 114195245604149660, guid: 29dcfe1641c148e408e318b3f8a08359, type: 2}
   earlyOffensiveSpells:
   - {fileID: 114171572672525456, guid: ed0957d89c8e91b419a2f86f26e291ee, type: 2}
   - {fileID: 114165402513207620, guid: 760c0deabd3b52e44b138ecc7cca8ffe, type: 2}
   enchantSpells:
+  - {fileID: 114067229439835902, guid: 5fdfdc8cc53576241a0acf94a65677ff, type: 2}
   - {fileID: 114846245563046474, guid: 4517bbd8881f3e945b7e0583eb22c434, type: 2}
   earlyEnchantSpells:
   - {fileID: 114067229439835902, guid: 5fdfdc8cc53576241a0acf94a65677ff, type: 2}

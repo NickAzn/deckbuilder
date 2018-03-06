@@ -78,8 +78,8 @@ MonoBehaviour:
   spellAttackReduce: 0
   spellStartDamage: 0
   spellStartLifeSteal: 0
-  spellRowHit: 2
-  spellCollumnHit: 2
+  spellRowHit: 1
+  spellCollumnHit: 1
   unitRelentless: 0
   unitDeathDraw: 0
   unitManaFont: 0

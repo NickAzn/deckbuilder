@@ -9,7 +9,9 @@ public class EnemyAI : MonoBehaviour {
 	public Card[] midUnits;
 	public Card[] lateUnits;
 	public Card[] offensiveSpells;
+	public Card[] earlyOffensiveSpells;
 	public Card[] enchantSpells;
+	public Card[] earlyEnchantSpells;
 	public GameManager gm;
 	public int aggroMeter;
 	public int earlyCardTurns;
@@ -181,7 +183,12 @@ public class EnemyAI : MonoBehaviour {
 			List<int> possibleSpells = OffensiveSpell ();
 			if (possibleSpells.Count > 0) {
 				int castSpot = possibleSpells [Random.Range (0, possibleSpells.Count)];
-				int spellCard = Random.Range (0, offensiveSpells.Length);
+				int spellCard = 0;
+				if (turnCounter < midCardTurns) {
+					spellCard = Random.Range (0, earlyOffensiveSpells.Length);
+				} else {
+					Random.Range (0, offensiveSpells.Length);
+				}
 				CastSpell (gm.playerSpots [castSpot], offensiveSpells [spellCard]);
 				yield return ShowCard (offensiveSpells [spellCard], 1.5f);
 				if (offensiveSpells [spellCard].spellCardDraw > 0) {
@@ -242,7 +249,12 @@ public class EnemyAI : MonoBehaviour {
 			List<int> possibleSpells = Enchant ();
 			if (possibleSpells.Count > 0) {
 				int castSpot = possibleSpells [Random.Range (0, possibleSpells.Count)];
-				int spellCard = Random.Range (0, enchantSpells.Length);
+				int spellCard = 0;
+				if (turnCounter < midCardTurns) {
+					spellCard = Random.Range (0, earlyEnchantSpells.Length);
+				} else {
+					spellCard = Random.Range (0, enchantSpells.Length);
+				}
 				CastSpell (gm.enemySpots [castSpot], enchantSpells [spellCard]);
 				yield return ShowCard (enchantSpells [spellCard], 1.5f);
 				cardCount--;

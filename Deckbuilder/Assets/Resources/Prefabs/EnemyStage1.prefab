@@ -67,7 +67,12 @@ MonoBehaviour:
   offensiveSpells:
   - {fileID: 114171572672525456, guid: ed0957d89c8e91b419a2f86f26e291ee, type: 2}
   - {fileID: 114165402513207620, guid: 760c0deabd3b52e44b138ecc7cca8ffe, type: 2}
+  earlyOffensiveSpells:
+  - {fileID: 114171572672525456, guid: ed0957d89c8e91b419a2f86f26e291ee, type: 2}
+  - {fileID: 114165402513207620, guid: 760c0deabd3b52e44b138ecc7cca8ffe, type: 2}
   enchantSpells:
+  - {fileID: 114067229439835902, guid: 5fdfdc8cc53576241a0acf94a65677ff, type: 2}
+  earlyEnchantSpells:
   - {fileID: 114067229439835902, guid: 5fdfdc8cc53576241a0acf94a65677ff, type: 2}
   gm: {fileID: 0}
   aggroMeter: 0

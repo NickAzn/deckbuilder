@@ -41,6 +41,10 @@ public class StageManager : MonoBehaviour {
 			encounterCount = Random.Range (7, 11);
 			shopEncounter = Random.Range (5, encounterCount - 1);
 			SaveLoad.SaveCurrentEncounter (0);
+		} else if (stage == 2) {
+			encounterCount = Random.Range (9, 13);
+			shopEncounter = Random.Range (7, encounterCount - 1);
+			SaveLoad.SaveCurrentEncounter (0);
 		} else {
 			LoadScene ("MainMenu");
 		}

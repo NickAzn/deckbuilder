@@ -4087,9 +4087,11 @@ MonoBehaviour:
   enemyAIs:
   - {fileID: 1441385925576906, guid: 9f0777b6244d552409449f7298427099, type: 2}
   - {fileID: 1411822397291070, guid: bc8f0c3754ff8f6499430c9c373b4adf, type: 2}
+  - {fileID: 1602319324950050, guid: bad6cc565437c0445ad439c8989b2498, type: 2}
   bossEnemyAIs:
   - {fileID: 1975980572770012, guid: c5575521ff099c64591ba521143cab5d, type: 2}
   - {fileID: 1085663696166842, guid: 834a0f141e49419489b217f64b2f3583, type: 2}
+  - {fileID: 1856987753429466, guid: 0e60e66328dbdea45b2f85b2b6962a11, type: 2}
   player: {fileID: 356550592}
   enemy: {fileID: 0}
   selectedCard: {fileID: 0}
