@@ -62,7 +62,9 @@ MonoBehaviour:
   attack: 1
   health: -1
   cardName: Mark of Battle
-  description: Target unit you control gains 1 attack, and relentless
+  description: 'Enchant target unit you control.
+
+    Enchanted unit gains 1 attack, and *Relentless.'
   nameUI: {fileID: 0}
   descUI: {fileID: 0}
   atkUI: {fileID: 0}
@@ -73,5 +75,17 @@ MonoBehaviour:
   spellEnchant: 1
   spellSacrifice: 0
   spellCardDraw: 0
+  spellAttackReduce: 0
+  spellStartDamage: 0
+  spellStartLifeSteal: 0
+  spellRowHit: 0
+  spellColumnHit: 0
+  spellRowColumnHit: 0
   unitRelentless: 1
   unitDeathDraw: 0
+  unitManaFont: 0
+  unitFury: 0
+  manaBoost: 0
+  armor: 0
+  magicArmor: 0
+  crystalPact: 0

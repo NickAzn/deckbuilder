@@ -59,6 +59,7 @@ MonoBehaviour:
   - {fileID: 114618712277928762, guid: f74e131a86610804f9ae90eb75bdfec1, type: 2}
   - {fileID: 114165402513207620, guid: 760c0deabd3b52e44b138ecc7cca8ffe, type: 2}
   - {fileID: 114800451218087598, guid: f02d53ec885e3b54b83184e2690b0964, type: 2}
+  - {fileID: 114946441457141214, guid: 6e6400995e255e94c8e9c309189b725b, type: 2}
   uncommonCards:
   - {fileID: 114171572672525456, guid: ed0957d89c8e91b419a2f86f26e291ee, type: 2}
   - {fileID: 114125756811820270, guid: d51196b87351a0d49862e8c0de589e9e, type: 2}
@@ -68,6 +69,7 @@ MonoBehaviour:
   - {fileID: 114947882670045886, guid: a13d19a28d808bc4e8c771f207b72492, type: 2}
   - {fileID: 114067229439835902, guid: 5fdfdc8cc53576241a0acf94a65677ff, type: 2}
   - {fileID: 114195245604149660, guid: 29dcfe1641c148e408e318b3f8a08359, type: 2}
+  - {fileID: 114393184949094100, guid: e56ef37f44354374680400e4bbf85900, type: 2}
   rareCards:
   - {fileID: 114224432382225192, guid: e0fb0b2df46b6234ca3551ccef282bd3, type: 2}
   - {fileID: 114846245563046474, guid: 4517bbd8881f3e945b7e0583eb22c434, type: 2}

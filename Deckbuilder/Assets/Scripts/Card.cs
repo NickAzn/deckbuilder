@@ -43,7 +43,8 @@ public class Card : MonoBehaviour {
 	public int spellStartDamage = 0;	// When > 0, deal damage to enemy unit in same row
 	public bool spellStartLifeSteal = false;	// When true, damage dealt at start of turn from spellStartDamage increases health.
 	public int spellRowHit = 0;			// When > 0, deal damage to enemy units in same row
-	public int spellCollumnHit = 0;		// When > 0, deal damage to enemy units in same collumn
+	public int spellColumnHit = 0;		// When > 0, deal damage to enemy units in same column
+	public int spellRowColumnHit = 0;	// When > 0, deal damage to units in same row and column
 
 	public bool unitRelentless = false;	// When true, unit will continue attacking past first target, if it has extra attack
 	public int unitDeathDraw = 0;		// When > 0, player will draw that amount of cards on unit death
@@ -108,7 +109,8 @@ public class Card : MonoBehaviour {
 		spellStartDamage = otherCard.spellStartDamage;
 		spellStartLifeSteal = otherCard.spellStartLifeSteal;
 		spellRowHit = otherCard.spellRowHit;
-		spellCollumnHit = otherCard.spellCollumnHit;
+		spellColumnHit = otherCard.spellColumnHit;
+		spellRowColumnHit = otherCard.spellRowColumnHit;
 
 		unitRelentless = otherCard.unitRelentless;
 		unitDeathDraw = otherCard.unitDeathDraw;

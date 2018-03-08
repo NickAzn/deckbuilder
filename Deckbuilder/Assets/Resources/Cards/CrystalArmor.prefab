@@ -62,9 +62,9 @@ MonoBehaviour:
   attack: -1
   health: -1
   cardName: Crystal Armor
-  description: 'Target unit you control gains 1 Armor
+  description: 'Target unit you control gains 1 *Armor
 
-    Crystal Pact* 1 (Your crystal behind target unit takes 1 damage)'
+    *Crystal Pact 1 (Your crystal behind target unit takes 1 damage)'
   nameUI: {fileID: 0}
   descUI: {fileID: 0}
   atkUI: {fileID: 0}
@@ -79,7 +79,8 @@ MonoBehaviour:
   spellStartDamage: 0
   spellStartLifeSteal: 0
   spellRowHit: 0
-  spellCollumnHit: 0
+  spellColumnHit: 0
+  spellRowColumnHit: 0
   unitRelentless: 0
   unitDeathDraw: 0
   unitManaFont: 0

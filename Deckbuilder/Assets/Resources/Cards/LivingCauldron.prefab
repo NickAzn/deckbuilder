@@ -62,7 +62,7 @@ MonoBehaviour:
   attack: 1
   health: 4
   cardName: Living Cauldron
-  description: 'Armor* 1
+  description: '*Armor 1
 
     When this unit is destroyed, draw 2 cards.'
   nameUI: {fileID: 0}
@@ -79,7 +79,8 @@ MonoBehaviour:
   spellStartDamage: 0
   spellStartLifeSteal: 0
   spellRowHit: 0
-  spellCollumnHit: 0
+  spellColumnHit: 0
+  spellRowColumnHit: 0
   unitRelentless: 0
   unitDeathDraw: 2
   unitManaFont: 0

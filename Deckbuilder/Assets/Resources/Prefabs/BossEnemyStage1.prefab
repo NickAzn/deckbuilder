@@ -54,7 +54,6 @@ MonoBehaviour:
   earlyUnits:
   - {fileID: 114934376419062240, guid: 04926b8157c5427439280c0435cb498c, type: 2}
   midUnits:
-  - {fileID: 114934376419062240, guid: 04926b8157c5427439280c0435cb498c, type: 2}
   - {fileID: 114125756811820270, guid: d51196b87351a0d49862e8c0de589e9e, type: 2}
   - {fileID: 114800451218087598, guid: f02d53ec885e3b54b83184e2690b0964, type: 2}
   - {fileID: 114618712277928762, guid: f74e131a86610804f9ae90eb75bdfec1, type: 2}
@@ -68,6 +67,7 @@ MonoBehaviour:
   - {fileID: 114171572672525456, guid: ed0957d89c8e91b419a2f86f26e291ee, type: 2}
   - {fileID: 114195245604149660, guid: 29dcfe1641c148e408e318b3f8a08359, type: 2}
   - {fileID: 114165402513207620, guid: 760c0deabd3b52e44b138ecc7cca8ffe, type: 2}
+  - {fileID: 114305136590519174, guid: e3bc4b1083919f245867c44d03792fbf, type: 2}
   earlyOffensiveSpells:
   - {fileID: 114171572672525456, guid: ed0957d89c8e91b419a2f86f26e291ee, type: 2}
   - {fileID: 114165402513207620, guid: 760c0deabd3b52e44b138ecc7cca8ffe, type: 2}

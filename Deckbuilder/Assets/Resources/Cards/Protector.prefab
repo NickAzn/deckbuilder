@@ -62,7 +62,7 @@ MonoBehaviour:
   attack: 1
   health: 2
   cardName: Protector
-  description: Armor* 2
+  description: '*Armor 2'
   nameUI: {fileID: 0}
   descUI: {fileID: 0}
   atkUI: {fileID: 0}
@@ -74,6 +74,11 @@ MonoBehaviour:
   spellSacrifice: 0
   spellCardDraw: 0
   spellAttackReduce: 0
+  spellStartDamage: 0
+  spellStartLifeSteal: 0
+  spellRowHit: 0
+  spellColumnHit: 0
+  spellRowColumnHit: 0
   unitRelentless: 0
   unitDeathDraw: 0
   unitManaFont: 0

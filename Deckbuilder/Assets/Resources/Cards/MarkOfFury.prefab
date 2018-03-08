@@ -62,7 +62,8 @@ MonoBehaviour:
   attack: -1
   health: -1
   cardName: Mark of Fury
-  description: Target unit you control gains Fury 1*, and loses 1 attack
+  description: "Enchant target unit you control. \nEnchanted unit gains *Fury 1, and
+    loses 1 attack."
   nameUI: {fileID: 0}
   descUI: {fileID: 0}
   atkUI: {fileID: 0}
@@ -74,8 +75,16 @@ MonoBehaviour:
   spellSacrifice: 0
   spellCardDraw: 0
   spellAttackReduce: 1
+  spellStartDamage: 0
+  spellStartLifeSteal: 0
+  spellRowHit: 0
+  spellColumnHit: 0
+  spellRowColumnHit: 0
   unitRelentless: 0
   unitDeathDraw: 0
   unitManaFont: 0
   unitFury: 1
   manaBoost: 0
+  armor: 0
+  magicArmor: 0
+  crystalPact: 0

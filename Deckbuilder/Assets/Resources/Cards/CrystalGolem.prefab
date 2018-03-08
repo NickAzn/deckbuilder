@@ -62,11 +62,11 @@ MonoBehaviour:
   attack: 4
   health: 4
   cardName: Crystal Golem
-  description: 'Magic Armor* 1
+  description: '*Magic Armor 1
 
-    Armor* 1
+    *Armor 1
 
-    Crystal Pact* 1'
+    *Crystal Pact 1'
   nameUI: {fileID: 0}
   descUI: {fileID: 0}
   atkUI: {fileID: 0}
@@ -78,6 +78,11 @@ MonoBehaviour:
   spellSacrifice: 0
   spellCardDraw: 0
   spellAttackReduce: 0
+  spellStartDamage: 0
+  spellStartLifeSteal: 0
+  spellRowHit: 0
+  spellColumnHit: 0
+  spellRowColumnHit: 0
   unitRelentless: 0
   unitDeathDraw: 0
   unitManaFont: 0

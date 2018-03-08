@@ -64,7 +64,7 @@ MonoBehaviour:
   cardName: Energy Siphon
   description: 'Deals 1 damage to target enemy unit.
 
-    Draw a card'
+    Draw a card.'
   nameUI: {fileID: 0}
   descUI: {fileID: 0}
   atkUI: {fileID: 0}
@@ -76,6 +76,11 @@ MonoBehaviour:
   spellSacrifice: 0
   spellCardDraw: 1
   spellAttackReduce: 0
+  spellStartDamage: 0
+  spellStartLifeSteal: 0
+  spellRowHit: 0
+  spellColumnHit: 0
+  spellRowColumnHit: 0
   unitRelentless: 0
   unitDeathDraw: 0
   unitManaFont: 0

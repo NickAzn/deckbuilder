@@ -288,8 +288,10 @@ public class GameManager : MonoBehaviour {
 					attackingSpots [i].fury--;
 					i--;
 				}
+			} else {
+				attackingSpots[i].fury = 0;
 			}
-		}
+		} 
 		yield return new WaitForSeconds(0.5f);
 		// Start the new turn after attacking
 		if (startedPlayerTurn) {

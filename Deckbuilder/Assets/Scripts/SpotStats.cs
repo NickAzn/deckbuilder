@@ -133,11 +133,14 @@ public class SpotStats : MonoBehaviour {
 		if (card.spellStartDamage > 0) {
 			TakeDamage (card.spellStartDamage - magicArmor);
 		}
-		if (card.spellCollumnHit > 0) {
-			TakeDamage (card.spellCollumnHit - magicArmor);
+		if (card.spellColumnHit > 0) {
+			TakeDamage (card.spellColumnHit - magicArmor);
 		}
 		if (card.spellRowHit > 0) {
 			TakeDamage (card.spellRowHit - magicArmor);
+		}
+		if (card.spellRowColumnHit > 0) {
+			TakeDamage (card.spellRowColumnHit - magicArmor);
 		}
 
 	}
@@ -161,7 +164,7 @@ public class SpotStats : MonoBehaviour {
 				if (card.spellCardDraw > 0) {
 					player.DrawCard (card.spellCardDraw);	//Draw cards equal to spellCardDraw
 				}
-				if (card.spellCollumnHit > 0) {
+				if (card.spellColumnHit > 0) {
 					foreach (SpotStats spot in gm.enemySpots) {
 						if (collumn == spot.collumn && !spot.Equals (this)) {
 							spot.SpellSecondaryEffect (card);
@@ -171,13 +174,20 @@ public class SpotStats : MonoBehaviour {
 				if (card.spellRowHit > 0) {
 					foreach (SpotStats spot in gm.enemySpots) {
 						if (row == spot.row && !spot.Equals (this)) {
+							spot.SpellSecondaryEffect (card);
+						}
+					}
+				}
+				if (card.spellRowColumnHit > 0) {
+					foreach (SpotStats spot in gm.enemySpots) {
+						if ((row == spot.row && !spot.Equals (this)) || (collumn == spot.collumn && !spot.Equals(this)) ) {
 							spot.SpellSecondaryEffect (card);
 						}
 					}
 				}
 				player.DiscardCard (card);	// Discards the card if the player used it
 			} else {
-				if (card.spellCollumnHit > 0) {
+				if (card.spellColumnHit > 0) {
 					foreach (SpotStats spot in gm.playerSpots) {
 						if (collumn == spot.collumn && !spot.Equals (this)) {
 							spot.SpellSecondaryEffect (card);
@@ -187,6 +197,13 @@ public class SpotStats : MonoBehaviour {
 				if (card.spellRowHit > 0) {
 					foreach (SpotStats spot in gm.playerSpots) {
 						if (row == spot.row && !spot.Equals (this)) {
+							spot.SpellSecondaryEffect (card);
+						}
+					}
+				}
+				if (card.spellRowColumnHit > 0) {
+					foreach (SpotStats spot in gm.playerSpots) {
+						if ((row == spot.row && !spot.Equals (this)) || (collumn == spot.collumn && !spot.Equals(this)) ) {
 							spot.SpellSecondaryEffect (card);
 						}
 					}
