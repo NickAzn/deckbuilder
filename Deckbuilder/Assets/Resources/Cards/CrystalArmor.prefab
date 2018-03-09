@@ -62,9 +62,13 @@ MonoBehaviour:
   attack: -1
   health: -1
   cardName: Crystal Armor
-  description: 'Target unit you control gains 1 *Armor
+  description: '*Crystal Pact 1
 
-    *Crystal Pact 1 (Your crystal behind target unit takes 1 damage)'
+    Enchant target unit you control.
+
+    Enchanted unit gains *Armor 1
+
+'
   nameUI: {fileID: 0}
   descUI: {fileID: 0}
   atkUI: {fileID: 0}
