@@ -362,6 +362,26 @@ public class SpotStats : MonoBehaviour {
 		if (hasUnit) {
 			atkUI.text = damage.ToString ();
 			hpUI.text = health.ToString ();
+
+			//Change color of stats based on original card stats
+			//stat > orig = green
+			//stat < orig = red
+			//stat = orig = white
+			if (health > origCard.health) {
+				hpUI.color = Color.green;
+			} else if (health < origCard.health) {
+				hpUI.color = Color.red;
+			} else {
+				hpUI.color = Color.white;
+			}
+
+			if (damage > origCard.attack) {
+				atkUI.color = Color.green;
+			} else if (damage < origCard.attack) {
+				atkUI.color = Color.red;
+			} else {
+				atkUI.color = Color.white;
+			}
 		} else {
 			atkUI.text = "";
 			hpUI.text = "";

@@ -79,9 +79,11 @@ MonoBehaviour:
   - {fileID: 114067229439835902, guid: 5fdfdc8cc53576241a0acf94a65677ff, type: 2}
   - {fileID: 114846245563046474, guid: 4517bbd8881f3e945b7e0583eb22c434, type: 2}
   - {fileID: 114946441457141214, guid: 6e6400995e255e94c8e9c309189b725b, type: 2}
+  - {fileID: 114367413512793902, guid: 4463a0692067b31409eff771cd80fe7d, type: 2}
   earlyEnchantSpells:
   - {fileID: 114067229439835902, guid: 5fdfdc8cc53576241a0acf94a65677ff, type: 2}
   - {fileID: 114946441457141214, guid: 6e6400995e255e94c8e9c309189b725b, type: 2}
+  - {fileID: 114546677596330512, guid: d92d72a13f4e16a469c82027d6ad7f93, type: 2}
   gm: {fileID: 0}
   aggroMeter: 0
   earlyCardTurns: 2

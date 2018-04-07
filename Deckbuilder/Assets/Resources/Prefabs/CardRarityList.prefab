@@ -76,6 +76,8 @@ MonoBehaviour:
   - {fileID: 114540127464893966, guid: 126c83ee062af7f4f9d8c81d34c56b99, type: 2}
   - {fileID: 114608320322548614, guid: 902a034b643ca73498873ab1bdb305be, type: 2}
   - {fileID: 114198791212364370, guid: 9156c466274392b4bb02fadea85d08a0, type: 2}
+  - {fileID: 114546677596330512, guid: d92d72a13f4e16a469c82027d6ad7f93, type: 2}
   ultimateCards:
   - {fileID: 114463602804174820, guid: bf414acc39b315142bbcd0887d349548, type: 2}
   - {fileID: 114050226050166032, guid: 088a2379a4da5ae43bb17f16c09c9ed9, type: 2}
+  - {fileID: 114367413512793902, guid: 4463a0692067b31409eff771cd80fe7d, type: 2}
