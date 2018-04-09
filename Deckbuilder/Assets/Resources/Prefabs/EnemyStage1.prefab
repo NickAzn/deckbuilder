@@ -64,6 +64,7 @@ MonoBehaviour:
   - {fileID: 114594836883534366, guid: 7064b1548deab4949af447145dd3c547, type: 2}
   - {fileID: 114947882670045886, guid: a13d19a28d808bc4e8c771f207b72492, type: 2}
   - {fileID: 114753647423312842, guid: 3ab367ab1ae99544e869c62faf557ead, type: 2}
+  - {fileID: 114345201483250336, guid: 3b1ab08c13624dd46a047cc8b6ad1fb2, type: 2}
   offensiveSpells:
   - {fileID: 114171572672525456, guid: ed0957d89c8e91b419a2f86f26e291ee, type: 2}
   - {fileID: 114165402513207620, guid: 760c0deabd3b52e44b138ecc7cca8ffe, type: 2}

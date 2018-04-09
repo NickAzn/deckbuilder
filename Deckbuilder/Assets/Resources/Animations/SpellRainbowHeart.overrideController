@@ -1,0 +1,12 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!221 &22100000
+AnimatorOverrideController:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: SpellRainbowHeart
+  m_Controller: {fileID: 9100000, guid: ae40b95eaacbd404785760431ad0504b, type: 2}
+  m_Clips:
+  - m_OriginalClip: {fileID: 7400000, guid: c72278d4d60369747bd426592fb8a8de, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 7ee2004b41eee304c86bcbfe940a1262, type: 2}

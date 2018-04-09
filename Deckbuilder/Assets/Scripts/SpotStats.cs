@@ -158,12 +158,13 @@ public class SpotStats : MonoBehaviour {
 		//Play Spell animation
 		yield return PlaySpellAnimation(card.cardAnimation);
 
+		if (card.spellCardDraw > 0) {
+			player.DrawCard (card.spellCardDraw);	//Draw cards equal to spellCardDraw
+		}
+
 		//If the spell is not an enchant, it is an instant spell
 		if (!card.spellEnchant) {
 			if (playerCast) {
-				if (card.spellCardDraw > 0) {
-					player.DrawCard (card.spellCardDraw);	//Draw cards equal to spellCardDraw
-				}
 				if (card.spellColumnHit > 0) {
 					foreach (SpotStats spot in gm.enemySpots) {
 						if (collumn == spot.collumn && !spot.Equals (this)) {

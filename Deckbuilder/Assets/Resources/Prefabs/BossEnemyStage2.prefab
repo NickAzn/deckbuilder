@@ -58,6 +58,7 @@ MonoBehaviour:
   - {fileID: 114125756811820270, guid: d51196b87351a0d49862e8c0de589e9e, type: 2}
   - {fileID: 114800451218087598, guid: f02d53ec885e3b54b83184e2690b0964, type: 2}
   - {fileID: 114618712277928762, guid: f74e131a86610804f9ae90eb75bdfec1, type: 2}
+  - {fileID: 114345201483250336, guid: 3b1ab08c13624dd46a047cc8b6ad1fb2, type: 2}
   lateUnits:
   - {fileID: 114618712277928762, guid: f74e131a86610804f9ae90eb75bdfec1, type: 2}
   - {fileID: 114594836883534366, guid: 7064b1548deab4949af447145dd3c547, type: 2}
@@ -65,6 +66,7 @@ MonoBehaviour:
   - {fileID: 114753647423312842, guid: 3ab367ab1ae99544e869c62faf557ead, type: 2}
   - {fileID: 114198791212364370, guid: 9156c466274392b4bb02fadea85d08a0, type: 2}
   - {fileID: 114224432382225192, guid: e0fb0b2df46b6234ca3551ccef282bd3, type: 2}
+  - {fileID: 114345201483250336, guid: 3b1ab08c13624dd46a047cc8b6ad1fb2, type: 2}
   offensiveSpells:
   - {fileID: 114171572672525456, guid: ed0957d89c8e91b419a2f86f26e291ee, type: 2}
   - {fileID: 114165402513207620, guid: 760c0deabd3b52e44b138ecc7cca8ffe, type: 2}
