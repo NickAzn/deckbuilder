@@ -52,6 +52,7 @@ public class Card : MonoBehaviour {
 	public int unitFury = 0;			// When > 0, unit attack that amount of additional times
 
 	public int manaBoost = 0;			// When > 0, this card grants that amount of current mana the turn it is used
+	public int maxManaBoost = 0;		// When > 0, this card grants increased max mana
 	public int armor = 0;				// Reduce damage taken from units by armor value
 	public int magicArmor = 0;			// Reduce damage taken from spells by magicArmor value
 	public int crystalPact = 0;			// Card damages crystal in the row it was used by crystalPact value
@@ -118,6 +119,7 @@ public class Card : MonoBehaviour {
 		unitFury = otherCard.unitFury;
 
 		manaBoost = otherCard.manaBoost;
+		maxManaBoost = otherCard.maxManaBoost;
 		armor = otherCard.armor;
 		magicArmor = otherCard.magicArmor;
 		crystalPact = otherCard.crystalPact;
@@ -175,6 +177,37 @@ public class Card : MonoBehaviour {
 					return 1;
 				} else {
 					return SortCardsByName(card1, card2);
+				}
+			}
+		}
+	}
+
+	// Sort cards based on type (unit then spells), if same type, sort alphabetically
+	public static int SortCardsByType(Card card1, Card card2) {
+		if (card1 == null) {
+			if (card2 == null) {
+				return 0;
+			} else {
+				return -1;
+			}
+		} else {
+			if (card2 == null) {
+				return 1;
+			} else {
+				int card1Type = 0;
+				int card2Type = 0;
+
+				if (card1.isSpell)
+					card1Type = 1;
+				if (card2.isSpell)
+					card2Type = 1;
+
+				if (card1Type < card2Type) {
+					return -1;
+				} else if (card1Type > card2Type) {
+					return 1;
+				} else {
+					return SortCardsByCost (card1, card2);
 				}
 			}
 		}

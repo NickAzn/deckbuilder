@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour {
 
 	public Card selectedCard;
 	public GameObject zoomCard;		// Set in editor to a large Card for readability purposes
+	public GameObject[] zoomCardEffects;	// Set in editor to effect tabs on large Card for clarity of '*' stats
 	Card zoomCardStats;
 	public GameObject endTurnButton;	// Set in editor to button with GameManager.EndTurn()
 
@@ -85,12 +86,52 @@ public class GameManager : MonoBehaviour {
 	//Hide the zoom card
 	public void HideZoomCard() {
 		zoomCard.SetActive (false);
+		foreach (GameObject gm in zoomCardEffects) {
+			gm.SetActive (false);
+		}
 	}
 
 	//Show the zoom card as the given card
 	public void ShowZoomCard(Card card) {
 		if (!gameEnded) {
 			zoomCardStats.CopyStats (card);
+			int effectTab = 0;
+			if (zoomCardStats.unitRelentless) {
+				zoomCardEffects [effectTab].SetActive (true);
+				zoomCardEffects [effectTab].GetComponentInChildren<Text> ().text =
+					"Relentless - Excess damage is dealt to the next available target.";
+				effectTab++;
+			}
+			if (zoomCardStats.unitManaFont > 0) {
+				zoomCardEffects [effectTab].SetActive (true);
+				zoomCardEffects [effectTab].GetComponentInChildren<Text> ().text =
+					"Mana Font X- When this unit is in play, increase max mana by X.";
+				effectTab++;
+			}
+			if (zoomCardStats.unitFury > 0) {
+				zoomCardEffects [effectTab].SetActive (true);
+				zoomCardEffects [effectTab].GetComponentInChildren<Text> ().text =
+					"Fury X- This unit attacks X additional times.";
+				effectTab++;
+			}
+			if (zoomCardStats.armor > 0) {
+				zoomCardEffects [effectTab].SetActive (true);
+				zoomCardEffects [effectTab].GetComponentInChildren<Text> ().text =
+					"Armor X- Damage taken from units is reduced by X";
+				effectTab++;
+			}
+			if (zoomCardStats.magicArmor > 0) {
+				zoomCardEffects [effectTab].SetActive (true);
+				zoomCardEffects [effectTab].GetComponentInChildren<Text> ().text =
+					"Magic Armor X- Damage taken from spells is reduced by X";
+				effectTab++;
+			}
+			if (zoomCardStats.crystalPact > 0) {
+				zoomCardEffects [effectTab].SetActive (true);
+				zoomCardEffects [effectTab].GetComponentInChildren<Text> ().text =
+					"Crystal Pact X - Your crystal on the row this card is used on takes X damage.";
+				effectTab++;
+			}
 			zoomCard.SetActive (true);
 		}
 	}

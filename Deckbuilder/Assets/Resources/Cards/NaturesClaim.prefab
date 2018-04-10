@@ -62,7 +62,11 @@ MonoBehaviour:
   attack: -1
   health: -1
   cardName: Nature's Claim
-  description: Sacrifice target unit you control and draw 3 cards.
+  description: 'Sacrifice target unit you control.
+
+    Draw 3 cards.
+
+    Gain 1 max mana.'
   nameUI: {fileID: 0}
   descUI: {fileID: 0}
   atkUI: {fileID: 0}
@@ -84,6 +88,7 @@ MonoBehaviour:
   unitManaFont: 0
   unitFury: 0
   manaBoost: 0
+  maxManaBoost: 1
   armor: 0
   magicArmor: 0
   crystalPact: 0

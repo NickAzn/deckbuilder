@@ -157,9 +157,10 @@ public class SpotStats : MonoBehaviour {
 	IEnumerator DelaySpell(Card card, bool playerCast) {
 		//Play Spell animation
 		yield return PlaySpellAnimation(card.cardAnimation);
-
-		if (card.spellCardDraw > 0) {
-			player.DrawCard (card.spellCardDraw);	//Draw cards equal to spellCardDraw
+		if (playerCast) {
+			if (card.spellCardDraw > 0) {
+				player.DrawCard (card.spellCardDraw);	//Draw cards equal to spellCardDraw
+			}
 		}
 
 		//If the spell is not an enchant, it is an instant spell
