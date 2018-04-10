@@ -96,6 +96,7 @@ public class GameManager : MonoBehaviour {
 		if (!gameEnded) {
 			zoomCardStats.CopyStats (card);
 			int effectTab = 0;
+			int x = 0;
 			if (zoomCardStats.unitRelentless) {
 				zoomCardEffects [effectTab].SetActive (true);
 				zoomCardEffects [effectTab].GetComponentInChildren<Text> ().text =
@@ -103,33 +104,38 @@ public class GameManager : MonoBehaviour {
 				effectTab++;
 			}
 			if (zoomCardStats.unitManaFont > 0) {
+				x = zoomCardStats.unitManaFont;
 				zoomCardEffects [effectTab].SetActive (true);
 				zoomCardEffects [effectTab].GetComponentInChildren<Text> ().text =
-					"Mana Font X- When this unit is in play, increase max mana by X.";
+					"Mana Font " + x + " - When this unit is in play, increase max mana by " + x + ".";
 				effectTab++;
 			}
 			if (zoomCardStats.unitFury > 0) {
+				x = zoomCardStats.unitFury;
 				zoomCardEffects [effectTab].SetActive (true);
 				zoomCardEffects [effectTab].GetComponentInChildren<Text> ().text =
-					"Fury X- This unit attacks X additional times.";
+					"Fury "+x+" - This unit attacks "+x+" additional times.";
 				effectTab++;
 			}
 			if (zoomCardStats.armor > 0) {
+				x = zoomCardStats.armor;
 				zoomCardEffects [effectTab].SetActive (true);
 				zoomCardEffects [effectTab].GetComponentInChildren<Text> ().text =
-					"Armor X- Damage taken from units is reduced by X";
+					"Armor "+x+" - Damage taken from units is reduced by "+x+".";
 				effectTab++;
 			}
 			if (zoomCardStats.magicArmor > 0) {
+				x = zoomCardStats.magicArmor;
 				zoomCardEffects [effectTab].SetActive (true);
 				zoomCardEffects [effectTab].GetComponentInChildren<Text> ().text =
-					"Magic Armor X- Damage taken from spells is reduced by X";
+					"Magic Armor "+x+" - Damage taken from spells is reduced by "+x+".";
 				effectTab++;
 			}
 			if (zoomCardStats.crystalPact > 0) {
+				x = zoomCardStats.crystalPact;
 				zoomCardEffects [effectTab].SetActive (true);
 				zoomCardEffects [effectTab].GetComponentInChildren<Text> ().text =
-					"Crystal Pact X - Your crystal on the row this card is used on takes X damage.";
+					"Crystal Pact "+x+" - Your crystal on the row this card is used on takes "+x+" damage.";
 				effectTab++;
 			}
 			zoomCard.SetActive (true);

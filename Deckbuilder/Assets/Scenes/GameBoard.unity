@@ -185,6 +185,7 @@ MonoBehaviour:
   manaUI: {fileID: 1615002938}
   cardArt: {fileID: 6081342}
   clickColor: {r: 0, g: 0, b: 0, a: 0}
+  hoverColor: {r: 215, g: 215, b: 215, a: 1}
   spellEnchant: 0
   spellSacrifice: 0
   spellCardDraw: 0
@@ -622,7 +623,7 @@ Transform:
   m_GameObject: {fileID: 28638008}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: -1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1520711321}
   m_RootOrder: 2
@@ -815,7 +816,7 @@ Transform:
   m_GameObject: {fileID: 41026967}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 2, y: 1, z: 0}
-  m_LocalScale: {x: -2, y: 2, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 1}
   m_Children:
   - {fileID: 221967613}
   - {fileID: 1706304133}
@@ -1990,7 +1991,7 @@ Transform:
   m_GameObject: {fileID: 221967611}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0.02, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: -1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 41026971}
   m_RootOrder: 0
@@ -3142,7 +3143,7 @@ Transform:
   m_GameObject: {fileID: 297346800}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 4, y: -2, z: 0}
-  m_LocalScale: {x: -2, y: 2, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 1}
   m_Children:
   - {fileID: 1410762551}
   - {fileID: 201114236}
@@ -4266,7 +4267,7 @@ Transform:
   m_GameObject: {fileID: 447923146}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0.02, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: -1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 924561176}
   m_RootOrder: 0
@@ -5059,7 +5060,7 @@ Transform:
   m_GameObject: {fileID: 543078641}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: -1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 924561176}
   m_RootOrder: 2
@@ -5315,7 +5316,7 @@ Transform:
   m_GameObject: {fileID: 583456220}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: -1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1523926442}
   m_RootOrder: 2
@@ -5617,7 +5618,8 @@ MonoBehaviour:
   hpUI: {fileID: 2048574728}
   manaUI: {fileID: 781180623}
   cardArt: {fileID: 1937032912}
-  clickColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+  clickColor: {r: 0.7254902, g: 0.7254902, b: 0.7254902, a: 1}
+  hoverColor: {r: 0.9019608, g: 0.9019608, b: 0.9019608, a: 1}
   spellEnchant: 0
   spellSacrifice: 0
   spellCardDraw: 0
@@ -6384,7 +6386,7 @@ Transform:
   m_GameObject: {fileID: 762191648}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0.02, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: -1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1367420884}
   m_RootOrder: 0
@@ -7572,7 +7574,7 @@ Transform:
   m_GameObject: {fileID: 924561172}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 4, y: 4, z: 0}
-  m_LocalScale: {x: -2, y: 2, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 1}
   m_Children:
   - {fileID: 447923148}
   - {fileID: 286662315}
@@ -12594,7 +12596,8 @@ MonoBehaviour:
   hpUI: {fileID: 661306824}
   manaUI: {fileID: 913716836}
   cardArt: {fileID: 1215544395}
-  clickColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+  clickColor: {r: 0.7254902, g: 0.7254902, b: 0.7254902, a: 1}
+  hoverColor: {r: 0.9019608, g: 0.9019608, b: 0.9019608, a: 1}
   spellEnchant: 0
   spellSacrifice: 0
   spellCardDraw: 0
@@ -13842,7 +13845,8 @@ MonoBehaviour:
   hpUI: {fileID: 475114073}
   manaUI: {fileID: 2112523345}
   cardArt: {fileID: 4908969}
-  clickColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+  clickColor: {r: 0.7254902, g: 0.7254902, b: 0.7254902, a: 1}
+  hoverColor: {r: 0.9019608, g: 0.9019608, b: 0.9019608, a: 1}
   spellEnchant: 0
   spellSacrifice: 0
   spellCardDraw: 0
@@ -14244,7 +14248,7 @@ Transform:
   m_GameObject: {fileID: 1349549411}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0.02, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: -1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1523926442}
   m_RootOrder: 0
@@ -14338,7 +14342,8 @@ MonoBehaviour:
   hpUI: {fileID: 280867300}
   manaUI: {fileID: 1034803664}
   cardArt: {fileID: 1475704313}
-  clickColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+  clickColor: {r: 0.7254902, g: 0.7254902, b: 0.7254902, a: 1}
+  hoverColor: {r: 0.9019608, g: 0.9019608, b: 0.9019608, a: 1}
   spellEnchant: 0
   spellSacrifice: 0
   spellCardDraw: 0
@@ -14679,7 +14684,7 @@ Transform:
   m_GameObject: {fileID: 1367420880}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 4, y: 1, z: 0}
-  m_LocalScale: {x: -2, y: 2, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 1}
   m_Children:
   - {fileID: 762191650}
   - {fileID: 286931532}
@@ -14765,6 +14770,7 @@ MonoBehaviour:
   manaUI: {fileID: 1947169714}
   cardArt: {fileID: 547049040}
   clickColor: {r: 0, g: 0, b: 0, a: 0}
+  hoverColor: {r: 215, g: 215, b: 215, a: 1}
   spellEnchant: 0
   spellSacrifice: 0
   spellCardDraw: 0
@@ -15048,7 +15054,7 @@ Transform:
   m_GameObject: {fileID: 1410762549}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0.02, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: -1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 297346804}
   m_RootOrder: 0
@@ -15976,7 +15982,7 @@ Transform:
   m_GameObject: {fileID: 1520711317}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 2, y: -2, z: 0}
-  m_LocalScale: {x: -2, y: 2, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 1}
   m_Children:
   - {fileID: 1836448081}
   - {fileID: 137813739}
@@ -16112,7 +16118,7 @@ Transform:
   m_GameObject: {fileID: 1523926438}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 2, y: 4, z: 0}
-  m_LocalScale: {x: -2, y: 2, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 1}
   m_Children:
   - {fileID: 1349549413}
   - {fileID: 633111580}
@@ -16869,7 +16875,7 @@ Transform:
   m_GameObject: {fileID: 1612816965}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: -1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 297346804}
   m_RootOrder: 2
@@ -17410,7 +17416,7 @@ Transform:
   m_GameObject: {fileID: 1663416568}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: -1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1367420884}
   m_RootOrder: 2
@@ -17617,7 +17623,8 @@ MonoBehaviour:
   hpUI: {fileID: 377194216}
   manaUI: {fileID: 104936004}
   cardArt: {fileID: 861093238}
-  clickColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+  clickColor: {r: 0.7254902, g: 0.7254902, b: 0.7254902, a: 1}
+  hoverColor: {r: 0.9019608, g: 0.9019608, b: 0.9019608, a: 1}
   spellEnchant: 0
   spellSacrifice: 0
   spellCardDraw: 0
@@ -18204,6 +18211,7 @@ MonoBehaviour:
   manaUI: {fileID: 934687379}
   cardArt: {fileID: 450142210}
   clickColor: {r: 0, g: 0, b: 0, a: 0}
+  hoverColor: {r: 215, g: 215, b: 215, a: 1}
   spellEnchant: 0
   spellSacrifice: 0
   spellCardDraw: 0
@@ -18900,7 +18908,7 @@ Transform:
   m_GameObject: {fileID: 1827291841}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: -1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 41026971}
   m_RootOrder: 2
@@ -19124,7 +19132,7 @@ Transform:
   m_GameObject: {fileID: 1836448079}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0.02, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: -1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1520711321}
   m_RootOrder: 0

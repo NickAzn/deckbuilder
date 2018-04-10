@@ -62,7 +62,7 @@ MonoBehaviour:
   attack: 2
   health: 1
   cardName: Wind Spirit
-  description: '*Fury 1 (Unit attacks 1 additional time)'
+  description: '*Fury 1'
   nameUI: {fileID: 0}
   descUI: {fileID: 0}
   atkUI: {fileID: 0}
@@ -84,6 +84,7 @@ MonoBehaviour:
   unitManaFont: 0
   unitFury: 1
   manaBoost: 0
+  maxManaBoost: 0
   armor: 0
   magicArmor: 0
   crystalPact: 0

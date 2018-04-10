@@ -35,6 +35,7 @@ public class Card : MonoBehaviour {
 	public Animator cardArt;
 
 	public Color clickColor;
+	public Color hoverColor;
 
 	public bool spellEnchant = false;	// When true, sets spell as enchant, so it uses a spot's enchant spot
 	public bool spellSacrifice = false;	// When true, spell will remove the unit it is casted on
@@ -146,6 +147,7 @@ public class Card : MonoBehaviour {
 	void OnMouseEnter() {
 		if (gm != null) {
 			gm.ShowZoomCard (this);
+			sr.color = hoverColor;
 		}
 	}
 
@@ -153,6 +155,7 @@ public class Card : MonoBehaviour {
 	void OnMouseExit() {
 		if (gm != null) {
 			gm.HideZoomCard ();
+			sr.color = Color.white;
 		}
 	}
 
