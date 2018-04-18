@@ -43,24 +43,26 @@ public class GameManager : MonoBehaviour {
 		HideZoomCard ();
 
 		int[] stageLoadout = SaveLoad.LoadStage ();
+		float crystalHeatlhMult = 1f;
 		if (stageLoadout != null) {
 			if (stageLoadout [3] == stageLoadout [1]) {
 				enemy = Instantiate (bossEnemyAIs [stageLoadout [0]]).GetComponent<EnemyAI> ();
+				crystalHeatlhMult = 1.5f;
 			} else {
 				enemy = Instantiate (enemyAIs [stageLoadout [0]]).GetComponent<EnemyAI> ();
 			}
 			if (stageLoadout [0] == 0) {
-				enemyCrystals [0].SetHealth (6);
-				enemyCrystals [1].SetHealth (6);
-				enemyCrystals [2].SetHealth (6);
+				enemyCrystals [0].SetHealth ((int)(6 * crystalHeatlhMult));
+				enemyCrystals [1].SetHealth ((int)(6 * crystalHeatlhMult));
+				enemyCrystals [2].SetHealth ((int)(6 * crystalHeatlhMult));
 			} else if (stageLoadout [0] == 1) {
-				enemyCrystals [0].SetHealth (7);
-				enemyCrystals [1].SetHealth (10);
-				enemyCrystals [2].SetHealth (7);
+				enemyCrystals [0].SetHealth ((int)(7 * crystalHeatlhMult));
+				enemyCrystals [1].SetHealth ((int)(10 * crystalHeatlhMult));
+				enemyCrystals [2].SetHealth ((int)(7 * crystalHeatlhMult));
 			} else if (stageLoadout [0] == 2) {
-				enemyCrystals [0].SetHealth (10);
-				enemyCrystals [1].SetHealth (7);
-				enemyCrystals [2].SetHealth (10);
+				enemyCrystals [0].SetHealth ((int)(10 * crystalHeatlhMult));
+				enemyCrystals [1].SetHealth ((int)(7 * crystalHeatlhMult));
+				enemyCrystals [2].SetHealth ((int)(10 * crystalHeatlhMult));
 			}
 		} else {
 			enemy = Instantiate (enemyAIs [0]).GetComponent<EnemyAI> ();

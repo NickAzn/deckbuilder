@@ -76,3 +76,4 @@ MonoBehaviour:
   aggroMeter: 0
   earlyCardTurns: 3
   midCardTurns: 7
+  isBoss: 1

@@ -140,7 +140,7 @@ public class Card : MonoBehaviour {
 
 	//When mouse is released from a click, change color back to white from the click color
 	void OnMouseUp() {
-		sr.color = Color.white;
+		sr.color = hoverColor;
 	}
 
 	//When hovering over the card, show a zoomed version of card for readability

@@ -16,6 +16,7 @@ public class EnemyAI : MonoBehaviour {
 	public int aggroMeter;
 	public int earlyCardTurns;
 	public int midCardTurns;
+	public bool isBoss;
 
 	int actionCounter = 0;
 
@@ -40,6 +41,14 @@ public class EnemyAI : MonoBehaviour {
 	//Summons a unit at the start of the game, but does not attack with it
 	void Start() {
 		gm = GameObject.Find ("GameManager").GetComponent<GameManager> ();
+
+		SummonEarlyUnit ();
+		if (isBoss) {
+			SummonEarlyUnit ();
+		}
+	}
+
+	void SummonEarlyUnit() {
 		int summonSpot = SelectRandomOpenSpot ();
 		int summonCard = Random.Range (0, earlyUnits.Length);
 		SummonUnit (gm.enemySpots [summonSpot], earlyUnits [summonCard]);
