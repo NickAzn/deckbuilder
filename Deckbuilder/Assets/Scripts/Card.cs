@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class Card : MonoBehaviour {
 
@@ -28,7 +29,7 @@ public class Card : MonoBehaviour {
 	public string description;
 
 	public Text nameUI;
-	public Text descUI;
+	public TextMeshProUGUI descUI;
 	public Text atkUI;
 	public Text hpUI;
 	public Text manaUI;
@@ -58,13 +59,13 @@ public class Card : MonoBehaviour {
 	public int magicArmor = 0;			// Reduce damage taken from spells by magicArmor value
 	public int crystalPact = 0;			// Card damages crystal in the row it was used by crystalPact value
 
-	SpriteRenderer sr;
+	Image cardBack;
 
 	void Start() {
 		if (GameObject.Find ("GameManager") != null) {
 			gm = GameObject.Find ("GameManager").GetComponent<GameManager> ();
 		}
-		sr = GetComponent<SpriteRenderer> ();
+		cardBack = GetComponent<Image> ();
 		UpdateUI ();
 	}
 		
@@ -135,19 +136,19 @@ public class Card : MonoBehaviour {
 
 		}
 		//Change color to give player feedback that they clicked the card
-		sr.color = clickColor;
+		cardBack.color = clickColor;
 	}
 
 	//When mouse is released from a click, change color back to white from the click color
 	void OnMouseUp() {
-		sr.color = hoverColor;
+		cardBack.color = hoverColor;
 	}
 
 	//When hovering over the card, show a zoomed version of card for readability
 	void OnMouseEnter() {
 		if (gm != null) {
 			gm.ShowZoomCard (this);
-			sr.color = hoverColor;
+			cardBack.color = hoverColor;
 		}
 	}
 
@@ -155,7 +156,7 @@ public class Card : MonoBehaviour {
 	void OnMouseExit() {
 		if (gm != null) {
 			gm.HideZoomCard ();
-			sr.color = Color.white;
+			cardBack.color = Color.white;
 		}
 	}
 
