@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class GameManager : MonoBehaviour {
 	public SpotStats[] playerSpots;		// Set in editor, all player spots (6)
@@ -101,42 +102,42 @@ public class GameManager : MonoBehaviour {
 			int x = 0;
 			if (zoomCardStats.unitRelentless) {
 				zoomCardEffects [effectTab].SetActive (true);
-				zoomCardEffects [effectTab].GetComponentInChildren<Text> ().text =
+				zoomCardEffects [effectTab].GetComponentInChildren<TextMeshProUGUI> ().text =
 					"Relentless - Excess damage is dealt to the next available target.";
 				effectTab++;
 			}
 			if (zoomCardStats.unitManaFont > 0) {
 				x = zoomCardStats.unitManaFont;
 				zoomCardEffects [effectTab].SetActive (true);
-				zoomCardEffects [effectTab].GetComponentInChildren<Text> ().text =
+				zoomCardEffects [effectTab].GetComponentInChildren<TextMeshProUGUI> ().text =
 					"Mana Font " + x + " - When this unit is in play, increase max mana by " + x + ".";
 				effectTab++;
 			}
 			if (zoomCardStats.unitFury > 0) {
 				x = zoomCardStats.unitFury;
 				zoomCardEffects [effectTab].SetActive (true);
-				zoomCardEffects [effectTab].GetComponentInChildren<Text> ().text =
-					"Fury "+x+" - This unit attacks "+x+" additional times.";
+				zoomCardEffects [effectTab].GetComponentInChildren<TextMeshProUGUI> ().text =
+					"Fury "+x+" - This unit attacks "+x+" additional time(s).";
 				effectTab++;
 			}
 			if (zoomCardStats.armor > 0) {
 				x = zoomCardStats.armor;
 				zoomCardEffects [effectTab].SetActive (true);
-				zoomCardEffects [effectTab].GetComponentInChildren<Text> ().text =
+				zoomCardEffects [effectTab].GetComponentInChildren<TextMeshProUGUI> ().text =
 					"Armor "+x+" - Damage taken from units is reduced by "+x+".";
 				effectTab++;
 			}
 			if (zoomCardStats.magicArmor > 0) {
 				x = zoomCardStats.magicArmor;
 				zoomCardEffects [effectTab].SetActive (true);
-				zoomCardEffects [effectTab].GetComponentInChildren<Text> ().text =
+				zoomCardEffects [effectTab].GetComponentInChildren<TextMeshProUGUI> ().text =
 					"Magic Armor "+x+" - Damage taken from spells is reduced by "+x+".";
 				effectTab++;
 			}
 			if (zoomCardStats.crystalPact > 0) {
 				x = zoomCardStats.crystalPact;
 				zoomCardEffects [effectTab].SetActive (true);
-				zoomCardEffects [effectTab].GetComponentInChildren<Text> ().text =
+				zoomCardEffects [effectTab].GetComponentInChildren<TextMeshProUGUI> ().text =
 					"Crystal Pact "+x+" - Your crystal on the row this card is used on takes "+x+" damage.";
 				effectTab++;
 			}

@@ -28,7 +28,7 @@ public class Card : MonoBehaviour {
 	[TextArea]
 	public string description;
 
-	public Text nameUI;
+	public TextMeshProUGUI nameUI;
 	public TextMeshProUGUI descUI;
 	public Text atkUI;
 	public Text hpUI;
