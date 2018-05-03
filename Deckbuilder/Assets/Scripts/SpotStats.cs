@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
+using TMPro;
 
 public class SpotStats : MonoBehaviour {
 
@@ -15,8 +15,8 @@ public class SpotStats : MonoBehaviour {
 	public Color hoverColor;
 	public GameObject highlighter;
 
-	public Text atkUI;
-	public Text hpUI;
+	public TextMeshProUGUI atkUI;
+	public TextMeshProUGUI hpUI;
 	public Animator unitAnimation;
 	public Animator spellAnimation;
 	public Animator summonAnimation;

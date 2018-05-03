@@ -30,9 +30,9 @@ public class Card : MonoBehaviour {
 
 	public TextMeshProUGUI nameUI;
 	public TextMeshProUGUI descUI;
-	public Text atkUI;
-	public Text hpUI;
-	public Text manaUI;
+	public TextMeshProUGUI atkUI;
+	public TextMeshProUGUI hpUI;
+	public TextMeshProUGUI manaUI;
 	public Animator cardArt;
 
 	public Color clickColor;

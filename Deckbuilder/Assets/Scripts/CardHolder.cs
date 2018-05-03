@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class CardHolder : MonoBehaviour {
 
@@ -10,8 +11,8 @@ public class CardHolder : MonoBehaviour {
 	public Card origCard;
 
 	public Image cardArt;
-	public Text manaCost;
-	public Text cardCount;
+	public TextMeshProUGUI manaCost;
+	public TextMeshProUGUI cardCount;
 
 	public bool deckCard;
 	public int position;

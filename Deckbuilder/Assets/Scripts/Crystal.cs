@@ -1,11 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
+using TMPro;
 
 public class Crystal : MonoBehaviour {
 
-	public Text hpUI;
+	public TextMeshProUGUI hpUI;
 	int health = 10;
 
 	public Sprite[] healthStates;

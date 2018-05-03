@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class Shop : MonoBehaviour {
 
@@ -19,7 +20,7 @@ public class Shop : MonoBehaviour {
 	List<GameObject> libraryCards = new List<GameObject>();
 
 	int tokens = 0;
-	public Text tokenUI;
+	public TextMeshProUGUI tokenUI;
 
 	public GameObject sellButton;
 	public GameObject sellAllButton;
@@ -107,7 +108,7 @@ public class Shop : MonoBehaviour {
 			crystalRepairButtons [0].onClick = new Button.ButtonClickedEvent ();
 			crystalRepairButtons [0].onClick.AddListener(delegate{RestoreCrystal(0);});
 			crystalRepairButtons [0].GetComponent<Image> ().sprite = Resources.Load <Sprite>("Textures/CrystalRestoreIcon");
-			crystalRepairButtons [0].GetComponentInChildren<Text> ().text = "-30";
+			crystalRepairButtons [0].GetComponentInChildren<TextMeshProUGUI> ().text = "-30";
 		}
 
 		if (crystalHealth [1] == 10) {
@@ -116,7 +117,7 @@ public class Shop : MonoBehaviour {
 			crystalRepairButtons [1].onClick = new Button.ButtonClickedEvent ();
 			crystalRepairButtons [1].onClick.AddListener(delegate{RestoreCrystal(1);});
 			crystalRepairButtons [1].GetComponent<Image> ().sprite = Resources.Load <Sprite>("Textures/CrystalRestoreIcon");
-			crystalRepairButtons [1].GetComponentInChildren<Text> ().text = "-30";
+			crystalRepairButtons [1].GetComponentInChildren<TextMeshProUGUI> ().text = "-30";
 		}
 
 		if (crystalHealth [2] == 10) {
@@ -125,7 +126,7 @@ public class Shop : MonoBehaviour {
 			crystalRepairButtons [2].onClick = new Button.ButtonClickedEvent ();
 			crystalRepairButtons [2].onClick.AddListener(delegate{RestoreCrystal(2);});
 			crystalRepairButtons [2].GetComponent<Image> ().sprite = Resources.Load <Sprite>("Textures/CrystalRestoreIcon");
-			crystalRepairButtons [2].GetComponentInChildren<Text> ().text = "-30";
+			crystalRepairButtons [2].GetComponentInChildren<TextMeshProUGUI> ().text = "-30";
 		}
 	}
 
@@ -283,7 +284,7 @@ public class Shop : MonoBehaviour {
 			crystalRepairButtons [crystal].GetComponent<Button> ().onClick.RemoveAllListeners ();
 			crystalRepairButtons [crystal].GetComponent<Button> ().onClick.AddListener(delegate{RepairCrystal(crystal);});
 			crystalRepairButtons [crystal].GetComponent<Image> ().sprite = Resources.Load <Sprite>("Textures/CrystalRepairIcon");
-			crystalRepairButtons [crystal].GetComponentInChildren<Text> ().text = "-5";
+			crystalRepairButtons [crystal].GetComponentInChildren<TextMeshProUGUI> ().text = "-5";
 		}
 	}
 		
