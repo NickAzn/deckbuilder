@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
+using TMPro;
 
 public class Player : MonoBehaviour {
 
@@ -17,9 +17,9 @@ public class Player : MonoBehaviour {
 	int maxSacs = 2;
 	int sacs = 0;
 
-	public Text manaUI;
-	public Text deckUI;
-	public Text discUI;
+	public TextMeshProUGUI manaUI;
+	public TextMeshProUGUI deckUI;
+	public TextMeshProUGUI discUI;
 
 	public GameObject sacButton;
 

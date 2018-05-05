@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using TMPro;
 
@@ -24,7 +23,7 @@ public class GameManager : MonoBehaviour {
 
 	bool playerTurn = true;
 
-	public Text endText;				// Set in editor to UI Text to display game over text
+	public TextMeshProUGUI endText;				// Set in editor to UI Text to display game over text
 	public GameObject restartButton;	// Set in editor to button with GameManager.Restart()
 
 	public GameObject rewardScreen;
