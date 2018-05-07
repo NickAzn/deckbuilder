@@ -360,7 +360,7 @@ public class SpotStats : MonoBehaviour {
 	}
 
 	//Updates spot's display attack and health
-	void UpdateUI() {
+	public void UpdateUI() {
 		if (hasUnit) {
 			atkUI.text = damage.ToString ();
 			hpUI.text = health.ToString ();

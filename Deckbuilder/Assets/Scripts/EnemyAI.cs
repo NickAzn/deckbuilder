@@ -43,8 +43,10 @@ public class EnemyAI : MonoBehaviour {
 		gm = GameObject.Find ("GameManager").GetComponent<GameManager> ();
 
 		SummonEarlyUnit ();
+        gm.PlayedCard(false);
 		if (isBoss) {
 			SummonEarlyUnit ();
+            gm.PlayedCard(false);
 		}
 	}
 
@@ -203,7 +205,7 @@ public class EnemyAI : MonoBehaviour {
 				if (offensiveSpells [spellCard].spellCardDraw > 0) {
 					DrawCards(offensiveSpells [spellCard].spellCardDraw);
 				}
-
+                gm.PlayedCard(false);
 				cardCount--;
 			} else {
 				actionCounter--;
@@ -236,6 +238,10 @@ public class EnemyAI : MonoBehaviour {
 			possibleSpots.Add (SelectRandomOpenSpot ());
 		}
 
+        if (possibleSpots.Count == 0) {
+            possibleSpots.Add(SelectRandomOpenSpot());
+        }
+
 		bool manaBoosted = false;
 		if (possibleSpots.Count > 0 && possibleSpots [0] > -1) {
 			int summonSpot = possibleSpots[Random.Range (0, possibleSpots.Count)];
@@ -250,7 +256,8 @@ public class EnemyAI : MonoBehaviour {
 				manaBoosted = true;
 			}
 			SummonUnit (gm.enemySpots [summonSpot], summonCard);
-		}
+            gm.PlayedCard(false);
+        }
 		yield return new WaitForSeconds (0.7f);
 
 		if (cardCount > 0 && Random.Range (0, actionCounter * extraActionMult) == 0) {
@@ -266,6 +273,7 @@ public class EnemyAI : MonoBehaviour {
 				}
 				CastSpell (gm.enemySpots [castSpot], enchantSpells [spellCard]);
 				yield return ShowCard (enchantSpells [spellCard], 1.5f);
+                gm.PlayedCard(false);
 				cardCount--;
 			} else {
 				actionCounter--;
@@ -285,21 +293,24 @@ public class EnemyAI : MonoBehaviour {
 		if (row1CrystalUp && playerR1Atk > 0) {
 			if (!gm.enemySpots [0].hasUnit) {
 				possibleSummons.Add (0);
-			} else if (!gm.enemySpots [3].hasUnit) {
+			}
+            if (!gm.enemySpots [3].hasUnit) {
 				possibleSummons.Add (3);
 			}
 		}
 		if (row2CrystalUp && playerR2Atk > 0) {
 			if (!gm.enemySpots [1].hasUnit) {
 				possibleSummons.Add (1);
-			} else if (!gm.enemySpots [4].hasUnit) {
+			}
+            if (!gm.enemySpots [4].hasUnit) {
 				possibleSummons.Add (4);
 			}
 		}
 		if (row3CrystalUp && playerR3Atk > 0) {
 			if (!gm.enemySpots [2].hasUnit) {
 				possibleSummons.Add(2);
-			} else if (!gm.enemySpots [5].hasUnit) {
+			}
+            if (!gm.enemySpots [5].hasUnit) {
 				possibleSummons.Add(5);
 			}
 		}
@@ -317,21 +328,24 @@ public class EnemyAI : MonoBehaviour {
 		if (pRow1CrystalUp && playerR1FrontHp == 0) {
 			if (!gm.enemySpots [0].hasUnit) {
 				possibleSummons.Add(0);
-			} else if (!gm.enemySpots [3].hasUnit) {
+			}
+            if (!gm.enemySpots [3].hasUnit) {
 				possibleSummons.Add(3);
 			}
 		}
 		if (pRow2CrystalUp && playerR2FrontHp == 0) {
 			if (!gm.enemySpots [1].hasUnit) {
 				possibleSummons.Add(1);
-			} else if (!gm.enemySpots [4].hasUnit) {
+			}
+            if (!gm.enemySpots [4].hasUnit) {
 				possibleSummons.Add(4);
 			}
 		}
 		if (pRow3CrystalUp && playerR3FrontHp == 0) {
 			if (!gm.enemySpots [2].hasUnit) {
 				possibleSummons.Add(2);
-			} else if (!gm.enemySpots [5].hasUnit) {
+			}
+            if (!gm.enemySpots [5].hasUnit) {
 				possibleSummons.Add(5);
 			}
 		}
@@ -341,25 +355,29 @@ public class EnemyAI : MonoBehaviour {
 			if (pRow1CrystalUp) {
 				if (!gm.enemySpots [0].hasUnit) {
 					possibleSummons.Add(0);
-				} else if (!gm.enemySpots [3].hasUnit) {
+				}
+                if (!gm.enemySpots [3].hasUnit) {
 					possibleSummons.Add(3);
 				}
 			}
 			if (pRow2CrystalUp) {
 				if (!gm.enemySpots [1].hasUnit) {
 					possibleSummons.Add(1);
-				} else if (!gm.enemySpots [4].hasUnit) {
+				}
+                if (!gm.enemySpots [4].hasUnit) {
 					possibleSummons.Add(4);
 				}
 			}
 			if (pRow3CrystalUp) {
 				if (!gm.enemySpots [2].hasUnit) {
 					possibleSummons.Add(2);
-				} else if (!gm.enemySpots [5].hasUnit) {
+				}
+                if (!gm.enemySpots [5].hasUnit) {
 					possibleSummons.Add(5);
 				}
 			}
 		}
+
 		return possibleSummons;
 	}
 

@@ -31,6 +31,11 @@ public class GameManager : MonoBehaviour {
 	public GameObject rewardCard2;
 	bool gameEnded = false;
 
+    public GameObject enchantedParticle;
+    int playerCardsPlayed = -1;
+    int enemyCardsPlayed = 0;
+    int crystalEnchParticleEmit = 20;
+
 	void Start() {
 		// Set player crystal health to the saved value
 		int[] crystalHealth = SaveLoad.LoadCrystalHealth ();
@@ -77,10 +82,127 @@ public class GameManager : MonoBehaviour {
 		// Hides the restart button
 		restartButton.SetActive (false);
 		rewardScreen.SetActive (false);
-	}
 
-	//loads a new scene
-	public void LoadScene(string name) {
+        UpdateCrystalEnch();
+    }
+
+    public void PlayedCard(bool isPlayer) {
+        if (isPlayer) {
+            playerCardsPlayed++;
+            if (playerCardsPlayed == 0)
+                playerCardsPlayed++;
+        } else {
+            enemyCardsPlayed++;
+        }
+        UpdateCrystalEnch();
+    }
+
+    void UpdateCrystalEnch() {
+        foreach (Crystal i in playerCrystals) {
+            if (i.isAlive()) {
+                CrystalEnchant enchant = i.enchant;
+                if (enchant != null) {
+                    int playValue = 0;
+                    if (enchant.playDiscardDraw > 0) {
+                        playValue = playerCardsPlayed % enchant.playDiscardDraw;
+                        if (playValue == 0 && isPlayerTurn()) {
+                            player.DrawFromDiscards(1);
+                            i.enchantParticles.Emit(crystalEnchParticleEmit);
+                        }
+                        if (playerCardsPlayed > 0) {
+                            i.enchantUIText.text = (enchant.playDiscardDraw - playValue).ToString();
+                        } else {
+                            i.enchantUIText.text = enchant.playDiscardDraw.ToString();
+                        }
+                    }
+
+                    if (enchant.playDamageBuff > 0) {
+                        playValue = playerCardsPlayed % enchant.playDamageBuff;
+                        if (playValue == 0 && isPlayerTurn()) {
+                            BuffRandomUnit(playerSpots, 1, 0, i.enchant.color);
+                            i.enchantParticles.Emit(crystalEnchParticleEmit);
+                        }
+                        if (playerCardsPlayed > 0) {
+                            i.enchantUIText.text = (enchant.playDamageBuff - playValue).ToString();
+                        } else {
+                            i.enchantUIText.text = enchant.playDamageBuff.ToString();
+                        }
+                    }
+
+                    if (enchant.playHealthBuff > 0) {
+                        playValue = playerCardsPlayed % enchant.playHealthBuff;
+                        if (playValue == 0 && isPlayerTurn()) {
+                            BuffRandomUnit(playerSpots, 0, 1, i.enchant.color);
+                            i.enchantParticles.Emit(crystalEnchParticleEmit);
+                        }
+                        if (playerCardsPlayed > 0) {
+                            i.enchantUIText.text = (enchant.playHealthBuff - playValue).ToString();
+                        } else {
+                            i.enchantUIText.text = enchant.playHealthBuff.ToString();
+                        }
+                    }
+                }
+            }
+        }
+
+        foreach (Crystal i in enemyCrystals) {
+            if (i.isAlive()) {
+                CrystalEnchant enchant = i.enchant;
+                if (enchant != null) {
+                    int playValue = 0;
+                    if (enchant.playDiscardDraw > 0) {
+                        playValue = enemyCardsPlayed % enchant.playDiscardDraw;
+                        if (playValue == 0 && !isPlayerTurn()) {
+                            enemy.DrawCards(1);
+                            i.enchantParticles.Emit(crystalEnchParticleEmit);
+                        }
+                        i.enchantUIText.text = (enchant.playDiscardDraw - playValue).ToString();
+                    }
+
+                    if (enchant.playDamageBuff > 0) {
+                        playValue = enemyCardsPlayed % enchant.playDamageBuff;
+                        if (playValue == 0 && !isPlayerTurn()) {
+                            BuffRandomUnit(enemySpots, 1, 0, i.enchant.color);
+                            i.enchantParticles.Emit(crystalEnchParticleEmit);
+                        }
+                        i.enchantUIText.text = (enchant.playDamageBuff - playValue).ToString();
+                    }
+                    if (enchant.playHealthBuff > 0) {
+                        playValue = enemyCardsPlayed % enchant.playHealthBuff;
+                        if (playValue == 0 && !isPlayerTurn()) {
+                            BuffRandomUnit(enemySpots, 0, 1, i.enchant.color);
+                            i.enchantParticles.Emit(crystalEnchParticleEmit);
+                        }
+                        i.enchantUIText.text = (enchant.playHealthBuff - playValue).ToString();
+                    }
+                }
+            }
+        }
+    }
+
+    void BuffRandomUnit(SpotStats[] spotList, int damageBuff, int healthBuff, Color enchColor) {
+        List<int> availableSpots = new List<int>();
+        for (int i = 0; i < spotList.Length; i++) {
+            if (spotList[i].hasUnit) {
+                availableSpots.Add(i);
+            }
+        }
+        if (availableSpots.Count > 0) {
+            int index = Random.Range(0, availableSpots.Count);
+            SpotStats spot = spotList[availableSpots[index]];
+
+            GameObject particles = Instantiate(enchantedParticle, new Vector3(spot.transform.position.x, spot.transform.position.y, -1f), Quaternion.identity);
+            ParticleSystem.MainModule partSettings = particles.GetComponent<ParticleSystem>().main;
+            partSettings.startColor = enchColor;
+
+            spot.damage += damageBuff;
+            spot.health += healthBuff;
+            spot.UpdateUI();
+        }
+    }
+
+    //loads a new scene
+    public void LoadScene(string name) {
 		Time.timeScale = 1.0f;
 		SceneManager.LoadScene (name);
 	}

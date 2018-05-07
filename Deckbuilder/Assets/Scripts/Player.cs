@@ -85,6 +85,24 @@ public class Player : MonoBehaviour {
 		}
 	}
 
+    //Draw a card from discards
+    //If the discards is empty, don't draw
+    public void DrawFromDiscards(int amount) {
+        if (amount > 0) {
+            int openIndex = FindOpenHand();
+            if (openIndex >= 0) {
+                if (discards.Count > 0) {
+                    hand[openIndex].GetComponent<Card>().CopyStats(discards[discards.Count - 1]);
+                    hand[openIndex].SetActive(true);
+                    discards.RemoveAt(discards.Count - 1);
+                    UpdateUI();
+                    DrawFromDiscards(amount - 1);
+                }
+            }
+        }
+    }
+
+    // Place all cards in discards into the deck and clear discards
 	bool ResetDeck() {
 		if (discards.Count > 0) {
 			deck = new List<Card> (discards);
@@ -95,11 +113,13 @@ public class Player : MonoBehaviour {
 		}
 	}
 
+    // Place card in discards
 	public void DiscardCard(Card card) {
 		discards.Add (card);
 		UpdateUI ();
 	}
 
+    //returns true if player has enough mana to play card
 	public bool CanPlayCard (Card card) {
 		if (card.manaCost <= mana) {
 			return true;
@@ -107,6 +127,7 @@ public class Player : MonoBehaviour {
 		return false;
 	}
 
+    //Plays card at given spot
 	public bool PlayCard(SpotStats spot) {
 		Card card = gm.selectedCard;
 		if (CanPlayCard(card)) {
@@ -128,7 +149,8 @@ public class Player : MonoBehaviour {
 			}
 			DisableSelectedCard ();
 			UpdateUI ();
-			return true;
+            gm.PlayedCard(true);
+            return true;
 		}
 		return false;
 	}

@@ -1537,6 +1537,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hpUI: {fileID: 315726230}
+  enchantUI: {fileID: 0}
+  enchantUIText: {fileID: 0}
+  enchantParticles: {fileID: 0}
+  enchant: {fileID: 0}
   healthStates:
   - {fileID: 21300000, guid: 3892720d4c462074abdd87e2b793cf97, type: 3}
   - {fileID: 21300002, guid: 3892720d4c462074abdd87e2b793cf97, type: 3}
@@ -3259,6 +3263,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hpUI: {fileID: 1318298158}
+  enchantUI: {fileID: 0}
+  enchantUIText: {fileID: 0}
+  enchantParticles: {fileID: 0}
+  enchant: {fileID: 0}
   healthStates:
   - {fileID: 21300000, guid: 3892720d4c462074abdd87e2b793cf97, type: 3}
   - {fileID: 21300002, guid: 3892720d4c462074abdd87e2b793cf97, type: 3}
@@ -4899,6 +4907,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hpUI: {fileID: 318994295}
+  enchantUI: {fileID: 0}
+  enchantUIText: {fileID: 0}
+  enchantParticles: {fileID: 0}
+  enchant: {fileID: 0}
   healthStates:
   - {fileID: 21300000, guid: 3892720d4c462074abdd87e2b793cf97, type: 3}
   - {fileID: 21300002, guid: 3892720d4c462074abdd87e2b793cf97, type: 3}
@@ -6722,8 +6734,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 734555147}
   m_HandleRect: {fileID: 734555146}
   m_Direction: 2
-  m_Value: 0
-  m_Size: 1
+  m_Value: 0.5
+  m_Size: 0.99999994
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
