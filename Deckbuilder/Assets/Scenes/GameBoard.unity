@@ -943,6 +943,10 @@ MonoBehaviour:
   playerSide: 0
   player: {fileID: 356550592}
   origCard: {fileID: 0}
+  deathParticles: {fileID: 1019427310088294, guid: d0a94c1c2ae9b7e41a82d602108657a2,
+    type: 2}
+  hitParticles: {fileID: 1249188527122418, guid: 24e3aff5891d96e49a5da9a2ffb20d2c,
+    type: 2}
   relentless: 0
   fury: 0
   armor: 0
@@ -2812,6 +2816,10 @@ MonoBehaviour:
   playerSide: 1
   player: {fileID: 356550592}
   origCard: {fileID: 0}
+  deathParticles: {fileID: 1019427310088294, guid: d0a94c1c2ae9b7e41a82d602108657a2,
+    type: 2}
+  hitParticles: {fileID: 1249188527122418, guid: 24e3aff5891d96e49a5da9a2ffb20d2c,
+    type: 2}
   relentless: 0
   fury: 0
   armor: 0
@@ -3101,6 +3109,10 @@ MonoBehaviour:
   playerSide: 1
   player: {fileID: 356550592}
   origCard: {fileID: 0}
+  deathParticles: {fileID: 1019427310088294, guid: d0a94c1c2ae9b7e41a82d602108657a2,
+    type: 2}
+  hitParticles: {fileID: 1249188527122418, guid: 24e3aff5891d96e49a5da9a2ffb20d2c,
+    type: 2}
   relentless: 0
   fury: 0
   armor: 0
@@ -3238,6 +3250,10 @@ MonoBehaviour:
   playerSide: 1
   player: {fileID: 356550592}
   origCard: {fileID: 0}
+  deathParticles: {fileID: 1019427310088294, guid: d0a94c1c2ae9b7e41a82d602108657a2,
+    type: 2}
+  hitParticles: {fileID: 1249188527122418, guid: 24e3aff5891d96e49a5da9a2ffb20d2c,
+    type: 2}
   relentless: 0
   fury: 0
   armor: 0
@@ -4186,6 +4202,10 @@ MonoBehaviour:
   playerSide: 0
   player: {fileID: 356550592}
   origCard: {fileID: 0}
+  deathParticles: {fileID: 1019427310088294, guid: d0a94c1c2ae9b7e41a82d602108657a2,
+    type: 2}
+  hitParticles: {fileID: 1249188527122418, guid: 24e3aff5891d96e49a5da9a2ffb20d2c,
+    type: 2}
   relentless: 0
   fury: 0
   armor: 0
@@ -8471,6 +8491,10 @@ MonoBehaviour:
   playerSide: 1
   player: {fileID: 356550592}
   origCard: {fileID: 0}
+  deathParticles: {fileID: 1019427310088294, guid: d0a94c1c2ae9b7e41a82d602108657a2,
+    type: 2}
+  hitParticles: {fileID: 1249188527122418, guid: 24e3aff5891d96e49a5da9a2ffb20d2c,
+    type: 2}
   relentless: 0
   fury: 0
   armor: 0
@@ -14675,6 +14699,10 @@ MonoBehaviour:
   playerSide: 0
   player: {fileID: 356550592}
   origCard: {fileID: 0}
+  deathParticles: {fileID: 1019427310088294, guid: d0a94c1c2ae9b7e41a82d602108657a2,
+    type: 2}
+  hitParticles: {fileID: 1249188527122418, guid: 24e3aff5891d96e49a5da9a2ffb20d2c,
+    type: 2}
   relentless: 0
   fury: 0
   armor: 0
@@ -18004,6 +18032,10 @@ MonoBehaviour:
   playerSide: 1
   player: {fileID: 356550592}
   origCard: {fileID: 0}
+  deathParticles: {fileID: 1019427310088294, guid: d0a94c1c2ae9b7e41a82d602108657a2,
+    type: 2}
+  hitParticles: {fileID: 1249188527122418, guid: 24e3aff5891d96e49a5da9a2ffb20d2c,
+    type: 2}
   relentless: 0
   fury: 0
   armor: 0
@@ -29126,6 +29158,10 @@ MonoBehaviour:
   playerSide: 0
   player: {fileID: 356550592}
   origCard: {fileID: 0}
+  deathParticles: {fileID: 1019427310088294, guid: d0a94c1c2ae9b7e41a82d602108657a2,
+    type: 2}
+  hitParticles: {fileID: 1249188527122418, guid: 24e3aff5891d96e49a5da9a2ffb20d2c,
+    type: 2}
   relentless: 0
   fury: 0
   armor: 0
@@ -30922,6 +30958,10 @@ MonoBehaviour:
   playerSide: 0
   player: {fileID: 356550592}
   origCard: {fileID: 0}
+  deathParticles: {fileID: 1019427310088294, guid: d0a94c1c2ae9b7e41a82d602108657a2,
+    type: 2}
+  hitParticles: {fileID: 1249188527122418, guid: 24e3aff5891d96e49a5da9a2ffb20d2c,
+    type: 2}
   relentless: 0
   fury: 0
   armor: 0
@@ -31058,6 +31098,10 @@ MonoBehaviour:
   playerSide: 0
   player: {fileID: 356550592}
   origCard: {fileID: 0}
+  deathParticles: {fileID: 1019427310088294, guid: d0a94c1c2ae9b7e41a82d602108657a2,
+    type: 2}
+  hitParticles: {fileID: 1249188527122418, guid: 24e3aff5891d96e49a5da9a2ffb20d2c,
+    type: 2}
   relentless: 0
   fury: 0
   armor: 0
@@ -48888,6 +48932,10 @@ MonoBehaviour:
   playerSide: 1
   player: {fileID: 356550592}
   origCard: {fileID: 0}
+  deathParticles: {fileID: 1019427310088294, guid: d0a94c1c2ae9b7e41a82d602108657a2,
+    type: 2}
+  hitParticles: {fileID: 1249188527122418, guid: 24e3aff5891d96e49a5da9a2ffb20d2c,
+    type: 2}
   relentless: 0
   fury: 0
   armor: 0

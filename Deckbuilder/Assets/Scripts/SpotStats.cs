@@ -29,6 +29,9 @@ public class SpotStats : MonoBehaviour {
 
 	SpriteRenderer sr;
 
+    public GameObject deathParticles;
+    public GameObject hitParticles;
+
 	public bool relentless = false;
 	int deathDraw = 0;
 	public int fury = 0;
@@ -353,9 +356,21 @@ public class SpotStats : MonoBehaviour {
 		if (hasUnit && amount > 0) {
 			health -= amount;
 			UpdateUI ();
+            if (health > 0) {
+                GameObject particles = Instantiate(hitParticles);
+                particles.transform.position = new Vector3(transform.position.x, transform.position.y, -1f);
+            }
 			if (health <= 0) {
+                GameObject particles = Instantiate(deathParticles);
+                particles.transform.position = new Vector3(transform.position.x, transform.position.y, -1f);
+                if (playerSide) {
+                    particles.transform.rotation = Quaternion.Euler(0f, -90f, 0f);
+                } else {
+                    particles.transform.rotation = Quaternion.Euler(0f, 90f, 0f);
+                }
 				RemoveUnit ();
 			}
+
 		}
 	}
 
