@@ -40,7 +40,7 @@ public class Player : MonoBehaviour {
 	}
 
 	void Update() {
-		if (gm.selectedCard != null && sacs < maxSacs && gm.isPlayerTurn()) {
+		if (gm.selectedCard != null && sacs < maxSacs && gm.IsPlayerTurn()) {
 			sacButton.SetActive (true);
 		} else {
 			sacButton.SetActive (false);

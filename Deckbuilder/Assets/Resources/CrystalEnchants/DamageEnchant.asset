@@ -11,9 +11,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2c1d92109cf569408e2884fa3fc3c7c, type: 3}
   m_Name: DamageEnchant
   m_EditorClassIdentifier: 
-  name: Damage Enhancer
+  enchName: Damage Enhancer
   description: For every 4 cards you play, a random unit on your side gains 1 attack.
   color: {r: 1, g: 0.39215687, b: 0.39215687, a: 1}
+  playType: 4
   playDiscardDraw: 0
   playHealthBuff: 0
-  playDamageBuff: 4
+  playDamageBuff: 1

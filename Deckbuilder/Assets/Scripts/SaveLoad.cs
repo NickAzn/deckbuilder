@@ -23,6 +23,11 @@ public static class SaveLoad {
 	static string SHOP_ENCOUNTER = "ShopEncounter";
 	static string STAGE_LEVEL = "Stage";
 
+    static string CRYSTAL_1_ENCH = "Crystal1Ench";
+    static string CRYSTAL_2_ENCH = "Crystal2Ench";
+    static string CRYSTAL_3_ENCH = "Crystal3Ench";
+    static string ENCHANT_LIBRARY = "EnchantLibrary";
+
 
 	//Saves the health of player crystals
 	public static void SaveCrystalHealth(int crystal1, int crystal2, int crystal3) {
@@ -46,6 +51,62 @@ public static class SaveLoad {
 		PlayerPrefs.SetInt (CRYSTAL_2_HP, 10);
 		PlayerPrefs.SetInt (CRYSTAL_3_HP, 10);
 	}
+
+    //Saves players active crystal enchants
+    public static void SaveActiveCrystalEnchants(CrystalEnchant enchant1, CrystalEnchant enchant2, CrystalEnchant enchant3) {
+        if (enchant1 != null) {
+            PlayerPrefs.SetString(CRYSTAL_1_ENCH, enchant1.name);
+        } else {
+            PlayerPrefs.SetString(CRYSTAL_1_ENCH, null);
+        }
+
+        if (enchant2 != null) {
+            PlayerPrefs.SetString(CRYSTAL_2_ENCH, enchant2.name);
+        } else {
+            PlayerPrefs.SetString(CRYSTAL_2_ENCH, null);
+        }
+
+        if (enchant3 != null) {
+            PlayerPrefs.SetString(CRYSTAL_3_ENCH, enchant3.name);
+        } else {
+            PlayerPrefs.SetString(CRYSTAL_3_ENCH, null);
+        }
+    }
+
+    //Loads active crystal enchants
+    public static CrystalEnchant[] LoadActiveCrystalEnchants() {
+        CrystalEnchant[] activeEnchants = new CrystalEnchant[3];
+
+        string ench1s = PlayerPrefs.GetString(CRYSTAL_1_ENCH);
+        string ench2s = PlayerPrefs.GetString(CRYSTAL_2_ENCH);
+        string ench3s = PlayerPrefs.GetString(CRYSTAL_3_ENCH);
+
+        if (ench1s != null)
+            activeEnchants[0] = Resources.Load("CrystalEnchants/" + ench1s) as CrystalEnchant;
+        if (ench2s != null)
+            activeEnchants[1] = Resources.Load("CrystalEnchants/" + ench2s) as CrystalEnchant;
+        if (ench3s != null)
+            activeEnchants[2] = Resources.Load("CrystalEnchants/" + ench3s) as CrystalEnchant;
+
+        return activeEnchants;
+    }
+
+    //Saves the player crystal enchants library
+    public static void SaveCrystalEnchantLibrary(List<CrystalEnchant> enchants) {
+        string libEnchants = "";
+
+        foreach(CrystalEnchant ench in enchants) {
+            if (ench != null) {
+                libEnchants = libEnchants + ench.enchName + " ";
+            }
+        }
+
+        PlayerPrefs.SetString(ENCHANT_LIBRARY, libEnchants);
+    }
+
+    public static List<CrystalEnchant> LoadCrystalEnchantLibrary() {
+        return null;
+    }
 
 	//Saves the player deck
 	public static void SavePlayerDeck(List<Card> deck) {
@@ -86,6 +147,7 @@ public static class SaveLoad {
 		PlayerPrefs.SetString (PLAYER_DECK, "");
 	}
 
+    //Loads player library
 	public static List<Card> LoadPlayerLibrary() {
 		//If there is a library to load, load the library, else, return null
 		if (PlayerPrefs.GetString (PLAYER_LIBRARY) != "") {
@@ -105,6 +167,7 @@ public static class SaveLoad {
 		return null;
 	}
 
+    //Saves player library
 	public static void SavePlayerLibrary(List<Card> library) {
 		string libraryCards = "";
 
@@ -117,18 +180,22 @@ public static class SaveLoad {
 
 	}
 
+    //Resets the player library
 	public static void ResetPlayerLibrary() {
 		PlayerPrefs.SetString (PLAYER_LIBRARY, "");
 	}
 
+    //Saves player tokens
 	public static void SavePlayerTokens(int amount) {
 		PlayerPrefs.SetInt (TOKENS, amount);
 	}
 
+    //Loads player tokens
 	public static int LoadPlayerTokens() {
 		return PlayerPrefs.GetInt (TOKENS, 0);
 	}
 
+    //Generates a shop for a floor and saves it
 	public static void GenerateNewShop() {
 		CardRarityHolder cards = Resources.Load<CardRarityHolder> ("Prefabs/CardRarityList");
 
@@ -151,6 +218,7 @@ public static class SaveLoad {
 		PlayerPrefs.SetString (RANDOM_SHOP_CARD, randomCardName);
 	}
 
+    //Loads shop
 	public static Card[] LoadShopCards() {
 		Card[] shopCards = new Card[5];
 
@@ -163,6 +231,7 @@ public static class SaveLoad {
 		return shopCards;
 	}
 
+    //Removes card from shop
 	public static void RemoveShopCard(int shopCard) {
 		if (shopCard == 0) {
 			PlayerPrefs.DeleteKey (COMMON_SHOP_CARD);
@@ -177,12 +246,14 @@ public static class SaveLoad {
 		}
 	}
 
+    //Saves players current progress
 	public static void SaveStageLoadout(int stage, int encounters, int shopEncounter) {
 		PlayerPrefs.SetInt (STAGE_LEVEL, stage);
 		PlayerPrefs.SetInt (ENCOUNTERS, encounters);
 		PlayerPrefs.SetInt (SHOP_ENCOUNTER, shopEncounter);
 	}
 
+    //Loads players progress
 	public static int[] LoadStage() {
 		int[] stageLoadout = new int[4];
 		stageLoadout[0] = PlayerPrefs.GetInt (STAGE_LEVEL, -1);
@@ -195,11 +266,13 @@ public static class SaveLoad {
 		return stageLoadout;
 	}
 
+    //Resets progress
 	public static void ResetStage() {
 		PlayerPrefs.SetInt (STAGE_LEVEL, -1);
 		SaveCurrentEncounter (0);
 	}
 
+    //Saves current encounter progress
 	public static void SaveCurrentEncounter(int encounter) {
 		PlayerPrefs.SetInt (CURRENT_ENCOUNTER, encounter);
 	}

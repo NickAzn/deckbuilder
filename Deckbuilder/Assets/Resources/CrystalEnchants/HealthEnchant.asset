@@ -11,9 +11,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2c1d92109cf569408e2884fa3fc3c7c, type: 3}
   m_Name: HealthEnchant
   m_EditorClassIdentifier: 
-  name: Health Enhancer
+  enchName: Health Enhancer
   description: For every 4 cards you play, a random unit on your side gains 1 health.
   color: {r: 0.3137255, g: 0.78431374, b: 0.47058824, a: 1}
+  playType: 4
   playDiscardDraw: 0
-  playHealthBuff: 4
+  playHealthBuff: 1
   playDamageBuff: 0

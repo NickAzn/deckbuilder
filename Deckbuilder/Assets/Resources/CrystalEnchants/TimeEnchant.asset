@@ -11,9 +11,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2c1d92109cf569408e2884fa3fc3c7c, type: 3}
   m_Name: TimeEnchant
   m_EditorClassIdentifier: 
-  name: Time Reversal
+  enchName: Time Reversal
   description: For every 6 cards you play, draw the top card in your discards.
   color: {r: 1, g: 0.8627451, b: 0.5882353, a: 1}
-  playDiscardDraw: 6
+  playType: 6
+  playDiscardDraw: 1
   playHealthBuff: 0
   playDamageBuff: 0

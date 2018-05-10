@@ -37,6 +37,12 @@ public class Crystal : MonoBehaviour {
         enchantUI.gameObject.SetActive(true);
     }
 
+    public void RemoveEnchant() {
+        enchant = null;
+        enchantParticles.gameObject.SetActive(false);
+        enchantUI.gameObject.SetActive(false);
+    }
+
 	// Crystal takes given amount of damage
 	public void TakeDamage(int amount) {
 		health -= amount;

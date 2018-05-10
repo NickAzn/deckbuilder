@@ -83,6 +83,18 @@ public class GameManager : MonoBehaviour {
 		restartButton.SetActive (false);
 		rewardScreen.SetActive (false);
 
+
+        CrystalEnchant[] enchants = SaveLoad.LoadActiveCrystalEnchants();
+        if (enchants[0] != null) {
+            playerCrystals[0].AddEnchant(enchants[0]);
+        }
+        if (enchants[1] != null) {
+            playerCrystals[1].AddEnchant(enchants[1]);
+        }
+        if (enchants[2] != null) {
+            playerCrystals[2].AddEnchant(enchants[2]);
+        }
+        SaveLoad.SaveActiveCrystalEnchants(playerCrystals[0].enchant, playerCrystals[1].enchant, playerCrystals[2].enchant);
         UpdateCrystalEnch();
     }
 
@@ -103,42 +115,21 @@ public class GameManager : MonoBehaviour {
                 CrystalEnchant enchant = i.enchant;
                 if (enchant != null) {
                     int playValue = 0;
-                    if (enchant.playDiscardDraw > 0) {
-                        playValue = playerCardsPlayed % enchant.playDiscardDraw;
-                        if (playValue == 0 && isPlayerTurn()) {
-                            player.DrawFromDiscards(1);
+                    if (enchant.playType > 0) {
+                        playValue = playerCardsPlayed % enchant.playType;
+                        if (playValue == 0 && IsPlayerTurn()) {
+                            if (enchant.playDiscardDraw > 0)
+                                player.DrawFromDiscards(enchant.playDiscardDraw);
+                            if (enchant.playDamageBuff > 0)
+                                BuffRandomUnit(playerSpots, enchant.playDamageBuff, 0, i.enchant.color);
+                            if (enchant.playHealthBuff > 0)
+                                BuffRandomUnit(playerSpots, 0, enchant.playHealthBuff, i.enchant.color);
                             i.enchantParticles.Emit(crystalEnchParticleEmit);
                         }
                         if (playerCardsPlayed > 0) {
-                            i.enchantUIText.text = (enchant.playDiscardDraw - playValue).ToString();
+                            i.enchantUIText.text = (enchant.playType - playValue).ToString();
                         } else {
-                            i.enchantUIText.text = enchant.playDiscardDraw.ToString();
-                        }
-                    }
-
-                    if (enchant.playDamageBuff > 0) {
-                        playValue = playerCardsPlayed % enchant.playDamageBuff;
-                        if (playValue == 0 && isPlayerTurn()) {
-                            BuffRandomUnit(playerSpots, 1, 0, i.enchant.color);
-                            i.enchantParticles.Emit(crystalEnchParticleEmit);
-                        }
-                        if (playerCardsPlayed > 0) {
-                            i.enchantUIText.text = (enchant.playDamageBuff - playValue).ToString();
-                        } else {
-                            i.enchantUIText.text = enchant.playDamageBuff.ToString();
-                        }
-                    }
-
-                    if (enchant.playHealthBuff > 0) {
-                        playValue = playerCardsPlayed % enchant.playHealthBuff;
-                        if (playValue == 0 && isPlayerTurn()) {
-                            BuffRandomUnit(playerSpots, 0, 1, i.enchant.color);
-                            i.enchantParticles.Emit(crystalEnchParticleEmit);
-                        }
-                        if (playerCardsPlayed > 0) {
-                            i.enchantUIText.text = (enchant.playHealthBuff - playValue).ToString();
-                        } else {
-                            i.enchantUIText.text = enchant.playHealthBuff.ToString();
+                            i.enchantUIText.text = enchant.playType.ToString();
                         }
                     }
                 }
@@ -150,30 +141,18 @@ public class GameManager : MonoBehaviour {
                 CrystalEnchant enchant = i.enchant;
                 if (enchant != null) {
                     int playValue = 0;
-                    if (enchant.playDiscardDraw > 0) {
-                        playValue = enemyCardsPlayed % enchant.playDiscardDraw;
-                        if (playValue == 0 && !isPlayerTurn()) {
-                            enemy.DrawCards(1);
+                    if (enchant.playType > 0) {
+                        playValue = enemyCardsPlayed % enchant.playType;
+                        if (playValue == 0 && !IsPlayerTurn()) {
+                            if (enchant.playDiscardDraw > 0)
+                                enemy.DrawCards(enchant.playDiscardDraw);
+                            if (enchant.playDamageBuff > 0)
+                                BuffRandomUnit(enemySpots, enchant.playDamageBuff, 0, i.enchant.color);
+                            if (enchant.playHealthBuff > 0)
+                                BuffRandomUnit(enemySpots, 0, enchant.playHealthBuff, i.enchant.color);
                             i.enchantParticles.Emit(crystalEnchParticleEmit);
                         }
-                        i.enchantUIText.text = (enchant.playDiscardDraw - playValue).ToString();
-                    }
-
-                    if (enchant.playDamageBuff > 0) {
-                        playValue = enemyCardsPlayed % enchant.playDamageBuff;
-                        if (playValue == 0 && !isPlayerTurn()) {
-                            BuffRandomUnit(enemySpots, 1, 0, i.enchant.color);
-                            i.enchantParticles.Emit(crystalEnchParticleEmit);
-                        }
-                        i.enchantUIText.text = (enchant.playDamageBuff - playValue).ToString();
-                    }
-                    if (enchant.playHealthBuff > 0) {
-                        playValue = enemyCardsPlayed % enchant.playHealthBuff;
-                        if (playValue == 0 && !isPlayerTurn()) {
-                            BuffRandomUnit(enemySpots, 0, 1, i.enchant.color);
-                            i.enchantParticles.Emit(crystalEnchParticleEmit);
-                        }
-                        i.enchantUIText.text = (enchant.playHealthBuff - playValue).ToString();
+                        i.enchantUIText.text = (enchant.playType - playValue).ToString();
                     }
                 }
             }
@@ -267,7 +246,7 @@ public class GameManager : MonoBehaviour {
 	}
 
 	//Allows other scripts to see if it is the player's turn
-	public bool isPlayerTurn() {
+	public bool IsPlayerTurn() {
 		return playerTurn;
 	}
 

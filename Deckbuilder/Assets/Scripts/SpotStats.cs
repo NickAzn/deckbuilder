@@ -304,7 +304,7 @@ public class SpotStats : MonoBehaviour {
 	// Check if the selected card can be used on this spot
 	bool CanUseCard() {
 		if (gm.selectedCard != null) {
-			if (gm.isPlayerTurn ()) {
+			if (gm.IsPlayerTurn ()) {
 				Card selCard = gm.selectedCard;
 				if (player.CanPlayCard (selCard)) {
 					if (selCard.playerSideCast && playerSide) {
