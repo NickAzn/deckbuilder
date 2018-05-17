@@ -83,7 +83,7 @@ public class GameManager : MonoBehaviour {
 		restartButton.SetActive (false);
 		rewardScreen.SetActive (false);
 
-
+        SaveLoad.ResetCrystalEnchants();
         CrystalEnchant[] enchants = SaveLoad.LoadActiveCrystalEnchants();
         if (enchants[0] != null) {
             playerCrystals[0].AddEnchant(enchants[0]);

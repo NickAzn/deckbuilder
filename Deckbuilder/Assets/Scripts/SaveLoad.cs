@@ -97,7 +97,7 @@ public static class SaveLoad {
 
         foreach(CrystalEnchant ench in enchants) {
             if (ench != null) {
-                libEnchants = libEnchants + ench.enchName + " ";
+                libEnchants = libEnchants + ench.name + " ";
             }
         }
 
@@ -105,7 +105,23 @@ public static class SaveLoad {
     }
 
     public static List<CrystalEnchant> LoadCrystalEnchantLibrary() {
+        string enchantsS = PlayerPrefs.GetString(ENCHANT_LIBRARY);
+        if (enchantsS != null) {
+            List<CrystalEnchant> enchantLibrary = new List<CrystalEnchant>();
+            string[] enchants = enchantsS.Split(null);
+            for(int i = 0; i < enchants.Length - 1; i++) {
+                enchantLibrary.Add(Resources.Load("CrystalEnchants/" + enchants[i]) as CrystalEnchant);
+            }
+            return enchantLibrary;
+        }
         return null;
+    }
+
+    public static void ResetCrystalEnchants() {
+        PlayerPrefs.SetString(CRYSTAL_1_ENCH, "");
+        PlayerPrefs.SetString(CRYSTAL_2_ENCH, "");
+        PlayerPrefs.SetString(CRYSTAL_3_ENCH, "");
+        PlayerPrefs.SetString(ENCHANT_LIBRARY, "");
     }
 
 	//Saves the player deck

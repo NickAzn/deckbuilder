@@ -369,7 +369,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   origCard: {fileID: 0}
   cardArt: {fileID: 75446310}
-  manaCost: {fileID: 2130803430}
+  manaCost: {fileID: 0}
   cardCount: {fileID: 0}
   deckCard: 0
   position: 0
