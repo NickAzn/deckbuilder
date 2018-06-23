@@ -39,9 +39,9 @@ public static class SaveLoad {
 	//Loads the health of player crystals and returns as an array of int
 	public static int[] LoadCrystalHealth() {
 		int[] crystalHealth = new int[3];
-		crystalHealth[0] = (PlayerPrefs.GetInt (CRYSTAL_1_HP));
-		crystalHealth[1] = (PlayerPrefs.GetInt (CRYSTAL_2_HP));
-		crystalHealth[2] = (PlayerPrefs.GetInt (CRYSTAL_3_HP));
+		crystalHealth[0] = (PlayerPrefs.GetInt (CRYSTAL_1_HP, 10));
+		crystalHealth[1] = (PlayerPrefs.GetInt (CRYSTAL_2_HP, 10));
+		crystalHealth[2] = (PlayerPrefs.GetInt (CRYSTAL_3_HP, 10));
 		return crystalHealth;
 	}
 

@@ -1,0 +1,76 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using BeardedManStudios.Forge.Networking.Generated;
+using BeardedManStudios.Forge.Networking;
+
+public class OnlineBoardManager : NetworkBoardManagerBehavior {
+
+    public GameManager gm;
+    public Player player;
+
+    private void Start() {
+        if (!networkObject.IsServer) {
+            gm.playerTurn = false;
+            gm.endTurnButton.SetActive(false);
+        }
+    }
+
+    public void NetworkEndTurn() {
+        networkObject.SendRpc(RPC_END_TURN, Receivers.AllBuffered, networkObject.IsServer);
+    }
+
+    public void NetworkSummonUnit(int spotIndex, string cardName) {
+        networkObject.SendRpc(RPC_SUMMON_UNIT, Receivers.AllBuffered, networkObject.IsServer, spotIndex, cardName);
+    }
+
+    public void NetworkCastSpell(bool playerSide, int spotIndex, string cardName) {
+        bool hostCasted = networkObject.IsServer;
+        bool hostSide = true;
+        if ((hostCasted && !playerSide) || (!hostCasted && playerSide)) {
+            hostSide = false;
+        }
+        networkObject.SendRpc(RPC_CAST_SPELL, Receivers.AllBuffered, hostSide, spotIndex, cardName, hostCasted);
+    }
+
+    public override void SummonUnit(RpcArgs args) {
+        bool hostSide = args.GetNext<bool>();
+        int spotIndex = args.GetNext<int>();
+        string cardName = args.GetNext<string>();
+
+        if (networkObject.IsServer && hostSide) {
+            return;
+        } else if (!networkObject.IsServer && !hostSide) {
+            return;
+        } else {
+            Card playCard = (Resources.Load("Cards/" + cardName) as GameObject).GetComponent<Card>();
+            gm.enemySpots[spotIndex].AddUnit(playCard);
+        }
+    }
+
+    public override void CastSpell(RpcArgs args) {
+        bool hostSide = args.GetNext<bool>();
+        int spotIndex = args.GetNext<int>();
+        string cardName = args.GetNext<string>();
+        bool hostCasted = args.GetNext<bool>();
+
+        if (networkObject.IsServer && hostCasted) {
+            return;
+        } else if (!networkObject.IsServer && !hostCasted) {
+            return;
+        } else {
+            Card playCard = (Resources.Load("Cards/" + cardName) as GameObject).GetComponent<Card>();
+            if ((networkObject.IsServer && hostSide) || (!networkObject.IsServer && !hostSide))
+                gm.playerSpots[spotIndex].UseSpell(playCard, false);
+            else
+                gm.enemySpots[spotIndex].UseSpell(playCard, false);
+        }
+    }
+
+    public override void EndTurn(RpcArgs args) {
+        bool hostEnded = args.GetNext<bool>();
+        if ((!networkObject.IsServer && !hostEnded) || (networkObject.IsServer && hostEnded))
+            return;
+        gm.EndTurn();
+    }
+}

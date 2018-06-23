@@ -5,6 +5,10 @@ using UnityEngine.SceneManagement;
 using TMPro;
 
 public class GameManager : MonoBehaviour {
+
+    public bool onlineMode = false;
+    public OnlineBoardManager onlineBM = null;
+
 	public SpotStats[] playerSpots;		// Set in editor, all player spots (6)
 	public SpotStats[] enemySpots;		// Set in editor, all enemy spots (6)
 	public Crystal[] playerCrystals;	// Set in editor, all player crystals (3)
@@ -21,7 +25,7 @@ public class GameManager : MonoBehaviour {
 	Card zoomCardStats;
 	public GameObject endTurnButton;	// Set in editor to button with GameManager.EndTurn()
 
-	bool playerTurn = true;
+	public bool playerTurn = true;
 
 	public TextMeshProUGUI endText;				// Set in editor to UI Text to display game over text
 	public GameObject restartButton;	// Set in editor to button with GameManager.Restart()
@@ -47,37 +51,38 @@ public class GameManager : MonoBehaviour {
 		zoomCardStats = zoomCard.GetComponent<Card> ();
 		HideZoomCard ();
 
-		int[] stageLoadout = SaveLoad.LoadStage ();
-		float crystalHeatlhMult = 1f;
-		if (stageLoadout != null) {
-			if (stageLoadout [3] == stageLoadout [1]) {
-				enemy = Instantiate (bossEnemyAIs [stageLoadout [0]]).GetComponent<EnemyAI> ();
-				crystalHeatlhMult = 1.5f;
-			} else {
-				enemy = Instantiate (enemyAIs [stageLoadout [0]]).GetComponent<EnemyAI> ();
-			}
-			if (stageLoadout [0] == 0) {
-				enemyCrystals [0].SetHealth ((int)(6 * crystalHeatlhMult));
-				enemyCrystals [1].SetHealth ((int)(6 * crystalHeatlhMult));
-				enemyCrystals [2].SetHealth ((int)(6 * crystalHeatlhMult));
-			} else if (stageLoadout [0] == 1) {
-				enemyCrystals [0].SetHealth ((int)(7 * crystalHeatlhMult));
-				enemyCrystals [1].SetHealth ((int)(10 * crystalHeatlhMult));
-				enemyCrystals [2].SetHealth ((int)(7 * crystalHeatlhMult));
-			} else if (stageLoadout [0] == 2) {
-				enemyCrystals [0].SetHealth ((int)(10 * crystalHeatlhMult));
-				enemyCrystals [1].SetHealth ((int)(7 * crystalHeatlhMult));
-				enemyCrystals [2].SetHealth ((int)(10 * crystalHeatlhMult));
-			}
-		} else {
-			enemy = Instantiate (enemyAIs [0]).GetComponent<EnemyAI> ();
-			enemyCrystals [0].SetHealth (6);
-			enemyCrystals [1].SetHealth (6);
-			enemyCrystals [2].SetHealth (6);
-		}
-		// Sets enemy AI aggro to a random value to determine how aggressive the AI will play
-		enemy.aggroMeter = Random.Range (0, 4);
-
+        if (!onlineMode) {
+            int[] stageLoadout = SaveLoad.LoadStage();
+            float crystalHeatlhMult = 1f;
+            if (stageLoadout != null) {
+                if (stageLoadout[3] == stageLoadout[1]) {
+                    enemy = Instantiate(bossEnemyAIs[stageLoadout[0]]).GetComponent<EnemyAI>();
+                    crystalHeatlhMult = 1.5f;
+                } else {
+                    enemy = Instantiate(enemyAIs[stageLoadout[0]]).GetComponent<EnemyAI>();
+                }
+                if (stageLoadout[0] == 0) {
+                    enemyCrystals[0].SetHealth((int)(6 * crystalHeatlhMult));
+                    enemyCrystals[1].SetHealth((int)(6 * crystalHeatlhMult));
+                    enemyCrystals[2].SetHealth((int)(6 * crystalHeatlhMult));
+                } else if (stageLoadout[0] == 1) {
+                    enemyCrystals[0].SetHealth((int)(7 * crystalHeatlhMult));
+                    enemyCrystals[1].SetHealth((int)(10 * crystalHeatlhMult));
+                    enemyCrystals[2].SetHealth((int)(7 * crystalHeatlhMult));
+                } else if (stageLoadout[0] == 2) {
+                    enemyCrystals[0].SetHealth((int)(10 * crystalHeatlhMult));
+                    enemyCrystals[1].SetHealth((int)(7 * crystalHeatlhMult));
+                    enemyCrystals[2].SetHealth((int)(10 * crystalHeatlhMult));
+                }
+            } else {
+                enemy = Instantiate(enemyAIs[0]).GetComponent<EnemyAI>();
+                enemyCrystals[0].SetHealth(6);
+                enemyCrystals[1].SetHealth(6);
+                enemyCrystals[2].SetHealth(6);
+            }
+            // Sets enemy AI aggro to a random value to determine how aggressive the AI will play
+            enemy.aggroMeter = Random.Range(0, 4);
+        }
 
 		// Hides the restart button
 		restartButton.SetActive (false);
@@ -96,6 +101,13 @@ public class GameManager : MonoBehaviour {
         }
         SaveLoad.SaveActiveCrystalEnchants(playerCrystals[0].enchant, playerCrystals[1].enchant, playerCrystals[2].enchant);
         UpdateCrystalEnch();
+
+        for (int i = 0; i < playerSpots.Length; i++) {
+            playerSpots[i].spotIndex = i;
+        }
+        for (int i = 0; i < enemySpots.Length; i++) {
+            enemySpots[i].spotIndex = i;
+        }
     }
 
     public void PlayedCard(bool isPlayer) {
@@ -374,8 +386,11 @@ public class GameManager : MonoBehaviour {
 	public void EndTurn() {
 		selectedCard = null;
 		if (playerTurn) {
-			//Player attack
-			StartCoroutine(UnitsAttack(playerSpots, enemySpots));
+            if (onlineMode && onlineBM != null) {
+                onlineBM.NetworkEndTurn();
+            }
+            //Player attack
+            StartCoroutine(UnitsAttack(playerSpots, enemySpots));
 		} else {
 			//Enemy Attack
 			StartCoroutine(UnitsAttack(enemySpots, playerSpots));
@@ -448,7 +463,8 @@ public class GameManager : MonoBehaviour {
 			foreach (SpotStats spot in enemySpots) {
 				spot.NewTurn ();
 			}
-			enemy.NewTurn ();
+            if (!onlineMode)
+			    enemy.NewTurn ();
 		} else {
 			foreach (SpotStats spot in playerSpots) {
 				spot.NewTurn ();

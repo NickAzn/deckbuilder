@@ -6,6 +6,7 @@ using TMPro;
 public class Player : MonoBehaviour {
 
 	public GameManager gm;
+    public OnlineBoardManager onlineBM = null;
 
 	public List<Card> deck = new List<Card>();
 	public List<Card> discards = new List<Card>();
@@ -134,9 +135,15 @@ public class Player : MonoBehaviour {
 			mana -= card.manaCost;
 			if (card.isUnit) {
 				spot.AddUnit (card);
+                if (onlineBM != null) {
+                    onlineBM.NetworkSummonUnit(spot.spotIndex, card.baseCard.name);
+                }
 			} else if (card.isSpell) {
 				spot.UseSpell (card, true);
-			}
+                if (onlineBM != null) {
+                    onlineBM.NetworkCastSpell(spot.playerSide, spot.spotIndex, card.baseCard.name);
+                }
+            }
 			if (card.manaBoost > 0) {
 				mana += card.manaBoost;
 			}

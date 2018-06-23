@@ -38,6 +38,8 @@ public class SpotStats : MonoBehaviour {
 	public int armor = 0;
 	public int magicArmor = 0;
 
+    public int spotIndex; //Set by game manager
+
 	void Start() {
 		sr = GetComponent<SpriteRenderer> ();
 		spellAnimation.gameObject.SetActive (false);
@@ -287,7 +289,9 @@ public class SpotStats : MonoBehaviour {
 			player.DiscardCard (origCard);
 		} else {
 			if (deathDraw > 0) {
-				gm.enemy.DrawCards (deathDraw);
+                if (!gm.onlineMode) {
+                    gm.enemy.DrawCards(deathDraw);
+                }
 			}
 		}
 		enchantment.RemoveCard ();
