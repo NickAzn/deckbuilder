@@ -10,6 +10,7 @@ public class OnlineBoardManager : NetworkBoardManagerBehavior {
     public Player player;
 
     protected override void NetworkStart() {
+        base.NetworkStart();
         //If not hosting, then go second
         if (!networkObject.IsServer) {
             gm.playerTurn = false;
