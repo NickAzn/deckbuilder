@@ -41,11 +41,13 @@ public class GameManager : MonoBehaviour {
     int crystalEnchParticleEmit = 20;
 
 	void Start() {
-		// Set player crystal health to the saved value
-		int[] crystalHealth = SaveLoad.LoadCrystalHealth ();
-		playerCrystals [0].SetHealth (crystalHealth[0]);
-		playerCrystals [1].SetHealth (crystalHealth[1]);
-		playerCrystals [2].SetHealth (crystalHealth[2]);
+        // Set player crystal health to the saved value
+        if (!onlineMode) {
+            int[] crystalHealth = SaveLoad.LoadCrystalHealth();
+            playerCrystals[0].SetHealth(crystalHealth[0]);
+            playerCrystals[1].SetHealth(crystalHealth[1]);
+            playerCrystals[2].SetHealth(crystalHealth[2]);
+        }
 
 		// Hide the zoomCard
 		zoomCardStats = zoomCard.GetComponent<Card> ();
@@ -392,8 +394,8 @@ public class GameManager : MonoBehaviour {
             //Player attack
             StartCoroutine(UnitsAttack(playerSpots, enemySpots));
 		} else {
-			//Enemy Attack
-			StartCoroutine(UnitsAttack(enemySpots, playerSpots));
+            //Enemy Attack
+            StartCoroutine(UnitsAttack(enemySpots, playerSpots));
 		}
 	}
 

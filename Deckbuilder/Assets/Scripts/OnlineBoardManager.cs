@@ -9,21 +9,26 @@ public class OnlineBoardManager : NetworkBoardManagerBehavior {
     public GameManager gm;
     public Player player;
 
-    private void Start() {
+    protected override void NetworkStart() {
+        //If not hosting, then go second
         if (!networkObject.IsServer) {
             gm.playerTurn = false;
             gm.endTurnButton.SetActive(false);
+            player.IncreaseMaxMana(1);
         }
     }
 
+    //Send RPC to end turn
     public void NetworkEndTurn() {
         networkObject.SendRpc(RPC_END_TURN, Receivers.AllBuffered, networkObject.IsServer);
     }
 
+    //Send RPC to summon unit at spot
     public void NetworkSummonUnit(int spotIndex, string cardName) {
         networkObject.SendRpc(RPC_SUMMON_UNIT, Receivers.AllBuffered, networkObject.IsServer, spotIndex, cardName);
     }
 
+    //Send RPC to cast spell at spot
     public void NetworkCastSpell(bool playerSide, int spotIndex, string cardName) {
         bool hostCasted = networkObject.IsServer;
         bool hostSide = true;
@@ -33,6 +38,7 @@ public class OnlineBoardManager : NetworkBoardManagerBehavior {
         networkObject.SendRpc(RPC_CAST_SPELL, Receivers.AllBuffered, hostSide, spotIndex, cardName, hostCasted);
     }
 
+    //RPC to summon unit at spot
     public override void SummonUnit(RpcArgs args) {
         bool hostSide = args.GetNext<bool>();
         int spotIndex = args.GetNext<int>();
@@ -48,6 +54,7 @@ public class OnlineBoardManager : NetworkBoardManagerBehavior {
         }
     }
 
+    //RPC to cast spell at spot
     public override void CastSpell(RpcArgs args) {
         bool hostSide = args.GetNext<bool>();
         int spotIndex = args.GetNext<int>();
@@ -60,6 +67,10 @@ public class OnlineBoardManager : NetworkBoardManagerBehavior {
             return;
         } else {
             Card playCard = (Resources.Load("Cards/" + cardName) as GameObject).GetComponent<Card>();
+            if (playCard.crystalPact > 0) {
+                gm.enemyCrystals[gm.enemySpots[spotIndex].row - 1].TakeDamage(playCard.crystalPact);
+                gm.CheckGameEnded();
+            }
             if ((networkObject.IsServer && hostSide) || (!networkObject.IsServer && !hostSide))
                 gm.playerSpots[spotIndex].UseSpell(playCard, false);
             else
@@ -67,6 +78,7 @@ public class OnlineBoardManager : NetworkBoardManagerBehavior {
         }
     }
 
+    //RPC to end turn
     public override void EndTurn(RpcArgs args) {
         bool hostEnded = args.GetNext<bool>();
         if ((!networkObject.IsServer && !hostEnded) || (networkObject.IsServer && hostEnded))
