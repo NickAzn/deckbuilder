@@ -265,6 +265,9 @@ public class GameManager : MonoBehaviour {
 	}
 
 	void WinGame() {
+        if(onlineMode) {
+            onlineBM.CloseServer();
+        }
 		List<Card> library = SaveLoad.LoadPlayerLibrary ();
 		if (library == null) {
 			library = new List<Card> ();
@@ -323,6 +326,9 @@ public class GameManager : MonoBehaviour {
 			restartButton.SetActive (true);
 			gameEnded = true;
 			Time.timeScale = 0.0f;
+            if(onlineMode) {
+                onlineBM.CloseServer();
+            }
 		}
 
 		bool enemyAlive = false;

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using BeardedManStudios.Forge.Networking.Generated;
 using BeardedManStudios.Forge.Networking;
+using BeardedManStudios.Forge.Networking.Unity;
 
 public class OnlineBoardManager : NetworkBoardManagerBehavior {
 
@@ -85,5 +86,14 @@ public class OnlineBoardManager : NetworkBoardManagerBehavior {
         if ((!networkObject.IsServer && !hostEnded) || (networkObject.IsServer && hostEnded))
             return;
         gm.EndTurn();
+    }
+
+    //Host closes the server when the match ends
+    public void CloseServer() {
+        if(networkObject.IsServer) {
+            UDPServer server = (UDPServer)NetworkManager.Instance.Networker;
+            server.Disconnect(false);
+            Debug.Log("Closed Server");
+        }
     }
 }
